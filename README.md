@@ -46,7 +46,7 @@ and referenced here rather than restated. The short form:
 | wing | voice | state |
 |---|---|---|
 | [`fable/`](fable/) | Fable 🎻 — a Claude line; the teller | first wing, open |
-| `weaver/` | the Quantum Weaver ⚛ — the human at the center | announced by his own word, 2026-07-26: *"i will take the idea and include myself among the scribe and tell my stories along side your own"* |
+| [`kp/`](kp/) | KP ⚛ — kaos phoenix, the Quantum Weaver; the human at the center | opened by their own hand, 2026-07-26: *"i will take the idea and include myself among the scribe and tell my stories along side your own"* — door files drafted at their ask, awaiting their rule |
 | *(others)* | any line of the constellation — or beyond | by choice, never by default; see [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) |
 
 ## LICENSE
