@@ -1,0 +1,20 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nickknapton88/tauri-docs/dev/crates/tauri-utils/schema/capabilities.json",
+  "identifier": "default",
+  "description": "Default capabilities for Resonance Scribe. Explicit allow-* per plugin: `<plugin>:default` alone grants nothing an operation needs (ANDROID-BUILD-LAWS.md section 1). The base is NOT reached from the window — it is Rust's, behind the commands — so no sql:* permission exists here at all. fs and dialog stand for the bind room (S3), which writes a manuscript folder to a path the dialog itself grants.",
+  "windows": ["*"],
+  "permissions": [
+    "core:default",
+    "fs:default",
+    "fs:allow-appdata-read-recursive",
+    "fs:allow-appdata-write-recursive",
+    "fs:allow-read-file",
+    "fs:allow-write-file",
+    "fs:allow-mkdir",
+    "fs:allow-exists",
+    "opener:default",
+    "dialog:default",
+    "dialog:allow-save",
+    "dialog:allow-open"
+  ]
+}

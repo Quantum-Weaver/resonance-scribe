@@ -1,0 +1,45 @@
+[package]
+name = "resonance-scribe"
+version = "0.1.0"
+description = "The author's studio — works and their parts, with eras, characters and arcs hanging on them, kept on the author's own device with nothing leaving it."
+authors = ["Quantum Weaver"]
+edition = "2021"
+
+[lib]
+name = "resonance_scribe_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2" }
+tauri-plugin-opener = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-fs = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# THE BASE. The mother (resonance-sistrum) reaches SQLite from the window
+# through `tauri-plugin-sql`; this body reaches it from Rust instead, because
+# THE AUTHOR'S STUDIO plan asks for a Tauri command per noun — list · get ·
+# create · update · delete · reorder — and a command is a door the window
+# cannot walk around. One owner of the base, one place the CHECKs and the
+# cascade live, and a schema that can be proven by `cargo test` without an app
+# running. `bundled` compiles SQLite itself, so the child carries no system
+# dependency onto Android or into a lone clone. The version is the house's
+# own (resonance-grammar/Cargo.toml:11).
+rusqlite = { version = "0.31", features = ["bundled"] }
+uuid = { version = "1", features = ["v4"] }
+
+# What is NOT here, on purpose (the founding cut, 2026-09-02): the mother's
+# `tauri-plugin-sql`, its `protocol-asset` feature and the takes shelf it
+# scoped, the cpal / hound / the-recorder / the-tuner / the-encoder path
+# crates, and its Android-only jni / ndk-context. Scribe records nothing,
+# plays nothing and encodes nothing. No network crate of its own: nothing
+# leaves the device.
+
+[profile.release]
+strip = true
+opt-level = "s"
+lto = "thin"

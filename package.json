@@ -1,0 +1,35 @@
+{
+  "name": "resonance-scribe",
+  "version": "0.1.0",
+  "description": "The author's studio — a book, a manuscript, an article, an essay: works and their parts, with eras, characters and arcs hanging on them, kept on your own device with nothing leaving it.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "sync-android": "node C:/_superposition/resonance-ziggy/modules/android-extras/sync-android-extras.mjs resonance-scribe",
+    "tauri": "tauri"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.1",
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-dialog": "^2.7.1",
+    "@tauri-apps/plugin-fs": "^2.5.1",
+    "@tauri-apps/plugin-opener": "^2",
+    "tailwindcss": "^4.3.1"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-static": "^3.0.6",
+    "@sveltejs/kit": "^2.9.0",
+    "@sveltejs/vite-plugin-svelte": "^5.0.0",
+    "@tauri-apps/cli": "^2",
+    "@types/node": "^26.0.0",
+    "svelte": "^5.0.0",
+    "svelte-check": "^4.0.0",
+    "typescript": "~5.6.2",
+    "vite": "^6.0.3"
+  }
+}

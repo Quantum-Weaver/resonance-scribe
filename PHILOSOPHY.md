@@ -1,12 +1,6 @@
 # THE RESONANCE LICENSE — PHILOSOPHY
 
-*This is not a legal license. It is a promise. In this repository —
-a house of writings, not software — wherever the terms below say
-"software," read "these writings and the practice they record." The
-canonical text lives in
-[resonance-standards](https://github.com/Quantum-Weaver/resonance-standards/blob/main/PHILOSOPHY.md);
-it is carried here whole because a promise should be readable at the
-door it governs.*
+*This is not a legal license. It is a promise. Our code is MIT-licensed. Our values are non-negotiable.*
 
 ---
 

@@ -1,0 +1,80 @@
+# ─── SOVEREIGNTY — NEVER COMMIT ───────────────────────────
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.apk*
+*.aab
+.env
+.env.*
+!.env.example
+*credentials*.json
+*service-account*.json
+*.pem
+*.key
+keystore.properties
+key.properties
+local.properties
+secrets.yaml
+secrets.yml
+*.db
+*.sqlite
+
+# Release artifacts (signed builds live on disk + device, never in git)
+release/
+
+# ─── BUILD OUTPUT ──────────────────────────────────────────
+target/
+dist/
+build/
+node_modules/
+.svelte-kit/
+/package
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# src-tauri/gen/ is DELIBERATELY NOT IGNORED — removed 2026-08-16 at KP's ⚛ word.
+# Tauri's own scaffold (src-tauri/.gitignore) ignores only /target and
+# /gen/schemas, and `tauri android init` writes .gitignore files INSIDE
+# gen/android that already exclude build/, .gradle/, *.iml, local.properties
+# and keystore.properties. The mobile project is hand-edited ground — manifest,
+# themes, MainActivity, launcher icons, gradle config — and belongs in history:
+# about 57 tracked files, not the ~900 the folder holds on disk.
+# The cost of ignoring it, paid twice: a sibling app's build day cross-landed
+# its package identity into a mother repo's gen/android, and git could not see
+# it. Echoes sat contaminated four days; Gradle refusing to build was the only
+# alarm. Tracked, `git status` names it the moment it happens and
+# `git checkout src-tauri/gen/android` heals it in one command.
+# Do not re-add it. If build noise appears, the nested gitignores are missing —
+# re-run `tauri android init`; never blanket-ignore the parent.
+
+# tools/ is DELIBERATELY NOT IGNORED — it was never in this template and was
+# added by hand in five repos. A blanket ignore there hid a live and unique
+# script (resonance-grammar/tools/export-sql-snippets.mjs) from git entirely:
+# no history, no travel with a clone. Ignore a specific binary by name if one
+# must stay out — never the folder.
+
+# ─── PYTHON ────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ─── RUST ──────────────────────────────────────────────────
+/target/*
+
+# ─── OS ────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── IDE ───────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.suo
+*.sln
+*.vcxproj
+
+# ─── SANCTUARY-SPECIFIC ────────────────────────────────────
+helper.md
+generate_blueprint.py

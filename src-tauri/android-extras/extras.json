@@ -1,0 +1,14 @@
+{
+	"app": "resonance-scribe",
+	"from": "the founding cut from resonance-sistrum, 2026-09-02 — sistrum's own declaration read and emptied, not copied",
+	"kotlinPlugins": false,
+	"manifest": {
+		"blocks": []
+	},
+	"sections": {
+		"launcherIcons": false,
+		"windowGround": false,
+		"templateLeftovers": false,
+		"signingConfig": false
+	}
+}
