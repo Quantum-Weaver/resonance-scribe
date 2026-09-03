@@ -1,16 +1,27 @@
 <script lang="ts">
 	import '../app.css';
+	import Rail from '$lib/components/Rail.svelte';
 	import { themeStore } from '$lib/stores/theme.svelte';
+	import { workStore } from '$lib/stores/work.svelte';
 	import { getThemeColors } from '$lib/theme/theme';
 	import { onMount } from 'svelte';
 
 	let { children } = $props();
 
-	// The mother's shell, minus her chrome: the Sidebar and the ComfortBar were
-	// doors into rooms this body does not have yet. S2 brings the rail back
-	// when there are four rooms for it to point at.
+	// ONE SHELL, ONE RAIL, FOUR ROOMS AS ROUTES — the conductor's reading of
+	// the plan's "one page, four rooms". The shell and the rail are drawn once
+	// here; `/`, `/desk`, `/board`, `/cast` and `/bind` are static routes in
+	// SPA mode (`ssr = false`, adapter-static) and there is no `[id]` route
+	// anywhere: the chosen work is held in a runes store, not in the URL, so it
+	// survives every walk between rooms and every reload.
+	//
+	// The Sidebar and the ComfortBar did not cross from the mother. The rail is
+	// this body's own, written to the family's idiom rather than copied.
 	onMount(() => {
 		themeStore.loadTheme();
+		// The work chosen in an earlier sitting, re-read from the base by id.
+		// A work that is gone clears itself; nothing is drawn from a cache.
+		void workStore.restore();
 	});
 
 	const config = $derived(themeStore.config);
@@ -36,6 +47,7 @@
 		--border-color: {colors.border};
 	"
 >
+	<Rail />
 	<main class="main-content">
 		{@render children()}
 	</main>
@@ -58,5 +70,14 @@
 		max-width: 100%;
 		overflow-y: auto;
 		overflow-x: hidden;
+	}
+
+	/* The rail's own media query turns it into a row at the same width; the
+	   shell has to stack for that to be a top bar rather than a squeezed
+	   column. One breakpoint, named in two files, and they agree. */
+	@media (max-width: 46rem) {
+		.app-shell {
+			flex-direction: column;
+		}
 	}
 </style>

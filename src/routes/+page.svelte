@@ -1,10 +1,20 @@
 <script lang="ts">
-	// THE SHELF — the only room S1 builds. It opens the base, lists the works,
-	// and makes one. The desk, the board, the cast and the bind are S2's and
-	// S3's; they are named below as DOORWAYS, never as dead ends
-	// (the-epagoge's second day, and the plan's §The rulings that governed).
+	// THE SHELF — the works, and the way into them.
+	//
+	// S1 built this page and named four doorways. S2 opened three of them and S3
+	// opened the fourth, so the section below had to become true a second time:
+	// all four are rooms now and all four are linked as rooms. Nothing here is
+	// a doorway any more, and nothing here says it is.
+	//
+	// OPEN chooses the work and walks to the desk. The choice lives in a runes
+	// store and its id in localStorage, so the rooms know which work they are
+	// about without an `[id]` in the URL.
+	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { createWork, listWorks } from '$lib/base';
+	import { sortData } from '$lib/panti';
+	import { studioStore } from '$lib/stores/studio.svelte';
+	import { workStore } from '$lib/stores/work.svelte';
 	import { WORK_KINDS, type Work, type WorkKind } from '$lib/types/types';
 
 	let works = $state<Work[]>([]);
@@ -17,6 +27,12 @@
 	let saving = $state(false);
 
 	const ready = $derived(title.trim().length > 0 && !saving);
+
+	// The-panti orders every list this studio shows. The base hands the works
+	// back most-recently-touched first; the shelf keeps that, by name of the
+	// column it is (`updated_at`, descending), through `sortData` — which
+	// COPIES, so `works` is never rewritten underneath the store that holds it.
+	const shown = $derived(sortData(works, 'updated_at', 'desc'));
 
 	async function refresh() {
 		try {
@@ -45,15 +61,37 @@
 		}
 	}
 
+	function open(w: Work) {
+		workStore.choose(w);
+		void studioStore.load(w.id);
+		void goto('/desk');
+	}
+
 	const when = (ms: number) => new Date(ms).toLocaleDateString();
 
 	onMount(refresh);
 
-	const doorways = [
-		{ name: 'The desk', says: 'a work’s parts in a rail, the chosen part in a plain markdown editor, the word count as data.' },
-		{ name: 'The board', says: 'parts as cards across the eras, arcs drawn through the cards they appear in, characters as marks.' },
-		{ name: 'The cast', says: 'characters and their appearances, read from the board and never kept as a second list.' },
-		{ name: 'The bind', says: 'a work out as a manuscript folder, an EPUB, paged HTML, or standard manuscript format.' }
+	const rooms = [
+		{
+			name: 'The desk',
+			href: '/desk',
+			says: 'a work’s parts in a rail, the chosen part in a plain markdown editor, the word count as data.'
+		},
+		{
+			name: 'The board',
+			href: '/board',
+			says: 'parts as cards across the eras, arcs drawn through the cards they appear in, characters as marks.'
+		},
+		{
+			name: 'The cast',
+			href: '/cast',
+			says: 'characters and their appearances, read from the board and never kept as a second list.'
+		},
+		{
+			name: 'The bind',
+			href: '/bind',
+			says: 'a work out as a manuscript folder, an EPUB, paged HTML or standard manuscript format — and the whole of it as a .scribe.json to carry elsewhere and open again.'
+		}
 	];
 </script>
 
@@ -104,12 +142,15 @@
 			<p class="quiet">Nothing here yet. The first work is one line above.</p>
 		{:else}
 			<ul>
-				{#each works as w (w.id)}
-					<li>
+				{#each shown as w (w.id)}
+					<li class:chosen={workStore.id === w.id}>
 						<span class="kind">{w.kind}</span>
 						<span class="title">{w.title}</span>
 						{#if w.byline}<span class="byline">{w.byline}</span>{/if}
 						<span class="when">touched {when(w.updated_at)}</span>
+						<button class="open" type="button" onclick={() => open(w)}>
+							Open<span class="visually-hidden"> {w.title} at the desk</span>
+						</button>
 					</li>
 				{/each}
 			</ul>
@@ -117,15 +158,13 @@
 	</section>
 
 	<section class="doorways">
-		<h2>Four doorways, not yet built</h2>
+		<h2>Four rooms</h2>
 		<p class="quiet">
-			The body and the base stand; the rooms do not. These are doorways — each one is
-			planned, none of them is a dead end, and nothing behind them is lost because
-			nothing is behind them yet.
+			All four stand. Open a work above and the rail on the left walks you between them.
 		</p>
 		<ul>
-			{#each doorways as d (d.name)}
-				<li><strong>{d.name}</strong> — {d.says}</li>
+			{#each rooms as r (r.name)}
+				<li><a href={r.href}><strong>{r.name}</strong></a> — {r.says}</li>
 			{/each}
 		</ul>
 	</section>
@@ -239,6 +278,10 @@
 		padding: 0.7rem 0.9rem;
 	}
 
+	.shelf li.chosen {
+		border-color: var(--accent);
+	}
+
 	.kind {
 		font-size: 0.7rem;
 		text-transform: uppercase;
@@ -260,6 +303,11 @@
 		margin-left: auto;
 	}
 
+	.open {
+		padding: 0.35rem 0.8rem;
+		font-size: 0.82rem;
+	}
+
 	.doorways li {
 		color: var(--text-secondary);
 		line-height: 1.5;
@@ -267,5 +315,19 @@
 
 	.doorways strong {
 		color: var(--text);
+	}
+
+	.doorways a {
+		color: inherit;
+		text-decoration-color: var(--text-muted);
+	}
+
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
 	}
 </style>
