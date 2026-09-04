@@ -19,7 +19,7 @@ LEGEND   state  ● done · ◐ drifted/partial · ⏸ his hold · — not yet
 **resonance-scribe** · 2026-09-02 · S1, S2 and S3 done — the base, the shell,
 the rail and all four rooms · branch main, even with origin at 9a091a8 ·
 working tree: S2, S3 and the icons uncommitted — forty-five files modified,
-twenty-two paths untracked · *the sync word is KP's*
+twenty-two paths untracked
 
 ## Where it stands
 
@@ -43,13 +43,13 @@ twenty-two paths untracked · *the sync word is KP's*
 | The desktop shell opened, the rooms read by his eyes | ● | ⚛ | ✔ KP, 2026-09-02, verbatim: "scribe rooms look good" |
 | The dialogs, the fs scope, the writes, and whether the EPUB opens | — | ✋ | ? no lamp can see these without a window |
 | `tauri android init` and the first Android build | — | ✋ | ? his build day |
-| git's first breath — the re-founding and S1 (4be0dc6), the hooks (9a091a8), pushed | ● | ⚛ | ✔ at KP's sync word 2026-09-02 |
+| git's first breath — the re-founding and S1 (4be0dc6), the hooks (9a091a8), pushed | ● | ⚛ | ✔ 2026-09-02 |
 
 ## What waits, and whose
 
 | what waits | whose | source |
 |---|---|---|
-| S2 and S3's commit and push — seven modified, twenty untracked | ⚛ | KP's sync word; the base's rows are the conductor's |
+| S2 and S3's commit and push — seven modified, twenty untracked | ⚛ | the base's rows are the conductor's |
 | The bind's doors under his hand: does a save dialog land, does a folder export write, does the EPUB open in a reader? | ✋ | CHILD-BUILDS.md step 8; the rooms themselves he has read |
 | `tauri android init` (no `gen/` exists yet) | ✋ | CHILD-BUILDS.md; the build day is his |
 | The name of the new water (the-pandulipi is a working name) | ⚛ | THE-AUTHORS-STUDIO.md §Who decided what |
