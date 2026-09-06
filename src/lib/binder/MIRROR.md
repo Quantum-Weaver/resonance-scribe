@@ -5,7 +5,7 @@ As of 2026-09-02 (THE BIND ROOM - movement S3 of
 the water behind two of the four ways out), the binding's single editable
 truth is:
 
-    C:\_superposition\resonance-awen\tools\the-binder\src\index.ts
+    ../resonance-awen/tools/the-binder/src/index.ts
 
 Do not edit index.ts in THIS folder - it is a byte-faithful mirror
 (SHA256 verified at the copy: 556E08E073BFA12F), to be refreshed by

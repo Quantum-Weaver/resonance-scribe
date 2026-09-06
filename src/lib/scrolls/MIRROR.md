@@ -4,7 +4,7 @@ As of 2026-09-02 (THE ROOMS - movement S2 of
 `resonance-chamber/desk/THE-AUTHORS-STUDIO.md`, whose desk asks for "the-scrolls'
 rendering beside the editor"), the scroll's single editable truth is:
 
-    C:\_superposition\resonance-awen\tools\the-scrolls\the-scrolls.mjs
+    ../resonance-awen/tools/the-scrolls/the-scrolls.mjs
 
 Do not edit the file in THIS folder - it is a byte-faithful mirror (SHA256
 verified at the copy: BF9736BC6587487D), to be refreshed by distribution runs

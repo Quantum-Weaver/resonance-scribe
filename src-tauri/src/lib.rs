@@ -10,7 +10,7 @@
 //
 // The brief is `resonance-chamber/desk/THE-AUTHORS-STUDIO.md`, movement S1.
 // The record of where this realm stands is the base:
-//   python C:/_superposition/resonance-progenatrix/progenatrix.py recall --realm resonance-scribe
+//   python ../resonance-progenatrix/progenatrix.py recall --realm resonance-scribe
 
 mod base;
 mod commands;

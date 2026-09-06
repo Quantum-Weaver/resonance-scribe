@@ -5,7 +5,7 @@ As of 2026-09-02 (THE BIND ROOM - movement S3 of
 is "fed from the-sphragis's data when a licence is drawn"), the licence
 grammar's single editable truth is:
 
-    C:\_superposition\resonance-awen\tools\the-sphragis\src\index.ts
+    ../resonance-awen/tools/the-sphragis/src/index.ts
 
 Do not edit index.ts in THIS folder - it is a byte-faithful mirror
 (SHA256 verified at the copy: 3A5A9E57D316BBC3), refreshed by distribution

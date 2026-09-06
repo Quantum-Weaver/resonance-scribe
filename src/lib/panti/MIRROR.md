@@ -4,8 +4,8 @@ As of 2026-09-02 (THE ROOMS - movement S2 of
 `resonance-chamber/desk/THE-AUTHORS-STUDIO.md`, whose gate reads "the-panti
 for every list"), the row's single editable truth is:
 
-    C:\_superposition\resonance-awen\tools\the-panti\src\index.ts
-    C:\_superposition\resonance-awen\tools\the-panti\src\table.utils.ts
+    ../resonance-awen/tools/the-panti/src/index.ts
+    ../resonance-awen/tools/the-panti/src/table.utils.ts
 
 Do not edit either file in THIS folder - they are byte-faithful mirrors
 (SHA256 verified at the copy: index.ts BC65D713AC7DE84F ·

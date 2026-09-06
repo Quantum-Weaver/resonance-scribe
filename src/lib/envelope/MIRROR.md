@@ -4,9 +4,9 @@ As of 2026-09-02 (THE BIND ROOM - movement S3 of
 `resonance-chamber/desk/THE-AUTHORS-STUDIO.md`), the sovereignty trio's single
 editable truth is:
 
-    C:\_superposition\resonance-awen\tools\the-envelope\src\index.ts
-    C:\_superposition\resonance-awen\tools\the-envelope\src\host-surface.ts
-    C:\_superposition\resonance-awen\tools\the-envelope\src\hosts\tauri.ts
+    ../resonance-awen/tools/the-envelope/src/index.ts
+    ../resonance-awen/tools/the-envelope/src/host-surface.ts
+    ../resonance-awen/tools/the-envelope/src/hosts/tauri.ts
 
 Do not edit any of the three in THIS folder - they are byte-faithful mirrors
 (SHA256 verified at the copy: index.ts B52F553E8CBDECEA · host-surface.ts

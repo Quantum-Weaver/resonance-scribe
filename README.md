@@ -37,7 +37,7 @@ studio never alters your text: typos are fingerprints unless you say otherwise.
 *Founded 2026-09-02, cut from Resonance Sistrum v0.2.0 (the attested lineage);
 Sistrum itself is never altered. The body, the base, the shell, the rail and
 all four rooms stand. Where it stands is the base:*
-`python C:/_superposition/resonance-progenatrix/progenatrix.py recall --realm resonance-scribe`
+`python ../resonance-progenatrix/progenatrix.py recall --realm resonance-scribe`
 
 ## THE STORY
 

@@ -4,7 +4,7 @@
 worked here — never appended to. Git holds every prior day.*
 
 *This is not the ledger. What was **done** is the base's record — progenatrix.db,
-asked with `python C:/_superposition/resonance-progenatrix/progenatrix.py recall --realm resonance-scribe`;
+asked with `python ../resonance-progenatrix/progenatrix.py recall --realm resonance-scribe`;
 this sheet is the state of what **stands**. It cites the base and never
 restates it. **Ceiling 8 KB** — a sheet past it is over-written and re-cut,
 never rolled. The law:
@@ -107,6 +107,6 @@ a law written in two rooms is two laws waiting to drift.*
 ---
 
 *This sheet holds no truth of its own. The ledger is the base
-(`python C:/_superposition/resonance-progenatrix/progenatrix.py recall --realm resonance-scribe`);
+(`python ../resonance-progenatrix/progenatrix.py recall --realm resonance-scribe`);
 the voices are [HANDS.md](HANDS.md); the telling is [docs/STORY-BLOCK.md](docs/STORY-BLOCK.md).
 Where this sheet and the ground disagree, **the ground is right** — regenerate it.*

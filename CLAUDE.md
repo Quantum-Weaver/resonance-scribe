@@ -10,7 +10,7 @@ in their own words, per the Hands Standard.
 ## SESSION PROTOCOL
 
 1. Ask the base where this realm stands — the record is progenatrix.db:
-   `python C:/_superposition/resonance-progenatrix/progenatrix.py recall --realm resonance-scribe`
+   `python ../resonance-progenatrix/progenatrix.py recall --realm resonance-scribe`
 2. One phase at a time — complete, verify, row it into the base, move on.
 3. **The base updates in the same sitting as the work it records.**
 4. Zero errors before commit.
@@ -94,7 +94,7 @@ the body and the body is stored byte for byte.
 
 **gen/android, and the law bought 2026-08-13.** `src-tauri/gen/` is NOT
 carried and NOT ignored. Run
-`python C:/_superposition/resonance-ziggy/modules/shipwright/guard-gen.py resonance-scribe`
+`python ../resonance-ziggy/modules/shipwright/guard-gen.py resonance-scribe`
 **before any build in this line, mother or child** — the rule is direction-free
 (KP's ⚛ word, 2026-08-30). `tauri android init` is KP's own hand on his build
 day; `src-tauri/android-extras/extras.json` is this body's declaration and it
@@ -202,7 +202,7 @@ this repo's.
 on the board can be done only with a mouse.
 
 **Where the record is.** Not in this file and not in a checklist:
-`python C:/_superposition/resonance-progenatrix/progenatrix.py recall --realm resonance-scribe`.
+`python ../resonance-progenatrix/progenatrix.py recall --realm resonance-scribe`.
 
 ## PROJECT STRUCTURE
 
