@@ -1,0 +1,46 @@
+{
+  "tier": "domain",
+  "domain_name": ".journals",
+  "domain_path": ".journals",
+  "self": "scribe/.journals/dbp.ai.json",
+  "parent": "scribe/pbp.ai.json",
+  "description": "0 files, 3 subfolders",
+  "objects": [
+    {
+      "blueprint": "scribe/.journals/entity/obp.ai.json",
+      "object_path": ".journals/entity",
+      "description": "0 files, 0 subfolders",
+      "folder_count": 1,
+      "total_files": 0
+    },
+    {
+      "blueprint": "scribe/.journals/proofs/obp.ai.json",
+      "object_path": ".journals/proofs",
+      "description": "0 files, 3 subfolders",
+      "folder_count": 4,
+      "total_files": 3
+    },
+    {
+      "blueprint": "scribe/.journals/realm/obp.ai.json",
+      "object_path": ".journals/realm",
+      "description": "6 files, 0 subfolders",
+      "folder_count": 1,
+      "total_files": 6
+    }
+  ],
+  "object_count": 3,
+  "folders_reporting_directly": [
+    {
+      "blueprint": "scribe/.journals/fbp.ai.json",
+      "folder_path": ".journals",
+      "description": "0 files, 3 subfolders",
+      "file_count": 0,
+      "subdirectory_count": 3
+    }
+  ],
+  "total_folders": 7,
+  "total_files": 9,
+  "integration_timestamp": "2026-09-07T14:01:07.707443 | in sovereign time",
+  "maintaining_agent": "DomainAgent",
+  "note": "Links only. Every object's details live at its own address."
+}

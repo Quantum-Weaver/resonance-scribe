@@ -1,0 +1,135 @@
+{
+  "tier": "folder",
+  "folder_name": "src",
+  "folder_path": "src-tauri/src",
+  "self": "scribe/src-tauri/src/fbp.ai.json",
+  "parent": "scribe/src-tauri/src/obp.ai.json",
+  "description": "4 files, 0 subfolders",
+  "files": [
+    {
+      "path": "src-tauri/src/base.rs",
+      "description": "THE BASE"
+    },
+    {
+      "path": "src-tauri/src/commands.rs",
+      "description": "THE DOORS"
+    },
+    {
+      "path": "src-tauri/src/lib.rs",
+      "description": "RESONANCE SCRIBE"
+    },
+    {
+      "path": "src-tauri/src/main.rs",
+      "description": "Prevents additional console window on Windows in release, DO NOT REMOVE!!"
+    }
+  ],
+  "file_count": 4,
+  "subdirectories": [],
+  "code_analysis": {
+    "base.rs": {
+      "language": "rust",
+      "lines": 875,
+      "pub_fns": [
+        "now_ms",
+        "count_words",
+        "open",
+        "migrate",
+        "list_works",
+        "get_work",
+        "create_work",
+        "update_work",
+        "delete_work",
+        "list_parts",
+        "create_part",
+        "update_part",
+        "get_part",
+        "delete_part",
+        "reorder_parts",
+        "list_eras",
+        "create_era",
+        "update_era",
+        "delete_era",
+        "reorder_eras",
+        "list_characters",
+        "create_character",
+        "update_character",
+        "delete_character",
+        "list_arcs",
+        "create_arc",
+        "update_arc",
+        "delete_arc",
+        "list_appearances",
+        "create_appearance",
+        "delete_appearance"
+      ],
+      "structs": [
+        "Base",
+        "Work",
+        "Part",
+        "Era",
+        "Character",
+        "Arc",
+        "Appearance"
+      ],
+      "tauri_commands": 1,
+      "uses_unsafe": false
+    },
+    "commands.rs": {
+      "language": "rust",
+      "lines": 279,
+      "pub_fns": [
+        "list_works",
+        "get_work",
+        "create_work",
+        "update_work",
+        "delete_work",
+        "list_parts",
+        "create_part",
+        "update_part",
+        "delete_part",
+        "reorder_parts",
+        "list_eras",
+        "create_era",
+        "update_era",
+        "delete_era",
+        "reorder_eras",
+        "list_characters",
+        "create_character",
+        "update_character",
+        "delete_character",
+        "list_arcs",
+        "create_arc",
+        "update_arc",
+        "delete_arc",
+        "list_appearances",
+        "create_appearance",
+        "delete_appearance"
+      ],
+      "structs": [],
+      "tauri_commands": 26,
+      "uses_unsafe": false
+    },
+    "lib.rs": {
+      "language": "rust",
+      "lines": 86,
+      "pub_fns": [
+        "run"
+      ],
+      "structs": [],
+      "tauri_commands": 0,
+      "uses_unsafe": false
+    },
+    "main.rs": {
+      "language": "rust",
+      "lines": 7,
+      "pub_fns": [],
+      "structs": [],
+      "tauri_commands": 0,
+      "uses_unsafe": false
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.669410 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

@@ -1,0 +1,39 @@
+{
+  "tier": "domain",
+  "domain_name": "src",
+  "domain_path": "src",
+  "self": "scribe/src/dbp.ai.json",
+  "parent": "scribe/pbp.ai.json",
+  "description": "2 files, 2 subfolders",
+  "objects": [
+    {
+      "blueprint": "scribe/src/lib/obp.ai.json",
+      "object_path": "src/lib",
+      "description": "4 files, 19 subfolders",
+      "folder_count": 22,
+      "total_files": 75
+    },
+    {
+      "blueprint": "scribe/src/routes/obp.ai.json",
+      "object_path": "src/routes",
+      "description": "3 files, 4 subfolders",
+      "folder_count": 5,
+      "total_files": 7
+    }
+  ],
+  "object_count": 2,
+  "folders_reporting_directly": [
+    {
+      "blueprint": "scribe/src/fbp.ai.json",
+      "folder_path": "src",
+      "description": "2 files, 2 subfolders",
+      "file_count": 2,
+      "subdirectory_count": 2
+    }
+  ],
+  "total_folders": 28,
+  "total_files": 84,
+  "integration_timestamp": "2026-09-07T14:01:07.708567 | in sovereign time",
+  "maintaining_agent": "DomainAgent",
+  "note": "Links only. Every object's details live at its own address."
+}

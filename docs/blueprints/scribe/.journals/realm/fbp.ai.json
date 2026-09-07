@@ -1,0 +1,201 @@
+{
+  "tier": "folder",
+  "folder_name": "realm",
+  "folder_path": ".journals/realm",
+  "self": "scribe/.journals/realm/fbp.ai.json",
+  "parent": "scribe/.journals/realm/obp.ai.json",
+  "description": "6 files, 0 subfolders",
+  "files": [
+    {
+      "path": ".journals/realm/2026-09-02-the-bind-verified-and-mended.md",
+      "description": "2026-09-02 \u00b7 the bind room verified, and one grant mended"
+    },
+    {
+      "path": ".journals/realm/2026-09-02-the-bind.md",
+      "description": "2026-09-02 \u00b7 the bind room"
+    },
+    {
+      "path": ".journals/realm/2026-09-02-the-body-cut-from-sistrum.md",
+      "description": "2026-09-02 \u00b7 the body cut from Sistrum, and the six nouns as a base"
+    },
+    {
+      "path": ".journals/realm/2026-09-02-the-rooms.md",
+      "description": "2026-09-02 \u00b7 the rooms"
+    },
+    {
+      "path": ".journals/realm/2026-09-06-old-house-paths-in-prose-made-relative.md",
+      "description": "Old-house paths in prose made relative"
+    },
+    {
+      "path": ".journals/realm/2026-09-06-old-house-paths-made-relative.md",
+      "description": "Old-house paths made relative"
+    }
+  ],
+  "file_count": 6,
+  "subdirectories": [],
+  "code_analysis": {
+    "2026-09-02-the-bind-verified-and-mended.md": {
+      "language": "markdown",
+      "lines": 71,
+      "words": 629,
+      "heading_count": 6,
+      "headings": [
+        "2026-09-02 \u00b7 the bind room verified, and one grant mended",
+        "What the verifier did",
+        "What did not hold \u2014 and could not have been seen by any gate",
+        "The mend",
+        "What is still honestly unproven",
+        "The rows"
+      ],
+      "links_external": 0,
+      "links_site_absolute": [],
+      "links_internal": [],
+      "links_internal_unresolved": [],
+      "links_internal_outside_checkout": [],
+      "code_fences": 0,
+      "table_rows": 0,
+      "checkboxes": {
+        "open": 0,
+        "done": 0
+      },
+      "has_story_block": false,
+      "declares_mirror_class": false
+    },
+    "2026-09-02-the-bind.md": {
+      "language": "markdown",
+      "lines": 510,
+      "words": 3316,
+      "heading_count": 9,
+      "headings": [
+        "2026-09-02 \u00b7 the bind room \u2014 five ways out, and one door to the disk",
+        "THE CONDUCTOR'S READINGS, SAID OUT LOUD",
+        "THE RECEIPT \u2014 what was added and what was changed",
+        "THE MIRRORS \u2014 hashes taken at the copy",
+        "THE CHOICES, and why",
+        "THE GATES, verbatim",
+        "WHAT DID NOT HOLD",
+        "WHAT IS HONESTLY UNPROVEN",
+        "THE WALLS \u2014 the conductor's or KP's"
+      ],
+      "links_external": 0,
+      "links_site_absolute": [],
+      "links_internal": [],
+      "links_internal_unresolved": [],
+      "links_internal_outside_checkout": [],
+      "code_fences": 7,
+      "table_rows": 8,
+      "checkboxes": {
+        "open": 0,
+        "done": 0
+      },
+      "has_story_block": false,
+      "declares_mirror_class": false
+    },
+    "2026-09-02-the-body-cut-from-sistrum.md": {
+      "language": "markdown",
+      "lines": 239,
+      "words": 2064,
+      "heading_count": 7,
+      "headings": [
+        "2026-09-02 \u00b7 the body cut from Sistrum, and the six nouns as a base",
+        "THE RECEIPT",
+        "THE SCHEMA AS WRITTEN",
+        "THE CHOICES, and why",
+        "THE GATES, verbatim",
+        "WHAT DID NOT HOLD, and what is honestly unproven",
+        "THE WALLS \u2014 the conductor's or KP's"
+      ],
+      "links_external": 0,
+      "links_site_absolute": [],
+      "links_internal": [],
+      "links_internal_unresolved": [],
+      "links_internal_outside_checkout": [],
+      "code_fences": 1,
+      "table_rows": 23,
+      "checkboxes": {
+        "open": 0,
+        "done": 0
+      },
+      "has_story_block": false,
+      "declares_mirror_class": false
+    },
+    "2026-09-02-the-rooms.md": {
+      "language": "markdown",
+      "lines": 418,
+      "words": 2541,
+      "heading_count": 9,
+      "headings": [
+        "2026-09-02 \u00b7 the rooms \u2014 one shell, one rail, four routes",
+        "THE CONDUCTOR'S READING OF \"ONE PAGE\", SAID OUT LOUD",
+        "THE RECEIPT \u2014 what was added and what was changed",
+        "THE MIRRORS \u2014 hashes taken at the copy",
+        "THE CHOICES, and why",
+        "WHAT DID NOT HOLD",
+        "THE GATES, verbatim",
+        "WHAT IS HONESTLY UNPROVEN",
+        "THE WALLS \u2014 the conductor's or KP's"
+      ],
+      "links_external": 0,
+      "links_site_absolute": [],
+      "links_internal": [],
+      "links_internal_unresolved": [],
+      "links_internal_outside_checkout": [],
+      "code_fences": 8,
+      "table_rows": 5,
+      "checkboxes": {
+        "open": 0,
+        "done": 0
+      },
+      "has_story_block": false,
+      "declares_mirror_class": false
+    },
+    "2026-09-06-old-house-paths-in-prose-made-relative.md": {
+      "language": "markdown",
+      "lines": 11,
+      "words": 39,
+      "heading_count": 1,
+      "headings": [
+        "Old-house paths in prose made relative"
+      ],
+      "links_external": 0,
+      "links_site_absolute": [],
+      "links_internal": [],
+      "links_internal_unresolved": [],
+      "links_internal_outside_checkout": [],
+      "code_fences": 0,
+      "table_rows": 0,
+      "checkboxes": {
+        "open": 0,
+        "done": 0
+      },
+      "has_story_block": false,
+      "declares_mirror_class": false
+    },
+    "2026-09-06-old-house-paths-made-relative.md": {
+      "language": "markdown",
+      "lines": 7,
+      "words": 65,
+      "heading_count": 1,
+      "headings": [
+        "Old-house paths made relative \u2014 2026-09-06"
+      ],
+      "links_external": 0,
+      "links_site_absolute": [],
+      "links_internal": [],
+      "links_internal_unresolved": [],
+      "links_internal_outside_checkout": [],
+      "code_fences": 0,
+      "table_rows": 0,
+      "checkboxes": {
+        "open": 0,
+        "done": 0
+      },
+      "has_story_block": false,
+      "declares_mirror_class": false
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.494332 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

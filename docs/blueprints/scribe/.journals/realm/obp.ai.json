@@ -1,0 +1,22 @@
+{
+  "tier": "object",
+  "object_name": "realm",
+  "object_path": ".journals/realm",
+  "self": "scribe/.journals/realm/obp.ai.json",
+  "parent": "scribe/.journals/dbp.ai.json",
+  "description": "6 files, 0 subfolders",
+  "folders": [
+    {
+      "blueprint": "scribe/.journals/realm/fbp.ai.json",
+      "folder_path": ".journals/realm",
+      "description": "6 files, 0 subfolders",
+      "file_count": 6,
+      "subdirectory_count": 0
+    }
+  ],
+  "folder_count": 1,
+  "total_files": 6,
+  "integration_timestamp": "2026-09-07T14:01:07.679950 | in sovereign time",
+  "maintaining_agent": "ObjectAgent",
+  "note": "Links only. Every folder's details live at its own address."
+}

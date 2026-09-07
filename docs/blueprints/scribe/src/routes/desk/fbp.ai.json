@@ -1,0 +1,32 @@
+{
+  "tier": "folder",
+  "folder_name": "desk",
+  "folder_path": "src/routes/desk",
+  "self": "scribe/src/routes/desk/fbp.ai.json",
+  "parent": "scribe/src/routes/obp.ai.json",
+  "description": "1 files, 0 subfolders",
+  "files": [
+    {
+      "path": "src/routes/desk/+page.svelte",
+      "description": "surface, 19,292 bytes"
+    }
+  ],
+  "file_count": 1,
+  "subdirectories": [],
+  "code_analysis": {
+    "+page.svelte": {
+      "language": "svelte",
+      "lines": 786,
+      "uses_runes": [
+        "$derived",
+        "$state"
+      ],
+      "fetch_calls": [],
+      "has_style_block": true
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.585932 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

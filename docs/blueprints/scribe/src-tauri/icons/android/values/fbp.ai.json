@@ -1,0 +1,21 @@
+{
+  "tier": "folder",
+  "folder_name": "values",
+  "folder_path": "src-tauri/icons/android/values",
+  "self": "scribe/src-tauri/icons/android/values/fbp.ai.json",
+  "parent": "scribe/src-tauri/icons/obp.ai.json",
+  "description": "1 files, 0 subfolders",
+  "files": [
+    {
+      "path": "src-tauri/icons/android/values/ic_launcher_background.xml",
+      "description": "file, 115 bytes"
+    }
+  ],
+  "file_count": 1,
+  "subdirectories": [],
+  "code_analysis": {},
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.661372 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

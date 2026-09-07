@@ -1,0 +1,89 @@
+{
+  "tier": "folder",
+  "folder_name": "pandulipi",
+  "folder_path": "src/lib/pandulipi",
+  "self": "scribe/src/lib/pandulipi/fbp.ai.json",
+  "parent": "scribe/src/lib/obp.ai.json",
+  "description": "2 files, 0 subfolders",
+  "files": [
+    {
+      "path": "src/lib/pandulipi/index.ts",
+      "description": "THE PANDULIPI"
+    },
+    {
+      "path": "src/lib/pandulipi/MIRROR.md",
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    }
+  ],
+  "file_count": 2,
+  "subdirectories": [],
+  "code_analysis": {
+    "index.ts": {
+      "language": "typescript",
+      "lines": 770,
+      "exported_functions": [
+        "isRefusal",
+        "plain",
+        "countWords",
+        "pandulipi"
+      ],
+      "exported_consts": [
+        "EDITORIAL_LAW",
+        "EDITORIAL_LAW_AT",
+        "THE_WORD",
+        "THE_WORD_AT",
+        "NOTHING_STOOD",
+        "THE_LAWS",
+        "MARKUP_MARKS",
+        "PAPER",
+        "FORMAT_DEFAULT",
+        "TOOL_NAME"
+      ],
+      "interfaces": [
+        "Law",
+        "Refusal",
+        "BookJson",
+        "ChapterFile",
+        "ManuscriptFolder",
+        "SourceRun",
+        "PandulipiOptions",
+        "Submission"
+      ],
+      "types": [
+        "Telling",
+        "Paper",
+        "LineBreaks"
+      ],
+      "imports_node": [],
+      "spawns_process": false,
+      "writes_files": false,
+      "env_names_read": []
+    },
+    "MIRROR.md": {
+      "language": "markdown",
+      "lines": 61,
+      "words": 539,
+      "heading_count": 1,
+      "headings": [
+        "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+      ],
+      "links_external": 0,
+      "links_site_absolute": [],
+      "links_internal": [],
+      "links_internal_unresolved": [],
+      "links_internal_outside_checkout": [],
+      "code_fences": 0,
+      "table_rows": 0,
+      "checkboxes": {
+        "open": 0,
+        "done": 0
+      },
+      "has_story_block": false,
+      "declares_mirror_class": false
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.549537 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

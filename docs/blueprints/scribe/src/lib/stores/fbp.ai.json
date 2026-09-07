@@ -1,0 +1,90 @@
+{
+  "tier": "folder",
+  "folder_name": "stores",
+  "folder_path": "src/lib/stores",
+  "self": "scribe/src/lib/stores/fbp.ai.json",
+  "parent": "scribe/src/lib/obp.ai.json",
+  "description": "4 files, 0 subfolders",
+  "files": [
+    {
+      "path": "src/lib/stores/studio.svelte.ts",
+      "description": "THE STUDIO"
+    },
+    {
+      "path": "src/lib/stores/theme.svelte.ts",
+      "description": "typescript, 1,587 bytes"
+    },
+    {
+      "path": "src/lib/stores/ui.svelte.ts",
+      "description": "typescript, 364 bytes"
+    },
+    {
+      "path": "src/lib/stores/work.svelte.ts",
+      "description": "THE CHOSEN WORK"
+    }
+  ],
+  "file_count": 4,
+  "subdirectories": [],
+  "code_analysis": {
+    "studio.svelte.ts": {
+      "language": "typescript",
+      "lines": 378,
+      "exported_functions": [],
+      "exported_consts": [
+        "studioStore"
+      ],
+      "interfaces": [],
+      "types": [],
+      "imports_node": [],
+      "spawns_process": false,
+      "writes_files": false,
+      "env_names_read": []
+    },
+    "theme.svelte.ts": {
+      "language": "typescript",
+      "lines": 58,
+      "exported_functions": [],
+      "exported_consts": [
+        "themeStore"
+      ],
+      "interfaces": [],
+      "types": [],
+      "imports_node": [],
+      "spawns_process": false,
+      "writes_files": false,
+      "env_names_read": []
+    },
+    "ui.svelte.ts": {
+      "language": "typescript",
+      "lines": 12,
+      "exported_functions": [],
+      "exported_consts": [
+        "uiStore"
+      ],
+      "interfaces": [],
+      "types": [],
+      "imports_node": [],
+      "spawns_process": false,
+      "writes_files": false,
+      "env_names_read": []
+    },
+    "work.svelte.ts": {
+      "language": "typescript",
+      "lines": 85,
+      "exported_functions": [],
+      "exported_consts": [
+        "workStore"
+      ],
+      "interfaces": [],
+      "types": [],
+      "imports_node": [],
+      "spawns_process": false,
+      "writes_files": false,
+      "env_names_read": []
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.563878 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

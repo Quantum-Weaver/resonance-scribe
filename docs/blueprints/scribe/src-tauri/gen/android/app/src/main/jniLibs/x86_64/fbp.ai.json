@@ -1,0 +1,16 @@
+{
+  "tier": "folder",
+  "folder_name": "x86_64",
+  "folder_path": "src-tauri/gen/android/app/src/main/jniLibs/x86_64",
+  "self": "scribe/src-tauri/gen/android/app/src/main/jniLibs/x86_64/fbp.ai.json",
+  "parent": "scribe/src-tauri/gen/obp.ai.json",
+  "description": "0 files, 0 subfolders",
+  "files": [],
+  "file_count": 0,
+  "subdirectories": [],
+  "code_analysis": {},
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.613980 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

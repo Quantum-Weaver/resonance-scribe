@@ -1,0 +1,169 @@
+{
+  "tier": "object",
+  "object_name": "lib",
+  "object_path": "src/lib",
+  "self": "scribe/src/lib/obp.ai.json",
+  "parent": "scribe/src/dbp.ai.json",
+  "description": "4 files, 19 subfolders",
+  "folders": [
+    {
+      "blueprint": "scribe/src/lib/fbp.ai.json",
+      "folder_path": "src/lib",
+      "description": "4 files, 19 subfolders",
+      "file_count": 4,
+      "subdirectory_count": 19
+    },
+    {
+      "blueprint": "scribe/src/lib/binder/fbp.ai.json",
+      "folder_path": "src/lib/binder",
+      "description": "2 files, 0 subfolders",
+      "file_count": 2,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/clavis/fbp.ai.json",
+      "folder_path": "src/lib/clavis",
+      "description": "2 files, 0 subfolders",
+      "file_count": 2,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/components/fbp.ai.json",
+      "folder_path": "src/lib/components",
+      "description": "1 files, 0 subfolders",
+      "file_count": 1,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/cosmic/fbp.ai.json",
+      "folder_path": "src/lib/cosmic",
+      "description": "12 files, 0 subfolders",
+      "file_count": 12,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/cumdach/fbp.ai.json",
+      "folder_path": "src/lib/cumdach",
+      "description": "2 files, 0 subfolders",
+      "file_count": 2,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/envelope/fbp.ai.json",
+      "folder_path": "src/lib/envelope",
+      "description": "3 files, 1 subfolders",
+      "file_count": 3,
+      "subdirectory_count": 1
+    },
+    {
+      "blueprint": "scribe/src/lib/envelope/hosts/fbp.ai.json",
+      "folder_path": "src/lib/envelope/hosts",
+      "description": "1 files, 0 subfolders",
+      "file_count": 1,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/epagoge/fbp.ai.json",
+      "folder_path": "src/lib/epagoge",
+      "description": "2 files, 0 subfolders",
+      "file_count": 2,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/lok/fbp.ai.json",
+      "folder_path": "src/lib/lok",
+      "description": "2 files, 0 subfolders",
+      "file_count": 2,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/merismos/fbp.ai.json",
+      "folder_path": "src/lib/merismos",
+      "description": "2 files, 0 subfolders",
+      "file_count": 2,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/pandulipi/fbp.ai.json",
+      "folder_path": "src/lib/pandulipi",
+      "description": "2 files, 0 subfolders",
+      "file_count": 2,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/panti/fbp.ai.json",
+      "folder_path": "src/lib/panti",
+      "description": "3 files, 0 subfolders",
+      "file_count": 3,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/scrolls/fbp.ai.json",
+      "folder_path": "src/lib/scrolls",
+      "description": "3 files, 0 subfolders",
+      "file_count": 3,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/signet/fbp.ai.json",
+      "folder_path": "src/lib/signet",
+      "description": "2 files, 0 subfolders",
+      "file_count": 2,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/sky/fbp.ai.json",
+      "folder_path": "src/lib/sky",
+      "description": "2 files, 0 subfolders",
+      "file_count": 2,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/sphragis/fbp.ai.json",
+      "folder_path": "src/lib/sphragis",
+      "description": "2 files, 0 subfolders",
+      "file_count": 2,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/stores/fbp.ai.json",
+      "folder_path": "src/lib/stores",
+      "description": "4 files, 0 subfolders",
+      "file_count": 4,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/styles/fbp.ai.json",
+      "folder_path": "src/lib/styles",
+      "description": "1 files, 1 subfolders",
+      "file_count": 1,
+      "subdirectory_count": 1
+    },
+    {
+      "blueprint": "scribe/src/lib/styles/generated/fbp.ai.json",
+      "folder_path": "src/lib/styles/generated",
+      "description": "21 files, 0 subfolders",
+      "file_count": 21,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/theme/fbp.ai.json",
+      "folder_path": "src/lib/theme",
+      "description": "1 files, 0 subfolders",
+      "file_count": 1,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/src/lib/types/fbp.ai.json",
+      "folder_path": "src/lib/types",
+      "description": "1 files, 0 subfolders",
+      "file_count": 1,
+      "subdirectory_count": 0
+    }
+  ],
+  "folder_count": 22,
+  "total_files": 75,
+  "integration_timestamp": "2026-09-07T14:01:07.682775 | in sovereign time",
+  "maintaining_agent": "ObjectAgent",
+  "note": "Links only. Every folder's details live at its own address."
+}

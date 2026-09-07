@@ -1,0 +1,57 @@
+{
+  "tier": "folder",
+  "folder_name": "mipmap-xhdpi",
+  "folder_path": "src-tauri/gen/android/app/src/main/res/mipmap-xhdpi",
+  "self": "scribe/src-tauri/gen/android/app/src/main/res/mipmap-xhdpi/fbp.ai.json",
+  "parent": "scribe/src-tauri/gen/obp.ai.json",
+  "description": "3 files, 0 subfolders",
+  "files": [
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+      "description": "image, 11,095 bytes"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png",
+      "description": "image, 54,754 bytes"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png",
+      "description": "image, 10,771 bytes"
+    }
+  ],
+  "file_count": 3,
+  "subdirectories": [],
+  "code_analysis": {
+    "ic_launcher.png": {
+      "language": "content-file",
+      "format": "png",
+      "name": "ic_launcher.png",
+      "location": "src-tauri/gen/android/app/src/main/res/mipmap-xhdpi",
+      "bytes": 11095,
+      "opened": false,
+      "law": "Name and location only. The file is never opened."
+    },
+    "ic_launcher_foreground.png": {
+      "language": "content-file",
+      "format": "png",
+      "name": "ic_launcher_foreground.png",
+      "location": "src-tauri/gen/android/app/src/main/res/mipmap-xhdpi",
+      "bytes": 54754,
+      "opened": false,
+      "law": "Name and location only. The file is never opened."
+    },
+    "ic_launcher_round.png": {
+      "language": "content-file",
+      "format": "png",
+      "name": "ic_launcher_round.png",
+      "location": "src-tauri/gen/android/app/src/main/res/mipmap-xhdpi",
+      "bytes": 10771,
+      "opened": false,
+      "law": "Name and location only. The file is never opened."
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.626624 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

@@ -1,0 +1,101 @@
+{
+  "tier": "folder",
+  "folder_name": "panti",
+  "folder_path": "src/lib/panti",
+  "self": "scribe/src/lib/panti/fbp.ai.json",
+  "parent": "scribe/src/lib/obp.ai.json",
+  "description": "3 files, 0 subfolders",
+  "files": [
+    {
+      "path": "src/lib/panti/index.ts",
+      "description": "the-panti"
+    },
+    {
+      "path": "src/lib/panti/MIRROR.md",
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    },
+    {
+      "path": "src/lib/panti/table.utils.ts",
+      "description": "\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557"
+    }
+  ],
+  "file_count": 3,
+  "subdirectories": [],
+  "code_analysis": {
+    "index.ts": {
+      "language": "typescript",
+      "lines": 51,
+      "exported_functions": [],
+      "exported_consts": [
+        "TOOL_NAME",
+        "LOGGING"
+      ],
+      "interfaces": [],
+      "types": [],
+      "imports_node": [],
+      "spawns_process": false,
+      "writes_files": false,
+      "env_names_read": []
+    },
+    "MIRROR.md": {
+      "language": "markdown",
+      "lines": 52,
+      "words": 431,
+      "heading_count": 1,
+      "headings": [
+        "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+      ],
+      "links_external": 0,
+      "links_site_absolute": [],
+      "links_internal": [],
+      "links_internal_unresolved": [],
+      "links_internal_outside_checkout": [],
+      "code_fences": 0,
+      "table_rows": 0,
+      "checkboxes": {
+        "open": 0,
+        "done": 0
+      },
+      "has_story_block": false,
+      "declares_mirror_class": false
+    },
+    "table.utils.ts": {
+      "language": "typescript",
+      "lines": 311,
+      "exported_functions": [
+        "toggleSortDirection",
+        "updateSortState",
+        "sortData",
+        "getSortIndicatorState",
+        "isActiveSortColumn",
+        "filterData",
+        "applyFilters",
+        "isStripedRow",
+        "getColumnAlignment",
+        "toggleRowSelection",
+        "toggleSelectAll",
+        "isRowSelected",
+        "getCellDisplayValue",
+        "getRowId"
+      ],
+      "exported_consts": [],
+      "interfaces": [
+        "SortState",
+        "ColumnConfig",
+        "FilterState",
+        "SelectionState"
+      ],
+      "types": [
+        "SortDirection"
+      ],
+      "imports_node": [],
+      "spawns_process": false,
+      "writes_files": false,
+      "env_names_read": []
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.551779 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

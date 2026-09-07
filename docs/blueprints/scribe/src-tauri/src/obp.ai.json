@@ -1,0 +1,22 @@
+{
+  "tier": "object",
+  "object_name": "src",
+  "object_path": "src-tauri/src",
+  "self": "scribe/src-tauri/src/obp.ai.json",
+  "parent": "scribe/src-tauri/dbp.ai.json",
+  "description": "4 files, 0 subfolders",
+  "folders": [
+    {
+      "blueprint": "scribe/src-tauri/src/fbp.ai.json",
+      "folder_path": "src-tauri/src",
+      "description": "4 files, 0 subfolders",
+      "file_count": 4,
+      "subdirectory_count": 0
+    }
+  ],
+  "folder_count": 1,
+  "total_files": 4,
+  "integration_timestamp": "2026-09-07T14:01:07.706452 | in sovereign time",
+  "maintaining_agent": "ObjectAgent",
+  "note": "Links only. Every folder's details live at its own address."
+}

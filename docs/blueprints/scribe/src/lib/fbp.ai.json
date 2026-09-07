@@ -1,0 +1,204 @@
+{
+  "tier": "folder",
+  "folder_name": "lib",
+  "folder_path": "src/lib",
+  "self": "scribe/src/lib/fbp.ai.json",
+  "parent": "scribe/src/lib/obp.ai.json",
+  "description": "4 files, 19 subfolders",
+  "files": [
+    {
+      "path": "src/lib/base.ts",
+      "description": "THE BASE, from the window's side"
+    },
+    {
+      "path": "src/lib/bind.ts",
+      "description": "THE BIND'S ARITHMETIC"
+    },
+    {
+      "path": "src/lib/board.ts",
+      "description": "THE BOARD'S ARITHMETIC"
+    },
+    {
+      "path": "src/lib/host.ts",
+      "description": "THE ONE DOOR TO THE DISK"
+    }
+  ],
+  "file_count": 4,
+  "subdirectories": [
+    "src/lib/binder",
+    "src/lib/clavis",
+    "src/lib/components",
+    "src/lib/cosmic",
+    "src/lib/cumdach",
+    "src/lib/envelope",
+    "src/lib/epagoge",
+    "src/lib/lok",
+    "src/lib/merismos",
+    "src/lib/pandulipi",
+    "src/lib/panti",
+    "src/lib/scrolls",
+    "src/lib/signet",
+    "src/lib/sky",
+    "src/lib/sphragis",
+    "src/lib/stores",
+    "src/lib/styles",
+    "src/lib/theme",
+    "src/lib/types"
+  ],
+  "code_analysis": {
+    "base.ts": {
+      "language": "typescript",
+      "lines": 161,
+      "exported_functions": [],
+      "exported_consts": [
+        "listWorks",
+        "getWork",
+        "createWork",
+        "updateWork",
+        "deleteWork",
+        "listParts",
+        "createPart",
+        "updatePart",
+        "deletePart",
+        "reorderParts",
+        "listEras",
+        "createEra",
+        "updateEra",
+        "deleteEra",
+        "reorderEras",
+        "listCharacters",
+        "createCharacter",
+        "updateCharacter",
+        "deleteCharacter",
+        "listArcs",
+        "createArc",
+        "updateArc",
+        "deleteArc",
+        "listAppearances",
+        "createAppearance",
+        "deleteAppearance",
+        "chaptersOf",
+        "scenesOf"
+      ],
+      "interfaces": [],
+      "types": [],
+      "imports_node": [],
+      "spawns_process": false,
+      "writes_files": false,
+      "env_names_read": []
+    },
+    "bind.ts": {
+      "language": "typescript",
+      "lines": 941,
+      "exported_functions": [
+        "slug",
+        "chapterFileName",
+        "firstHeading",
+        "manuscriptFolderOf",
+        "frontOf",
+        "manuscriptOf",
+        "zipStore",
+        "envelopeOf",
+        "readingToImport",
+        "encodeWorkId",
+        "snapshotStamp",
+        "snapshotName",
+        "snapshotFolder"
+      ],
+      "exported_consts": [
+        "SCENE_BREAK",
+        "folderName",
+        "pathIn",
+        "SCRIBE_FORMAT",
+        "SCRIBE_VERSION",
+        "SCRIBE_APP",
+        "decodeWorkId"
+      ],
+      "interfaces": [
+        "Placed",
+        "FolderOptions",
+        "MadeFolder",
+        "FrontOptions",
+        "SavedBy",
+        "WorkRows",
+        "SealStamp",
+        "PlannedPart",
+        "PlannedEra",
+        "PlannedCharacter",
+        "PlannedArc",
+        "PlannedAppearance",
+        "ImportPlan"
+      ],
+      "types": [
+        "WorkHeart",
+        "ScribeWork"
+      ],
+      "imports_node": [],
+      "spawns_process": false,
+      "writes_files": false,
+      "env_names_read": []
+    },
+    "board.ts": {
+      "language": "typescript",
+      "lines": 228,
+      "exported_functions": [
+        "reorderWithin",
+        "nudge",
+        "moveToEra",
+        "threadThrough"
+      ],
+      "exported_consts": [
+        "isPlacement",
+        "erasOfPart",
+        "partsInEra",
+        "unplacedParts",
+        "charactersOfPart",
+        "arcsOfPart",
+        "hangId",
+        "centerOf",
+        "polylinePoints",
+        "shapeRank"
+      ],
+      "interfaces": [
+        "EraMove",
+        "Carded",
+        "Point",
+        "Box"
+      ],
+      "types": [],
+      "imports_node": [],
+      "spawns_process": false,
+      "writes_files": false,
+      "env_names_read": []
+    },
+    "host.ts": {
+      "language": "typescript",
+      "lines": 190,
+      "exported_functions": [
+        "chooseFolder",
+        "saveAs",
+        "occupied",
+        "writeNew",
+        "makeFolder",
+        "appDataFolder"
+      ],
+      "exported_consts": [
+        "scribeHost"
+      ],
+      "interfaces": [
+        "Chose",
+        "Wrote",
+        "Filter"
+      ],
+      "types": [],
+      "imports_node": [],
+      "spawns_process": false,
+      "writes_files": false,
+      "env_names_read": []
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.506998 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

@@ -1,0 +1,28 @@
+{
+  "tier": "folder",
+  "folder_name": "2026-09-02-the-rooms",
+  "folder_path": ".journals/proofs/2026-09-02-the-rooms",
+  "self": "scribe/.journals/proofs/2026-09-02-the-rooms/fbp.ai.json",
+  "parent": "scribe/.journals/proofs/obp.ai.json",
+  "description": "1 files, 0 subfolders",
+  "files": [
+    {
+      "path": ".journals/proofs/2026-09-02-the-rooms/rooms.mjs",
+      "description": "PROOF"
+    }
+  ],
+  "file_count": 1,
+  "subdirectories": [],
+  "code_analysis": {
+    "rooms.mjs": {
+      "language": "node",
+      "lines": 369,
+      "functions": [],
+      "commands": []
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.486878 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

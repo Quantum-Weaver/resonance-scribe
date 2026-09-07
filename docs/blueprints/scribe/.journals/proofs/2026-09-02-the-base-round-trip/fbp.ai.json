@@ -1,0 +1,28 @@
+{
+  "tier": "folder",
+  "folder_name": "2026-09-02-the-base-round-trip",
+  "folder_path": ".journals/proofs/2026-09-02-the-base-round-trip",
+  "self": "scribe/.journals/proofs/2026-09-02-the-base-round-trip/fbp.ai.json",
+  "parent": "scribe/.journals/proofs/obp.ai.json",
+  "description": "1 files, 0 subfolders",
+  "files": [
+    {
+      "path": ".journals/proofs/2026-09-02-the-base-round-trip/round-trip.mjs",
+      "description": "PROOF"
+    }
+  ],
+  "file_count": 1,
+  "subdirectories": [],
+  "code_analysis": {
+    "round-trip.mjs": {
+      "language": "node",
+      "lines": 153,
+      "functions": [],
+      "commands": []
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.483137 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

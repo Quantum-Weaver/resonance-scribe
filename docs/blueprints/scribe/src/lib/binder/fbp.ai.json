@@ -1,0 +1,96 @@
+{
+  "tier": "folder",
+  "folder_name": "binder",
+  "folder_path": "src/lib/binder",
+  "self": "scribe/src/lib/binder/fbp.ai.json",
+  "parent": "scribe/src/lib/obp.ai.json",
+  "description": "2 files, 0 subfolders",
+  "files": [
+    {
+      "path": "src/lib/binder/index.ts",
+      "description": "THE BINDER"
+    },
+    {
+      "path": "src/lib/binder/MIRROR.md",
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    }
+  ],
+  "file_count": 2,
+  "subdirectories": [],
+  "code_analysis": {
+    "index.ts": {
+      "language": "typescript",
+      "lines": 1192,
+      "exported_functions": [
+        "isRefusal",
+        "chapterOrder",
+        "impose",
+        "crc32",
+        "utf8",
+        "bind",
+        "typeset"
+      ],
+      "exported_consts": [
+        "EDITORIAL_LAW",
+        "EDITORIAL_LAW_AT",
+        "COVER_RULE",
+        "COVER_RULE_AT",
+        "THE_LAWS",
+        "MARKUP_ALPHABET",
+        "CRC32_CHECK",
+        "PAGE_DEFAULT"
+      ],
+      "interfaces": [
+        "Law",
+        "Refusal",
+        "Chapter",
+        "RightsGrant",
+        "Rights",
+        "Cover",
+        "FrontMatter",
+        "Manuscript",
+        "Ink",
+        "Rendered",
+        "BookFile",
+        "Book",
+        "BindOptions",
+        "PagePlan",
+        "TypesetOptions"
+      ],
+      "types": [
+        "Endpaper",
+        "LineBreaks"
+      ],
+      "imports_node": [],
+      "spawns_process": false,
+      "writes_files": false,
+      "env_names_read": []
+    },
+    "MIRROR.md": {
+      "language": "markdown",
+      "lines": 59,
+      "words": 532,
+      "heading_count": 1,
+      "headings": [
+        "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+      ],
+      "links_external": 0,
+      "links_site_absolute": [],
+      "links_internal": [],
+      "links_internal_unresolved": [],
+      "links_internal_outside_checkout": [],
+      "code_fences": 0,
+      "table_rows": 0,
+      "checkboxes": {
+        "open": 0,
+        "done": 0
+      },
+      "has_story_block": false,
+      "declares_mirror_class": false
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.510388 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

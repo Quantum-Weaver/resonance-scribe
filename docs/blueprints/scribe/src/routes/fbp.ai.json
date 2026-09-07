@@ -1,0 +1,70 @@
+{
+  "tier": "folder",
+  "folder_name": "routes",
+  "folder_path": "src/routes",
+  "self": "scribe/src/routes/fbp.ai.json",
+  "parent": "scribe/src/routes/obp.ai.json",
+  "description": "3 files, 4 subfolders",
+  "files": [
+    {
+      "path": "src/routes/+layout.svelte",
+      "description": "surface, 2,531 bytes"
+    },
+    {
+      "path": "src/routes/+layout.ts",
+      "description": "Tauri has no Node server: adapter-static with an index.html fallback puts the app in SPA mode"
+    },
+    {
+      "path": "src/routes/+page.svelte",
+      "description": "surface, 7,515 bytes"
+    }
+  ],
+  "file_count": 3,
+  "subdirectories": [
+    "src/routes/bind",
+    "src/routes/board",
+    "src/routes/cast",
+    "src/routes/desk"
+  ],
+  "code_analysis": {
+    "+layout.svelte": {
+      "language": "svelte",
+      "lines": 84,
+      "uses_runes": [
+        "$derived",
+        "$effect",
+        "$props"
+      ],
+      "fetch_calls": [],
+      "has_style_block": true
+    },
+    "+layout.ts": {
+      "language": "typescript",
+      "lines": 3,
+      "exported_functions": [],
+      "exported_consts": [
+        "ssr"
+      ],
+      "interfaces": [],
+      "types": [],
+      "imports_node": [],
+      "spawns_process": false,
+      "writes_files": false,
+      "env_names_read": []
+    },
+    "+page.svelte": {
+      "language": "svelte",
+      "lines": 334,
+      "uses_runes": [
+        "$derived",
+        "$state"
+      ],
+      "fetch_calls": [],
+      "has_style_block": true
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.580745 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

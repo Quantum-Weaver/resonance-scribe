@@ -1,0 +1,173 @@
+{
+  "tier": "project",
+  "project_name": "resonance-scribe",
+  "project_short_name": "scribe",
+  "project_repo": "resonance-scribe",
+  "project_path": "../resonance-scribe",
+  "self": "scribe/pbp.ai.json",
+  "parent": null,
+  "description": "The author's studio of the Resonance Sanctuary: a book, a manuscript, an article",
+  "tier_ladder": "file -> folder (fbp) -> object (obp) -> domain (dbp) -> project (pbp)",
+  "layout": "One project folder; the repo's own tree mirrored under it; the tier is the filename (pbp/dbp/obp/fbp.ai.json). Every link in every blueprint is relative to the blueprints folder, never absolute.",
+  "law": "Each tier links to where the details live. Nothing above the folder tier duplicates a body.",
+  "domains": [
+    {
+      "blueprint": "scribe/.journals/dbp.ai.json",
+      "domain_path": ".journals",
+      "description": "0 files, 3 subfolders",
+      "object_count": 3,
+      "total_folders": 7,
+      "total_files": 9
+    },
+    {
+      "blueprint": "scribe/src/dbp.ai.json",
+      "domain_path": "src",
+      "description": "2 files, 2 subfolders",
+      "object_count": 2,
+      "total_folders": 28,
+      "total_files": 84
+    },
+    {
+      "blueprint": "scribe/src-tauri/dbp.ai.json",
+      "domain_path": "src-tauri",
+      "description": "5 files, 6 subfolders",
+      "object_count": 6,
+      "total_folders": 55,
+      "total_files": 112
+    }
+  ],
+  "domain_count": 3,
+  "objects_reporting_directly": [],
+  "folders_reporting_directly": [
+    {
+      "blueprint": "scribe/fbp.ai.json",
+      "folder_path": ".",
+      "description": "The author's studio of the Resonance Sanctuary: a book, a manuscript, an article",
+      "file_count": 13,
+      "subdirectory_count": 7
+    },
+    {
+      "blueprint": "scribe/.cargo/fbp.ai.json",
+      "folder_path": ".cargo",
+      "description": "1 files, 0 subfolders",
+      "file_count": 1,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/.claude/fbp.ai.json",
+      "folder_path": ".claude",
+      "description": "1 files, 0 subfolders",
+      "file_count": 1,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/docs/fbp.ai.json",
+      "folder_path": "docs",
+      "description": "1 files, 0 subfolders",
+      "file_count": 1,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/static/fbp.ai.json",
+      "folder_path": "static",
+      "description": "1 files, 0 subfolders",
+      "file_count": 1,
+      "subdirectory_count": 0
+    }
+  ],
+  "analysis": [
+    {
+      "blueprint": "scribe/analysis_sovereignty.ai.json",
+      "description": "the sovereignty law \u2014 HELD"
+    },
+    {
+      "blueprint": "scribe/reconciliation.ai.json",
+      "description": "declared versus present \u2014 0 findings"
+    }
+  ],
+  "totals": {
+    "folders_blueprinted": 95,
+    "files_described": 222
+  },
+  "not_walked": {
+    "reason": "package-class trees, this repo's own gitignored trees at every depth, reparse points, and this tool's own output",
+    "package_dirs": [
+      ".cache",
+      ".dart_tool",
+      ".git",
+      ".godot",
+      ".gradle",
+      ".import",
+      ".mono",
+      ".mypy_cache",
+      ".next",
+      ".nuxt",
+      ".pytest_cache",
+      ".svelte-kit",
+      ".turbo",
+      ".venv",
+      "Pods",
+      "__pycache__",
+      "build",
+      "dist",
+      "env",
+      "mimirs-well",
+      "node_modules",
+      "out",
+      "target",
+      "venv"
+    ],
+    "gitignored_trees": {
+      "release": {
+        "address": "release",
+        "files_on_disk": 5,
+        "walked": false,
+        "reason": "gitignored by this repo's own .gitignore \u2014 named and counted, never described, never opened"
+      }
+    },
+    "gitignored_trees_at_depth": {
+      "src-tauri/target": {
+        "address": "src-tauri/target",
+        "files_on_disk": 3343,
+        "walked": false,
+        "reason": "gitignored at depth by this repo's own .gitignore \u2014 named and counted, never described, never opened"
+      },
+      "src-tauri/gen/schemas": {
+        "address": "src-tauri/gen/schemas",
+        "files_on_disk": 6,
+        "walked": false,
+        "reason": "gitignored at depth by this repo's own .gitignore \u2014 named and counted, never described, never opened"
+      },
+      "src-tauri/gen/android/build": {
+        "address": "src-tauri/gen/android/build",
+        "files_on_disk": 1,
+        "walked": false,
+        "reason": "gitignored at depth by this repo's own .gitignore \u2014 named and counted, never described, never opened"
+      },
+      "src-tauri/gen/android/buildSrc/build": {
+        "address": "src-tauri/gen/android/buildSrc/build",
+        "files_on_disk": 114,
+        "walked": false,
+        "reason": "gitignored at depth by this repo's own .gitignore \u2014 named and counted, never described, never opened"
+      },
+      "src-tauri/gen/android/app/build": {
+        "address": "src-tauri/gen/android/app/build",
+        "files_on_disk": 709,
+        "walked": false,
+        "reason": "gitignored at depth by this repo's own .gitignore \u2014 named and counted, never described, never opened"
+      },
+      "src-tauri/gen/android/app/src/main/java/com/audhd/resonance_scribe/generated": {
+        "address": "src-tauri/gen/android/app/src/main/java/com/audhd/resonance_scribe/generated",
+        "files_on_disk": 10,
+        "walked": false,
+        "reason": "gitignored at depth by this repo's own .gitignore \u2014 named and counted, never described, never opened"
+      }
+    },
+    "gitignored_note": "Read from the repo's own .gitignore files \u2014 the top-level ones one by one, the deeper ones in a single batched `git check-ignore`. Named and counted, never described, never opened.",
+    "reparse_points_not_followed": [],
+    "reparse_note": "Junctions and symlinks are named, never entered. Following one would pull an external ground into this repo's count, or loop on a self-junction.",
+    "own_output": "docs/blueprints"
+  },
+  "generated": "2026-09-07T14:01:07.748642 | in sovereign time",
+  "maintaining_agent": "ProjectAgent"
+}

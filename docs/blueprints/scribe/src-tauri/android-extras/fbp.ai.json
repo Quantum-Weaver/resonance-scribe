@@ -1,0 +1,36 @@
+{
+  "tier": "folder",
+  "folder_name": "android-extras",
+  "folder_path": "src-tauri/android-extras",
+  "self": "scribe/src-tauri/android-extras/fbp.ai.json",
+  "parent": "scribe/src-tauri/android-extras/obp.ai.json",
+  "description": "1 files, 0 subfolders",
+  "files": [
+    {
+      "path": "src-tauri/android-extras/extras.json",
+      "description": "data, 338 bytes"
+    }
+  ],
+  "file_count": 1,
+  "subdirectories": [],
+  "code_analysis": {
+    "extras.json": {
+      "language": "json",
+      "lines": 15,
+      "valid": true,
+      "root": "object",
+      "top_level_keys": [
+        "app",
+        "from",
+        "kotlinPlugins",
+        "manifest",
+        "sections"
+      ],
+      "key_count": 5
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.592091 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

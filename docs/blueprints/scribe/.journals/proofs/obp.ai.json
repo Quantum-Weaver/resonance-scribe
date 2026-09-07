@@ -1,0 +1,43 @@
+{
+  "tier": "object",
+  "object_name": "proofs",
+  "object_path": ".journals/proofs",
+  "self": "scribe/.journals/proofs/obp.ai.json",
+  "parent": "scribe/.journals/dbp.ai.json",
+  "description": "0 files, 3 subfolders",
+  "folders": [
+    {
+      "blueprint": "scribe/.journals/proofs/fbp.ai.json",
+      "folder_path": ".journals/proofs",
+      "description": "0 files, 3 subfolders",
+      "file_count": 0,
+      "subdirectory_count": 3
+    },
+    {
+      "blueprint": "scribe/.journals/proofs/2026-09-02-the-base-round-trip/fbp.ai.json",
+      "folder_path": ".journals/proofs/2026-09-02-the-base-round-trip",
+      "description": "1 files, 0 subfolders",
+      "file_count": 1,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/.journals/proofs/2026-09-02-the-bind/fbp.ai.json",
+      "folder_path": ".journals/proofs/2026-09-02-the-bind",
+      "description": "1 files, 0 subfolders",
+      "file_count": 1,
+      "subdirectory_count": 0
+    },
+    {
+      "blueprint": "scribe/.journals/proofs/2026-09-02-the-rooms/fbp.ai.json",
+      "folder_path": ".journals/proofs/2026-09-02-the-rooms",
+      "description": "1 files, 0 subfolders",
+      "file_count": 1,
+      "subdirectory_count": 0
+    }
+  ],
+  "folder_count": 4,
+  "total_files": 3,
+  "integration_timestamp": "2026-09-07T14:01:07.676983 | in sovereign time",
+  "maintaining_agent": "ObjectAgent",
+  "note": "Links only. Every folder's details live at its own address."
+}

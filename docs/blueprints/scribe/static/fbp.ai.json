@@ -1,0 +1,31 @@
+{
+  "tier": "folder",
+  "folder_name": "static",
+  "folder_path": "static",
+  "self": "scribe/static/fbp.ai.json",
+  "parent": "scribe/pbp.ai.json",
+  "description": "1 files, 0 subfolders",
+  "files": [
+    {
+      "path": "static/favicon.png",
+      "description": "image, 700,934 bytes"
+    }
+  ],
+  "file_count": 1,
+  "subdirectories": [],
+  "code_analysis": {
+    "favicon.png": {
+      "language": "content-file",
+      "format": "png",
+      "name": "favicon.png",
+      "location": "static",
+      "bytes": 700934,
+      "opened": false,
+      "law": "Name and location only. The file is never opened."
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.670521 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

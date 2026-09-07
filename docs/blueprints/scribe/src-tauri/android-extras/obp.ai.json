@@ -1,0 +1,22 @@
+{
+  "tier": "object",
+  "object_name": "android-extras",
+  "object_path": "src-tauri/android-extras",
+  "self": "scribe/src-tauri/android-extras/obp.ai.json",
+  "parent": "scribe/src-tauri/dbp.ai.json",
+  "description": "1 files, 0 subfolders",
+  "folders": [
+    {
+      "blueprint": "scribe/src-tauri/android-extras/fbp.ai.json",
+      "folder_path": "src-tauri/android-extras",
+      "description": "1 files, 0 subfolders",
+      "file_count": 1,
+      "subdirectory_count": 0
+    }
+  ],
+  "folder_count": 1,
+  "total_files": 1,
+  "integration_timestamp": "2026-09-07T14:01:07.692165 | in sovereign time",
+  "maintaining_agent": "ObjectAgent",
+  "note": "Links only. Every folder's details live at its own address."
+}

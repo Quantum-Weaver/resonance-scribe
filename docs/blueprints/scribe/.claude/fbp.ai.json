@@ -1,0 +1,32 @@
+{
+  "tier": "folder",
+  "folder_name": ".claude",
+  "folder_path": ".claude",
+  "self": "scribe/.claude/fbp.ai.json",
+  "parent": "scribe/pbp.ai.json",
+  "description": "1 files, 0 subfolders",
+  "files": [
+    {
+      "path": ".claude/settings.json",
+      "description": "data, 152 bytes"
+    }
+  ],
+  "file_count": 1,
+  "subdirectories": [],
+  "code_analysis": {
+    "settings.json": {
+      "language": "json",
+      "lines": 6,
+      "valid": true,
+      "root": "object",
+      "top_level_keys": [
+        "attribution"
+      ],
+      "key_count": 1
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.478491 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

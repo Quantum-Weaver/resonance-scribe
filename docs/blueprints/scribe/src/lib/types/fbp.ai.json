@@ -1,0 +1,49 @@
+{
+  "tier": "folder",
+  "folder_name": "types",
+  "folder_path": "src/lib/types",
+  "self": "scribe/src/lib/types/fbp.ai.json",
+  "parent": "scribe/src/lib/obp.ai.json",
+  "description": "1 files, 0 subfolders",
+  "files": [
+    {
+      "path": "src/lib/types/types.ts",
+      "description": "Theme customization"
+    }
+  ],
+  "file_count": 1,
+  "subdirectories": [],
+  "code_analysis": {
+    "types.ts": {
+      "language": "typescript",
+      "lines": 112,
+      "exported_functions": [],
+      "exported_consts": [
+        "WORK_KINDS",
+        "ARC_SHAPES"
+      ],
+      "interfaces": [
+        "ThemeConfig"
+      ],
+      "types": [
+        "TintLevel",
+        "WorkKind",
+        "ArcShape",
+        "Work",
+        "Part",
+        "Era",
+        "Character",
+        "Arc",
+        "Appearance"
+      ],
+      "imports_node": [],
+      "spawns_process": false,
+      "writes_files": false,
+      "env_names_read": []
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.578037 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

@@ -1,0 +1,25 @@
+{
+  "tier": "folder",
+  "folder_name": "kotlin",
+  "folder_path": "src-tauri/gen/android/buildSrc/src/main/java/com/audhd/resonance_scribe/kotlin",
+  "self": "scribe/src-tauri/gen/android/buildSrc/src/main/java/com/audhd/resonance_scribe/kotlin/fbp.ai.json",
+  "parent": "scribe/src-tauri/gen/obp.ai.json",
+  "description": "2 files, 0 subfolders",
+  "files": [
+    {
+      "path": "src-tauri/gen/android/buildSrc/src/main/java/com/audhd/resonance_scribe/kotlin/BuildTask.kt",
+      "description": "file, 2,298 bytes"
+    },
+    {
+      "path": "src-tauri/gen/android/buildSrc/src/main/java/com/audhd/resonance_scribe/kotlin/RustPlugin.kt",
+      "description": "file, 3,420 bytes"
+    }
+  ],
+  "file_count": 2,
+  "subdirectories": [],
+  "code_analysis": {},
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.645384 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}

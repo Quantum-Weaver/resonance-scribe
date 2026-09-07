@@ -1,0 +1,62 @@
+{
+  "tier": "folder",
+  "folder_name": "scrolls",
+  "folder_path": "src/lib/scrolls",
+  "self": "scribe/src/lib/scrolls/fbp.ai.json",
+  "parent": "scribe/src/lib/obp.ai.json",
+  "description": "3 files, 0 subfolders",
+  "files": [
+    {
+      "path": "src/lib/scrolls/MIRROR.md",
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    },
+    {
+      "path": "src/lib/scrolls/the-scrolls.d.mts",
+      "description": "file, 2,264 bytes"
+    },
+    {
+      "path": "src/lib/scrolls/the-scrolls.mjs",
+      "description": "The scrolls"
+    }
+  ],
+  "file_count": 3,
+  "subdirectories": [],
+  "code_analysis": {
+    "MIRROR.md": {
+      "language": "markdown",
+      "lines": 56,
+      "words": 531,
+      "heading_count": 1,
+      "headings": [
+        "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+      ],
+      "links_external": 0,
+      "links_site_absolute": [],
+      "links_internal": [],
+      "links_internal_unresolved": [],
+      "links_internal_outside_checkout": [],
+      "code_fences": 0,
+      "table_rows": 0,
+      "checkboxes": {
+        "open": 0,
+        "done": 0
+      },
+      "has_story_block": false,
+      "declares_mirror_class": false
+    },
+    "the-scrolls.mjs": {
+      "language": "node",
+      "lines": 111,
+      "functions": [
+        "escapeText",
+        "inline",
+        "renderScrollBody"
+      ],
+      "commands": []
+    }
+  },
+  "folders_not_walked": [],
+  "scan_timestamp": "2026-09-07T14:01:07.553584 | in sovereign time",
+  "maintaining_agent": "FolderAgent",
+  "note": "The details live here. Upper tiers link to this address; they do not copy this body."
+}
