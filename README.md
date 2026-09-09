@@ -1,4 +1,4 @@
-# 🪶 Resonance Scribe
+# ✍️ Resonance Scribe
 
 *The author's studio of the Resonance Sanctuary: a book, a manuscript, an article — every reason a person publishes — with formatting to hand and a simple story system of arcs across scenes, eras and characters. A base with a beautiful face; nothing leaves the device.*
 
