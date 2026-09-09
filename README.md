@@ -1,6 +1,9 @@
-# resonance-scribe
+# 🪶 Resonance Scribe
 
 *The author's studio of the Resonance Sanctuary: a book, a manuscript, an article — every reason a person publishes — with formatting to hand and a simple story system of arcs across scenes, eras and characters. A base with a beautiful face; nothing leaves the device.*
+
+[![License](https://img.shields.io/badge/license-MIT%20%2B%20Resonance-blue.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-0.1.0-brightgreen.svg)]()
 
 ---
 
