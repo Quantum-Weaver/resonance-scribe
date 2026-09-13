@@ -1,7 +1,7 @@
 <script lang="ts">
-	// THE BIND — where a finished work leaves the studio, five ways.
+	// THE BIND — where a finished work leaves the studio, six ways.
 	//
-	// ONE LAW TRAVELS WITH ALL FIVE and it is the law of the desk at the other
+	// ONE LAW TRAVELS WITH ALL SIX and it is the law of the desk at the other
 	// end of this app: the text goes out exactly as it was typed. Nothing is
 	// reflowed, nothing is normalised, no quote is curled, no trailing newline
 	// is dropped. "Typos are fingerprints unless he says otherwise."
@@ -30,12 +30,14 @@
 	import { version as APP_VERSION } from '../../../package.json';
 
 	import {
+		chaptersOf,
 		createAppearance,
 		createArc,
 		createCharacter,
 		createEra,
 		createPart,
 		createWork,
+		scenesOf,
 		updateWork
 	} from '$lib/base';
 	import {
@@ -59,6 +61,8 @@
 	import { deliver, openFrom } from '$lib/envelope';
 	import { appDataFolder, chooseFolder, makeFolder, occupied, saveAs, scribeHost, writeNew } from '$lib/host';
 	import { isRefusal as isSettingRefusal, pandulipi } from '$lib/pandulipi';
+	import { bindScreenplay } from '$lib/screenplay';
+	import type { Leaf } from '$lib/screenplay';
 	import { GRANT_ORDER, HOUSE_SPLIT, draw, render } from '$lib/sphragis';
 	import type { GrantName, Sphragis } from '$lib/sphragis';
 	import { studioStore } from '$lib/stores/studio.svelte';
@@ -209,6 +213,7 @@
 	let epubSaid = $state<Said | null>(null);
 	let printSaid = $state<Said | null>(null);
 	let setSaid = $state<Said | null>(null);
+	let scriptSaid = $state<Said | null>(null);
 	let sealSaid = $state<Said | null>(null);
 	let openSaid = $state<Said | null>(null);
 	let importSaid = $state<Said | null>(null);
@@ -432,7 +437,60 @@
 		}
 	}
 
-	// ── 4 · standard manuscript format ─────────────────────────────────────
+	// ── 4 · a screenplay ───────────────────────────────────────────────────
+
+	/** Chapters in `ord`, each chapter's scenes beneath it — the same reading
+	 *  order the folder road walks. */
+	const leaves = (): Leaf[] => {
+		const out: Leaf[] = [];
+		for (const c of chaptersOf(parts)) {
+			out.push({ title: c.title, body: c.body });
+			for (const s of scenesOf(parts, c.id)) out.push({ title: s.title, body: s.body });
+		}
+		return out;
+	};
+
+	async function writeScreenplay() {
+		const w = work;
+		if (!w || !authorGiven) return;
+		busy = 'script';
+		scriptSaid = null;
+		try {
+			await keepBylineIfAsked();
+			const bound = bindScreenplay({ title: w.title, byline: author.trim() }, leaves());
+			if (bound.screenplay.pages.length === 0) {
+				scriptSaid = said(
+					'refused',
+					'There is no text in this work yet, so there are no pages to set.',
+					bound.told
+				);
+				return;
+			}
+			const chose = await saveAs(slug(w.title) + '-screenplay.txt', [
+				{ name: 'Text', extensions: ['txt'] }
+			]);
+			if (chose.path === null) {
+				scriptSaid = said(
+					chose.why ? 'refused' : 'declined',
+					chose.why ?? 'No destination was chosen, and nothing was written.',
+					bound.told
+				);
+				return;
+			}
+			const wrote = await writeNew(chose.path, bound.text);
+			scriptSaid = said(
+				wrote.written ? 'done' : 'refused',
+				wrote.written
+					? `Written to ${chose.path}. ${bound.screenplay.pages.length} page${bound.screenplay.pages.length === 1 ? '' : 's'} after the title page, running ${bound.screenplay.runtime} at one page to the minute.`
+					: (wrote.why ?? 'Nothing was written.'),
+				bound.told
+			);
+		} finally {
+			busy = null;
+		}
+	}
+
+	// ── 5 · standard manuscript format ─────────────────────────────────────
 
 	async function setManuscript() {
 		const w = work;
@@ -478,7 +536,7 @@
 		}
 	}
 
-	// ── 5 · the envelope ───────────────────────────────────────────────────
+	// ── 6 · the envelope ───────────────────────────────────────────────────
 
 	async function sealWork() {
 		const w = work;
@@ -697,14 +755,14 @@
 			<p class="lede">
 				<strong>{work.title}</strong> — {chapterCount}
 				{chapterCount === 1 ? 'chapter' : 'chapters'}, {sceneCount}
-				{sceneCount === 1 ? 'scene' : 'scenes'}. Five ways out, and the same law on all of
+				{sceneCount === 1 ? 'scene' : 'scenes'}. Six ways out, and the same law on all of
 				them: the text leaves exactly as it was typed.
 			</p>
 		</header>
 
 		<!-- ── the shared options ──────────────────────────────────────── -->
 		<section class="shared">
-			<h2>What the first four ways all need</h2>
+			<h2>What the first five ways all need</h2>
 
 			<div class="fields">
 				<label class="field">
@@ -727,7 +785,7 @@
 				<p class="ask">
 					The-binder and the-pandulipi both refuse a manuscript with no author, and they
 					are right to — an editor needs a name on the page. This work carries no by-line,
-					so type one above and the four ways below open.
+					so type one above and the five ways below open.
 				</p>
 			{/if}
 
@@ -910,9 +968,32 @@
 			{@render says(printSaid)}
 		</section>
 
-		<!-- ── 4 · standard manuscript format ──────────────────────────── -->
+		<!-- ── 4 · a screenplay ────────────────────────────────────────── -->
 		<section class="way">
-			<h2>4 · Standard manuscript format</h2>
+			<h2>4 · A screenplay</h2>
+			<p>
+				The format's own measure, and it is arithmetic rather than an estimate:
+				twelve-point Courier is ten characters and six lines to the inch, so a US Letter
+				page with the trade's margins holds sixty columns by fifty-four lines — and one
+				page runs one minute. Sluglines, action, character cues, parentheticals, dialogue
+				and transitions are read out of your own text; nothing is upper-cased and no word
+				is broken to fit.
+			</p>
+			<p class="quiet small">
+				A chapter title is not a screenplay element and is not written into the pages
+				unless the title is itself a scene heading. The title page carries no screen time
+				and is not counted in the runtime.
+			</p>
+
+			<button type="button" onclick={writeScreenplay} disabled={!authorGiven || busy !== null}>
+				{busy === 'script' ? 'setting…' : 'Set a screenplay 🎬'}
+			</button>
+			{@render says(scriptSaid)}
+		</section>
+
+		<!-- ── 5 · standard manuscript format ──────────────────────────── -->
+		<section class="way">
+			<h2>5 · Standard manuscript format</h2>
 			<p>
 				What an editor expects: twelve-point monospace, double-spaced, one-inch margins, the
 				surname-and-short-title running head with the page number, the word count on the
@@ -964,9 +1045,9 @@
 			{@render says(setSaid)}
 		</section>
 
-		<!-- ── 5 · the envelope ────────────────────────────────────────── -->
+		<!-- ── 6 · the envelope ────────────────────────────────────────── -->
 		<section class="way">
-			<h2>5 · The whole work, as a <code>.scribe.json</code></h2>
+			<h2>6 · The whole work, as a <code>.scribe.json</code></h2>
 			<p>
 				One versioned envelope with the counts written on the outside, so you can see at a
 				glance that the file holds what this studio shows. It is the work, its parts, its

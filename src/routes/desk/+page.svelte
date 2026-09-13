@@ -18,10 +18,15 @@
 	// `&`, `<`, `>` and `"` before it shapes anything, so `{@html}` here can
 	// only ever show what the author typed. No markdown library is installed
 	// and none may be.
+	//
+	// THE SCREENPLAY SHAPE IS TEXT, NOT MARKUP. `$lib/screenplay` hands back
+	// laid-out lines and this room prints them in a `<pre>` — no `{@html}` on
+	// that road at all — so the same text the author typed is the text shown.
 	import { onDestroy, onMount } from 'svelte';
 	import { chaptersOf, scenesOf } from '$lib/base';
 	import { filterData, sortData } from '$lib/panti';
 	import { renderScrollBody } from '$lib/scrolls/the-scrolls.mjs';
+	import { format as screenplayOf, render as renderScreenplay } from '$lib/screenplay';
 	import { studioStore } from '$lib/stores/studio.svelte';
 	import { workStore } from '$lib/stores/work.svelte';
 	import type { Part } from '$lib/types/types';
@@ -37,6 +42,8 @@
 	let confirming = $state<string | null>(null);
 	let newChapter = $state('');
 	let newScene = $state('');
+	/** Which shape the second pane reads the same text in. */
+	let shape = $state<'prose' | 'screenplay'>('prose');
 
 	let timer: ReturnType<typeof setTimeout> | null = null;
 
@@ -81,6 +88,10 @@
 	});
 
 	const counted = $derived(rail.reduce((n, r) => n + 1 + r.scenes.length, 0));
+
+	// The screenplay is measured, not estimated: fixed-pitch type on a fixed
+	// page, so the page count is arithmetic and one page runs one minute.
+	const script = $derived(shape === 'screenplay' ? screenplayOf(draftBody) : null);
 
 	// ── the autosave ───────────────────────────────────────────────────────
 
@@ -394,21 +405,56 @@
 					</label>
 
 					<div class="pane">
-						<span class="pane-name">As it reads</span>
-						<div class="preview">
-							{#if draftBody.trim() === ''}
-								<p class="quiet">Nothing yet.</p>
-							{:else}
-								<!-- the-scrolls escapes before it shapes; this is its output and
-								     no other renderer's. -->
-								{@html renderScrollBody(draftBody)}
-							{/if}
+						<div class="shapes">
+							<span class="pane-name">As it reads</span>
+							<button
+								type="button"
+								class="shape"
+								class:on={shape === 'prose'}
+								aria-pressed={shape === 'prose'}
+								onclick={() => (shape = 'prose')}
+							>
+								Prose
+							</button>
+							<button
+								type="button"
+								class="shape"
+								class:on={shape === 'screenplay'}
+								aria-pressed={shape === 'screenplay'}
+								onclick={() => (shape = 'screenplay')}
+							>
+								Screenplay 🎬
+							</button>
 						</div>
-						<p class="quiet small">
-							The preview shows five forms — headings, bold, italic, bullets and
-							checklists. Anything else stays a plain paragraph here and is stored
-							exactly as you typed it.
-						</p>
+						{#if shape === 'screenplay' && script}
+							<pre class="preview script">{draftBody.trim() === ''
+									? ''
+									: renderScreenplay(script)}</pre>
+							<p class="quiet small">
+								{script.pages.length} page{script.pages.length === 1 ? '' : 's'}, running
+								{script.runtime} at one page to the minute — {script.measure.cpi} characters
+								and {script.measure.lpi} lines to the inch on {script.measure.pageWidth}in by
+								{script.measure.pageHeight}in. A slugline opens INT. or EXT.; a shouted short
+								line with speech under it is a character; a line in parentheses inside a speech
+								is a parenthetical; a shouted line ending TO: is a transition; everything else
+								is action. Nothing is upper-cased and no word is broken.
+							</p>
+						{:else}
+							<div class="preview">
+								{#if draftBody.trim() === ''}
+									<p class="quiet">Nothing yet.</p>
+								{:else}
+									<!-- the-scrolls escapes before it shapes; this is its output and
+									     no other renderer's. -->
+									{@html renderScrollBody(draftBody)}
+								{/if}
+							</div>
+							<p class="quiet small">
+								The preview shows five forms — headings, bold, italic, bullets and
+								checklists. Anything else stays a plain paragraph here and is stored
+								exactly as you typed it.
+							</p>
+						{/if}
 					</div>
 				</div>
 			{/if}
@@ -627,6 +673,37 @@
 		border-radius: 0.45rem;
 		padding: 0.85rem 0.95rem;
 		line-height: 1.6;
+	}
+
+	.shapes {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.shape {
+		font-size: 0.72rem;
+		padding: 0.15rem 0.5rem;
+		border: 1px solid var(--border-color);
+		border-radius: 0.3rem;
+		background: transparent;
+		color: var(--text-muted);
+		cursor: pointer;
+	}
+
+	.shape.on {
+		color: var(--text);
+		border-color: var(--accent);
+	}
+
+	/* The measure is fixed-pitch by law, so the pane shows it in fixed pitch. */
+	.script {
+		margin: 0;
+		white-space: pre;
+		overflow: auto;
+		font-family: 'Courier New', Courier, ui-monospace, monospace;
+		font-size: 0.8rem;
+		line-height: 1.25;
 	}
 
 	/* the-scrolls' own class names, styled here because the pure renderer ships

@@ -21,12 +21,13 @@ eras, the arcs are drawn through the cards they run through, and a character's
 emoji marks the cards they appear on — drag a card, or move it with the buttons
 on it; both write the same rows. The **cast**, where a character's appearances
 are read from those same rows rather than kept as a second list. And the
-**bind**, where a finished work leaves the studio four ways — a manuscript
-folder of markdown, an EPUB 3, paged HTML for print, or standard manuscript
-submission format for an editor — with a fifth road beside them that carries
-the whole work out as a `.scribe.json` and opens it again on any machine you
-own. A licence can be drawn for the rights page; nothing is ever written over a
-file that already stands.
+**bind**, where a finished work leaves the studio five ways — a manuscript
+folder of markdown, an EPUB 3, paged HTML for print, a screenplay set on the
+format's own measure of ten characters and six lines to the inch so a page
+runs a minute, or standard manuscript submission format for an editor — with
+a sixth road beside them that carries the whole work out as a `.scribe.json`
+and opens it again on any machine you own. A licence can be drawn for the
+rights page; nothing is ever written over a file that already stands.
 
 The sixth noun is the one that makes the rest simple: an **appearance** is one
 row that can hang on a part, an era, a character or an arc — a character in a

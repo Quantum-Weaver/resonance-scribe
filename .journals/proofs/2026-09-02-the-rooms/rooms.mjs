@@ -55,6 +55,9 @@ const repo = resolve(here, '..', '..', '..');
 const read = (...p) => readFileSync(join(repo, ...p), 'utf8');
 const sha = (path) => createHash('sha256').update(readFileSync(path)).digest('hex');
 
+// The waters' own repo, a sibling of this one.
+const AWEN = resolve(repo, '..', 'resonance-awen', 'tools');
+
 // ── the fixture ──────────────────────────────────────────────────────────
 //
 // One work, four chapters, two eras, one character, two arcs. c1 stands in
@@ -340,17 +343,17 @@ console.log('── the mirrors, byte for byte ──');
 	const pairs = [
 		[
 			'the-panti/src/index.ts',
-			'C:/_superposition/resonance-awen/tools/the-panti/src/index.ts',
+			join(AWEN, 'the-panti/src/index.ts'),
 			join(repo, 'src', 'lib', 'panti', 'index.ts')
 		],
 		[
 			'the-panti/src/table.utils.ts',
-			'C:/_superposition/resonance-awen/tools/the-panti/src/table.utils.ts',
+			join(AWEN, 'the-panti/src/table.utils.ts'),
 			join(repo, 'src', 'lib', 'panti', 'table.utils.ts')
 		],
 		[
 			'the-scrolls/the-scrolls.mjs',
-			'C:/_superposition/resonance-awen/tools/the-scrolls/the-scrolls.mjs',
+			join(AWEN, 'the-scrolls/the-scrolls.mjs'),
 			join(repo, 'src', 'lib', 'scrolls', 'the-scrolls.mjs')
 		]
 	];

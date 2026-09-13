@@ -35,7 +35,8 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = resolve(here, '..', '..', '..');
-const AWEN = 'C:/_superposition/resonance-awen/tools';
+// The waters' own repo, a sibling of this one.
+const AWEN = resolve(repo, '..', 'resonance-awen', 'tools');
 
 // THE ONE THING NODE IS TAUGHT: `$lib` is `src/lib`. SvelteKit's own alias,
 // declared in `.svelte-kit/tsconfig.json`; nothing else is patched, nothing is
