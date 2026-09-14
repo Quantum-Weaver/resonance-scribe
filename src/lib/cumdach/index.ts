@@ -1,4 +1,42 @@
-// the-cumdach — the navigation shrine: panels are DERIVED from the screen's own measure. Pure: no DOM, no clock, no disk.
+// the-cumdach — the book-shrine, pure.
+//
+// The Irish cumdach is the ornamented case made for a book already
+// sacred: it honors the text and never speaks over it. This water is
+// the navigation shrine that wraps every Resonance app — and its
+// heart is ARITHMETIC: the menu is never arranged by opinion, it is
+// DERIVED from the screen's own measure.
+//
+// THE LAWS, AS THE CORE KEEPS THEM:
+//   · THE FORMULA: count the doors · measure the land · derive the
+//     panels — and a switch PAYS FOR ITS OWN FURNITURE (mode buttons
+//     consume the very capacity they organize; the derivation solves
+//     the fixed point honestly).
+//   · THE BALANCE LAW: a switch never shows one button — at one
+//     panel no switch is derived at all — and panels never
+//     fill-then-spill: nine doors at capacity seven derive 5+4,
+//     never 7+2; hat splits balance the same way.
+//   · THE FACE LAW: a toggle wears COLOR + EMOJI — not numbers, not
+//     words; no register is the admission ticket to the menu, and the
+//     accessible name always rides underneath in words.
+//   · MENUS CHANGE, LAYOUT STYLES DON'T: doors, hats, faces, and
+//     colors are the consumer's particulars; the shrine is the
+//     constant.
+//   · DYNAMICS ALWAYS RE-DERIVE: the derivation is pure and cheap —
+//     any change of land (rotation, keyboard, an expanded foot, and
+//     A CHANGE OF THE VESSEL'S TEXT SIZE) re-runs it; the worn panel
+//     survives when it still exists.
+//   · THE FOOT is one chrome door outside every panel, optionally
+//     expandable; its expansion costs capacity like any other truth.
+//     It renders PINNED TO THE BOTTOM of the box `reserved` leaves —
+//     which is what makes the next law load-bearing.
+//   · THE RESERVED EDGE IS A SUM, NOT A BAR: `land.reserved` is every
+//     occupied edge ADDED TOGETHER — bottom bars, safe-area insets,
+//     and any FLOATING control the consumer pins into that band. An
+//     uncounted edge does not shrink the menu; it BURIES THE FOOT.
+//   · Everything is TOLD: capacity, panels, and every flag — a menu
+//     never runs off the edge of a vessel's world silently.
+//   · Pure absolutely: no DOM, no clock, no disk — the consumer
+//     measures; the core derives. Unknown keys ride whole.
 
 export interface Door {
 	id: string;
@@ -38,10 +76,8 @@ export interface Land {
 	 *
 	 * MEASURE IT; DO NOT PICK A CONSTANT. A control sized in `rem` but
 	 * pinned in `px` occupies a band whose height MOVES with the root
-	 * font-size — one 2.5rem button is 35 / 40 / 45px tall as the vessel
-	 * changes its own text setting. A `reserved` computed at one root size
-	 * under-reserves at a larger one, and the failure appears only for the
-	 * readers who most needed the larger text.
+	 * font-size, so a `reserved` computed at one root size under-reserves
+	 * at a larger one.
 	 */
 	reserved: number;
 }
@@ -130,7 +166,8 @@ export function derive(menu: Menu, land: Land, costs: Costs, palette: Palette, f
 		return Math.floor((usable0 - rows * costs.switchButton) / costs.door);
 	};
 
-	// Grow P while any panel would overflow — every growth re-prices the switch.
+	// Settle P: start from intent (declared hats) or 1 (flat), grow while
+	// any panel would overflow — every growth re-prices the switch.
 	let p = flat ? 1 : hats.length;
 	let cap = capacityAt(p);
 	if (cap < 1) {
@@ -174,6 +211,9 @@ export function derive(menu: Menu, land: Land, costs: Costs, palette: Palette, f
 		});
 	}
 
+	// Faces — color + emoji cycled from the palette, deterministic;
+	// never numbers, never visible words; the accessible name always
+	// words underneath (the hat's own, or the panel's honest count).
 	panels.forEach((panel, i) => {
 		const hat = flat ? null : hats.find((h) => h.id === panel.hatId) ?? null;
 		const words = hat && hat.label ? (panel.continued ? `${hat.label}, continued` : hat.label) : `Panel ${i + 1} of ${panels.length}`;

@@ -1,6 +1,9 @@
 <script lang="ts">
 	import '../app.css';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
 	import Rail from '$lib/components/Rail.svelte';
+	import { authorStore } from '$lib/stores/author.svelte';
 	import { themeStore } from '$lib/stores/theme.svelte';
 	import { workStore } from '$lib/stores/work.svelte';
 	import { getThemeColors } from '$lib/theme/theme';
@@ -8,21 +11,37 @@
 
 	let { children } = $props();
 
-	// ONE SHELL, ONE RAIL, FOUR ROOMS AS ROUTES — the conductor's reading of
+	// ONE SHELL, ONE RAIL, THE ROOMS AS ROUTES — the conductor's reading of
 	// the plan's "one page, four rooms". The shell and the rail are drawn once
-	// here; `/`, `/desk`, `/board`, `/cast` and `/bind` are static routes in
-	// SPA mode (`ssr = false`, adapter-static) and there is no `[id]` route
-	// anywhere: the chosen work is held in a runes store, not in the URL, so it
-	// survives every walk between rooms and every reload.
+	// here; `/`, `/desk`, `/board`, `/cast`, `/bind`, `/settings` and
+	// `/onboarding` are static routes in SPA mode (`ssr = false`,
+	// adapter-static) and there is no `[id]` route anywhere: the chosen work is
+	// held in a runes store, not in the URL, so it survives every walk between
+	// rooms and every reload.
 	//
 	// The Sidebar and the ComfortBar did not cross from the mother. The rail is
 	// this body's own, written to the family's idiom rather than copied.
+	//
+	// THE GATE, ONCE, ON FIRST PAINT. A studio with no author row opens at the
+	// door in. It asks the base exactly once — `onMount` runs once for the
+	// shell, not once per room — so there is no loop to fall into, and a base
+	// that will not answer (no Tauri window: `invoke` rejects) leaves every
+	// room standing and says nothing at all.
 	onMount(() => {
 		themeStore.loadTheme();
 		// The work chosen in an earlier sitting, re-read from the base by id.
 		// A work that is gone clears itself; nothing is drawn from a cache.
 		void workStore.restore();
+		void gate();
 	});
+
+	async function gate() {
+		await authorStore.load();
+		if (!authorStore.absent) return;
+		const here = page.url.pathname.replace(/\/$/, '') || '/';
+		if (here === '/onboarding') return;
+		await goto('/onboarding');
+	}
 
 	const config = $derived(themeStore.config);
 	const colors = $derived(getThemeColors(config));

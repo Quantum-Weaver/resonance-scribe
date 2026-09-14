@@ -8,7 +8,7 @@ truth is:
     ../resonance-awen/tools/the-binder/src/index.ts
 
 Do not edit index.ts in THIS folder - it is a byte-faithful mirror
-(SHA256 verified at the copy: 556E08E073BFA12F), to be refreshed by
+(SHA256 verified at the copy: 4CB5B4B93AF772BD), to be refreshed by
 distribution runs as the house's delivery pipeline stands up, the same road
 cosmic, the-cumdach, the-epagoge and the-panti already travel. Dialect
 changes, container changes and page-plan changes happen in the water.
@@ -30,7 +30,7 @@ file map, and one self-contained paged HTML for print. Two things in it are
 the reason it is this water and not another:
 
 1. **It alters no text.** `EDITORIAL_LAW` is exported as data with its address
-   (`resonance-chamber/desk/POTENTIALITIES.md:31`), and every literal run it
+   (`resonance-chamber/constellation/weaver/mimirs-well/design-lineage/constellation/fable/lanes/records/2026-08-23-stretto-deals/GROUND.md:265`, first set down at the desk paper POTENTIALITIES.md:31, since retired), and every literal run it
    emits carries the byte offsets it was cut from. That is the same law the
    desk keeps at the other end of the studio - `updatePart` stores a body byte
    for byte - so a work can cross this whole app from the keystroke to the

@@ -43,7 +43,7 @@ import type { BookFile, FrontMatter, Manuscript, Rights } from '$lib/binder';
 import type { BookJson, ChapterFile, ManuscriptFolder } from '$lib/pandulipi';
 import { seal } from '$lib/envelope';
 import type { Envelope, Reading } from '$lib/envelope';
-import type { Appearance, Arc, Character, Era, Part, Work } from '$lib/types/types';
+import type { Appearance, Arc, Character, Era, Part, StudioDump, Work } from '$lib/types/types';
 
 // ── THE SCENE BREAK, AND WHY IT IS THIS ONE ──────────────────────────────
 //
@@ -708,8 +708,16 @@ export function readingToImport(reading: Reading<Record<string, unknown>>): Impo
 			'this file is a bare list from before the envelope — Scribe has never written one, so there is nothing here it knows how to read.'
 		);
 	}
+	return planOfWork(reading.data as Record<string, unknown>, reading.counts ?? {});
+}
 
-	const data = reading.data as Record<string, unknown>;
+/** One work's data — the inside of a `scribe-work` envelope, or one entry of a
+ *  `scribe-studio` envelope's `works` — read as a plan. The counts are handed
+ *  in from whichever outside carried them. */
+function planOfWork(
+	data: Record<string, unknown>,
+	outsideCounts: Record<string, number>
+): ImportPlan {
 	if (!data || typeof data !== 'object') {
 		return empty('the envelope carries no data — there is nothing inside it to import.');
 	}
@@ -727,7 +735,7 @@ export function readingToImport(reading: Reading<Record<string, unknown>>): Impo
 
 	const told: string[] = [];
 	const plan = empty(null);
-	plan.counts = reading.counts ?? {};
+	plan.counts = outsideCounts;
 
 	const heart = (typeof data.work === 'object' && data.work !== null ? data.work : {}) as Record<
 		string,
@@ -875,6 +883,218 @@ export function readingToImport(reading: Reading<Record<string, unknown>>): Impo
 
 	told.push(
 		`${plan.parts.length} part${plan.parts.length === 1 ? '' : 's'}, ${plan.eras.length} era${plan.eras.length === 1 ? '' : 's'}, ${plan.characters.length} character${plan.characters.length === 1 ? '' : 's'}, ${plan.arcs.length} arc${plan.arcs.length === 1 ? '' : 's'} and ${plan.appearances.length} appearance${plan.appearances.length === 1 ? '' : 's'} will be created.`
+	);
+
+	plan.told = told;
+	return plan;
+}
+
+// ── THE STUDIO ENVELOPE ──────────────────────────────────────────────────
+//
+// THE WHOLE STUDIO IN ONE FILE: the author, and every work sealed exactly as
+// `envelopeOf` seals one — the same `ScribeWork` shape, byte for byte, so a
+// work lifted out of a studio file and a work saved on its own read the same
+// way.
+//
+// The work envelope's laws hold here unchanged: unknown keys are TOLD and not
+// stored, an import is a NEW work, every id is minted by the base, and a
+// version is never upgraded silently.
+
+/** The format's name on the door of a whole-studio file. */
+export const STUDIO_FORMAT = 'scribe-studio';
+/** This studio's telling of that format. Read 1, write 1. */
+export const STUDIO_VERSION = 1;
+
+/** The author, as a studio file carries them. `contact` is a multi-line block
+ *  carried verbatim and may be empty. */
+export type StudioAuthor = {
+	name: string;
+	byline: string;
+	contact: string;
+};
+
+/** WHAT A WHOLE-STUDIO FILE HOLDS. Each entry of `works` is exactly the data
+ *  `envelopeOf` seals for that work. */
+export type ScribeStudio = {
+	format: 'scribe-studio';
+	version: number;
+	app: 'resonance-scribe';
+	appVersion: string;
+	/** ISO-8601, the moment of the save. THE ROOM READS THE CLOCK. */
+	sealedAt: string;
+	author: StudioAuthor | null;
+	works: ScribeWork[];
+};
+
+/** One work's five lists, out of every row the base handed back. */
+export function rowsOfWork(dump: StudioDump, workId: string): WorkRows {
+	return {
+		parts: dump.parts.filter((r) => r.work_id === workId),
+		eras: dump.eras.filter((r) => r.work_id === workId),
+		characters: dump.characters.filter((r) => r.work_id === workId),
+		arcs: dump.arcs.filter((r) => r.work_id === workId),
+		appearances: dump.appearances.filter((r) => r.work_id === workId)
+	};
+}
+
+/**
+ * The whole studio, sealed.
+ *
+ * THE COUNTS ON THE OUTSIDE ARE COUNTED FROM THE INSIDE — every row that was
+ * placed in a work, and the author as 1 or 0 — so the outside of the envelope
+ * and what it carries cannot disagree.
+ */
+export function studioEnvelopeOf(dump: StudioDump, stamp: SealStamp): Envelope<ScribeStudio> {
+	const works: ScribeWork[] = [];
+	const counts: Record<string, number> = {
+		author: dump.author ? 1 : 0,
+		works: 0,
+		parts: 0,
+		eras: 0,
+		characters: 0,
+		arcs: 0,
+		appearances: 0
+	};
+
+	for (const work of dump.works) {
+		const rows = rowsOfWork(dump, work.id);
+		works.push(envelopeOf(work, rows, stamp).data);
+		counts.works += 1;
+		counts.parts += rows.parts.length;
+		counts.eras += rows.eras.length;
+		counts.characters += rows.characters.length;
+		counts.arcs += rows.arcs.length;
+		counts.appearances += rows.appearances.length;
+	}
+
+	const data: ScribeStudio = {
+		format: STUDIO_FORMAT,
+		version: STUDIO_VERSION,
+		app: SCRIBE_APP,
+		appVersion: stamp.appVersion,
+		sealedAt: stamp.at,
+		author: dump.author
+			? { name: dump.author.name, byline: dump.author.byline, contact: dump.author.contact }
+			: null,
+		works
+	};
+
+	return seal(SCRIBE_APP, stamp.appVersion, data, counts);
+}
+
+/** THE ROWS TO CREATE FOR A WHOLE STUDIO: the author the file carries, and one
+ *  `ImportPlan` per work, in the file's own order. */
+export interface StudioImportPlan {
+	/** one plain sentence, or null. Nothing here throws. */
+	refused: string | null;
+	author: StudioAuthor | null;
+	works: ImportPlan[];
+	/** what the file said it carried, from the envelope's outside. */
+	counts: Record<string, number>;
+	/** the titles the file carries, for the room to show before importing. */
+	titles: string[];
+	/** every derivation, every absence, and every key that could not be kept. */
+	told: string[];
+}
+
+const emptyStudio = (why: string | null): StudioImportPlan => ({
+	refused: why,
+	author: null,
+	works: [],
+	counts: {},
+	titles: [],
+	told: []
+});
+
+/** The keys a studio file has a place for. Anything else is TOLD. */
+const KNOWN_STUDIO = {
+	top: ['format', 'version', 'app', 'appVersion', 'sealedAt', 'author', 'works'],
+	author: ['name', 'byline', 'contact']
+};
+
+/**
+ * An opened whole-studio file → the author it carries and a plan per work.
+ *
+ * EVERY WORK BECOMES A NEW WORK, through the same `planOfWork` a single
+ * `.scribe.json` is read by, over the same shape. A work that cannot be read
+ * is named and left out rather than taking the whole file down with it.
+ *
+ * THE AUTHOR IS READ, NEVER APPLIED. This hands the author back; whether one
+ * already standing is replaced is the room's question and a hand's answer.
+ */
+export function readingToStudioImport(reading: Reading<Record<string, unknown>>): StudioImportPlan {
+	if (!reading) return emptyStudio('nothing was handed over to read.');
+	if (reading.kind === 'legacy') {
+		return emptyStudio(
+			'this file is a bare list from before the envelope — Scribe has never written one, so there is nothing here it knows how to read.'
+		);
+	}
+
+	const data = reading.data as Record<string, unknown>;
+	if (!data || typeof data !== 'object') {
+		return emptyStudio('the envelope carries no data — there is nothing inside it to import.');
+	}
+	if (data.format !== STUDIO_FORMAT) {
+		return emptyStudio(
+			`this envelope holds ${JSON.stringify(data.format)}, and a whole studio is written as "${STUDIO_FORMAT}". The file was not altered.`
+		);
+	}
+	const version = num(data.version, 1);
+	if (version > STUDIO_VERSION) {
+		return emptyStudio(
+			`this file was written by a newer Scribe (version ${version}; this one reads ${STUDIO_VERSION}). Nothing was imported and nothing was changed — a version is never upgraded silently, in either direction.`
+		);
+	}
+
+	const told: string[] = [];
+	const plan = emptyStudio(null);
+	plan.counts = reading.counts ?? {};
+
+	const who = (typeof data.author === 'object' && data.author !== null ? data.author : null) as
+		| Record<string, unknown>
+		| null;
+	if (who) {
+		plan.author = { name: str(who.name), byline: str(who.byline), contact: str(who.contact) };
+		told.push(
+			'the file carries an author. An author already standing here is never written over on the way in — the room asks first.'
+		);
+	} else {
+		told.push('the file carries no author — none is invented, and whoever stands here stays.');
+	}
+
+	const list = Array.isArray(data.works) ? data.works : [];
+	for (const entry of list) {
+		if (typeof entry !== 'object' || entry === null) {
+			told.push('one entry under `works` is not a work at all, and was left out rather than guessed at.');
+			continue;
+		}
+		const one = planOfWork(entry as Record<string, unknown>, {});
+		if (one.refused !== null) {
+			told.push(`one work in this file was left out — ${one.refused}`);
+			continue;
+		}
+		plan.works.push(one);
+		if (one.title !== null) plan.titles.push(one.title);
+		for (const line of one.told) told.push(`“${one.title}” — ${line}`);
+	}
+
+	const strangeTop = strangers([data], KNOWN_STUDIO.top);
+	if (strangeTop.length > 0) {
+		told.push(
+			`the file itself carries ${strangeTop.length} key${strangeTop.length === 1 ? '' : 's'} this studio has no column for — ${strangeTop.join(', ')}. ${strangeTop.length === 1 ? 'It is' : 'They are'} read whole and said out loud here, and NOT stored.`
+		);
+	}
+	if (who) {
+		const strangeWho = strangers([who], KNOWN_STUDIO.author);
+		if (strangeWho.length > 0) {
+			told.push(
+				`the author carries ${strangeWho.length} key${strangeWho.length === 1 ? '' : 's'} this studio has no column for — ${strangeWho.join(', ')}. ${strangeWho.length === 1 ? 'It is' : 'They are'} read whole and said out loud here, and NOT stored.`
+			);
+		}
+	}
+
+	told.push(
+		`${plan.works.length} work${plan.works.length === 1 ? '' : 's'} will be created, each as a NEW work beside whatever already stands here.`
 	);
 
 	plan.told = told;

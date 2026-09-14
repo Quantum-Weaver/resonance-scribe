@@ -57,6 +57,8 @@ registerHooks({
 
 const {
 	SCENE_BREAK,
+	STUDIO_FORMAT,
+	STUDIO_VERSION,
 	chapterFileName,
 	decodeWorkId,
 	encodeWorkId,
@@ -68,9 +70,12 @@ const {
 	manuscriptOf,
 	pathIn,
 	readingToImport,
+	readingToStudioImport,
+	rowsOfWork,
 	slug,
 	snapshotFolder,
 	snapshotName,
+	studioEnvelopeOf,
 	zipStore
 } = await import('../../../src/lib/bind.ts');
 
@@ -698,6 +703,280 @@ console.log('── the import: a NEW work, and not one id from the file ──'
 }
 
 console.log('');
+console.log('── the whole studio: one file, every work, and the author ──');
+
+// A SECOND WORK, so the studio envelope has to keep two apart. Its ids share
+// no prefix with the first's, and its rows are deliberately interleaved into
+// the same lists the base hands back from `read_all`.
+const WORK2 = {
+	id: 'w-old-2',
+	kind: 'essay',
+	title: 'The Ledger',
+	byline: null,
+	note: null,
+	rights: null,
+	created_at: 3,
+	updated_at: 4
+};
+
+const PARTS2 = [
+	part('pt-two-s1', { work_id: WORK2.id, parent_id: 'pt-two-c1', ord: 0, title: 'A column', body: 'Two and two.' }),
+	part('pt-two-c1', { work_id: WORK2.id, parent_id: null, ord: 0, title: 'The ledger', body: 'It balanced.' })
+];
+const ERAS2 = [{ id: 'er-two-a', work_id: WORK2.id, ord: 0, name: 'The audit', note: null }];
+const CHARACTERS2 = [{ id: 'ch-two-1', work_id: WORK2.id, name: 'Ash', note: null, emoji: '📗' }];
+const ARCS2 = [{ id: 'ar-two-1', work_id: WORK2.id, name: 'The count', shape: 'rising', note: null }];
+const APPEARANCES2 = [
+	{ id: 'ap-two-1', work_id: WORK2.id, part_id: 'pt-two-c1', era_id: 'er-two-a', character_id: 'ch-two-1', arc_id: 'ar-two-1', note: null }
+];
+
+const AUTHOR_ROW = {
+	id: 'author',
+	name: 'Wren Halloway',
+	byline: 'W. Halloway',
+	contact: 'Wren Halloway\n1 Pier Road\nwren@example.invalid',
+	created_at: 1,
+	updated_at: 2
+};
+
+// `read_all`'s own shape: every row of every table, the two works' rows mixed
+// in one list each, exactly as the base hands them over.
+const DUMP = {
+	author: AUTHOR_ROW,
+	works: [{ ...WORK, rights: null }, WORK2],
+	parts: [...PARTS, ...PARTS2],
+	eras: [...ERAS, ...ERAS2],
+	characters: [...CHARACTERS, ...CHARACTERS2],
+	arcs: [...ARCS, ...ARCS2],
+	appearances: [...APPEARANCES, ...APPEARANCES2]
+};
+
+const STAMP = { appVersion: '0.2.0', at: '2026-09-14T00:00:00.000Z' };
+
+let STUDIO_PLAN = null;
+
+{
+	const env = studioEnvelopeOf(DUMP, STAMP);
+
+	claim(
+		`the studio is sealed under this app's own name — app "${env.app}", envelope "${env.envelope}" v${env.envelopeVersion}`,
+		env.app === 'resonance-scribe' && env.envelope === envelope.ENVELOPE
+	);
+	claim(
+		`the data inside names the format and the version it was written by — ${env.data.format} v${env.data.version}, app ${env.data.app} ${env.data.appVersion}`,
+		env.data.format === STUDIO_FORMAT &&
+			env.data.version === STUDIO_VERSION &&
+			env.data.app === 'resonance-scribe' &&
+			env.data.appVersion === STAMP.appVersion
+	);
+	claim(
+		`the moment is HANDED IN and stated inside the file, not read by this water — sealedAt ${env.data.sealedAt}`,
+		env.data.sealedAt === STAMP.at && env.data.works.every((w) => w.work.savedAt === STAMP.at)
+	);
+
+	claim(
+		'the author rides whole — name, by-line and the contact block, its line breaks intact',
+		env.data.author !== null &&
+			env.data.author.name === AUTHOR_ROW.name &&
+			env.data.author.byline === AUTHOR_ROW.byline &&
+			env.data.author.contact === AUTHOR_ROW.contact &&
+			env.data.author.contact.split('\n').length === 3 &&
+			!('id' in env.data.author)
+	);
+	claim(
+		'and a studio with no author seals `author: null` rather than inventing one',
+		studioEnvelopeOf({ ...DUMP, author: null }, STAMP).data.author === null
+	);
+
+	// EACH WORK IS EXACTLY WHAT `envelopeOf` SEALS FOR IT — byte for byte, so a
+	// work lifted out of a studio file and one saved on its own are the same.
+	const one = envelopeOf({ ...WORK, rights: null }, { parts: PARTS, eras: ERAS, characters: CHARACTERS, arcs: ARCS, appearances: APPEARANCES }, STAMP);
+	const two = envelopeOf(WORK2, { parts: PARTS2, eras: ERAS2, characters: CHARACTERS2, arcs: ARCS2, appearances: APPEARANCES2 }, STAMP);
+	claim(
+		'each work inside is EXACTLY what `envelopeOf` seals for that work, byte for byte',
+		env.data.works.length === 2 &&
+			JSON.stringify(env.data.works[0]) === JSON.stringify(one.data) &&
+			JSON.stringify(env.data.works[1]) === JSON.stringify(two.data)
+	);
+
+	// THE ROWS ARE KEPT APART BY `work_id` AND NOTHING ELSE.
+	const first = env.data.works[0];
+	const second = env.data.works[1];
+	claim(
+		`no row crosses between the two works — ${first.parts.length}+${second.parts.length} parts, each under its own work_id`,
+		first.parts.every((r) => r.work_id === WORK.id) &&
+			second.parts.every((r) => r.work_id === WORK2.id) &&
+			first.parts.length === PARTS.length &&
+			second.parts.length === PARTS2.length &&
+			second.appearances.length === 1 &&
+			first.appearances.length === APPEARANCES.length
+	);
+
+	// THE COUNTS ON THE OUTSIDE ARE COUNTED FROM THE INSIDE.
+	const inside = { works: 0, parts: 0, eras: 0, characters: 0, arcs: 0, appearances: 0 };
+	for (const w of env.data.works) {
+		inside.works += 1;
+		inside.parts += w.parts.length;
+		inside.eras += w.eras.length;
+		inside.characters += w.characters.length;
+		inside.arcs += w.arcs.length;
+		inside.appearances += w.appearances.length;
+	}
+	claim(
+		`the counts are on the OUTSIDE and equal what is inside — ${JSON.stringify(env.counts)}`,
+		env.counts.author === 1 &&
+			env.counts.works === inside.works &&
+			env.counts.parts === inside.parts &&
+			env.counts.eras === inside.eras &&
+			env.counts.characters === inside.characters &&
+			env.counts.arcs === inside.arcs &&
+			env.counts.appearances === inside.appearances
+	);
+
+	claim(
+		'`rowsOfWork` answers only about the work it was asked for',
+		rowsOfWork(DUMP, WORK2.id).parts.length === PARTS2.length &&
+			rowsOfWork(DUMP, 'w-that-is-not-here').parts.length === 0
+	);
+
+	// ── and the way back ──────────────────────────────────────────────────
+	const onDisk = JSON.parse(JSON.stringify(env));
+	const reading = envelope.open(onDisk, 'resonance-scribe');
+	claim('a studio file reads back as an envelope after a round trip through JSON', reading.kind === 'envelope');
+
+	STUDIO_PLAN = readingToStudioImport(reading);
+	const p = STUDIO_PLAN;
+	claim('and it becomes a plan, not a refusal', p.refused === null);
+	claim(
+		`both works come back in the file's own order — ${p.titles.join(' · ')}`,
+		p.works.length === 2 && p.titles[0] === 'The Pier' && p.titles[1] === 'The Ledger'
+	);
+	claim(
+		'the author comes back whole, contact block and all — to be OFFERED, never applied by this water',
+		p.author !== null &&
+			p.author.name === AUTHOR_ROW.name &&
+			p.author.byline === AUTHOR_ROW.byline &&
+			p.author.contact === AUTHOR_ROW.contact
+	);
+	claim(
+		"each work's plan is the same reading a lone .scribe.json gets — chapters first in ord, then each chapter's scenes, parents as INDICES",
+		p.works[0].parts.length === 4 &&
+			p.works[0].parts[2].parentIndex === 0 &&
+			p.works[1].parts.length === 2 &&
+			p.works[1].parts[0].title === 'The ledger' &&
+			p.works[1].parts[1].parentIndex === 0
+	);
+	claim(
+		'every hand of the second work’s appearance is re-mapped to an index of its own plan',
+		p.works[1].appearances.length === 1 &&
+			p.works[1].appearances[0].partIndex === 0 &&
+			p.works[1].appearances[0].eraIndex === 0 &&
+			p.works[1].appearances[0].characterIndex === 0 &&
+			p.works[1].appearances[0].arcIndex === 0
+	);
+
+	const ALL_OLD = [
+		...OLD_IDS,
+		WORK2.id,
+		...PARTS2.map((r) => r.id),
+		...ERAS2.map((r) => r.id),
+		...CHARACTERS2.map((r) => r.id),
+		...ARCS2.map((r) => r.id),
+		...APPEARANCES2.map((r) => r.id)
+	];
+	const asText = JSON.stringify(p);
+	const leaked = ALL_OLD.filter((id) => asText.includes(id));
+	claim(
+		`not one of the file's ${ALL_OLD.length} ids appears anywhere on the studio plan — the base mints every one${leaked.length ? ' [leaked: ' + leaked.join(' ') + ']' : ''}`,
+		leaked.length === 0
+	);
+	claim(
+		'the plan says out loud that every work becomes a NEW work, and that a standing author is not written over on the way in',
+		p.told.some((t) => t.includes('NEW work')) && p.told.some((t) => t.includes('never written over'))
+	);
+
+	// UNKNOWN KEYS ARE TOLD AND NOT STORED, at the studio's own level too.
+	const strangeStudio = readingToStudioImport(
+		envelope.open(
+			JSON.parse(
+				JSON.stringify(
+					envelope.seal(
+						'resonance-scribe',
+						'0.2.0',
+						{
+							format: 'scribe-studio',
+							version: 1,
+							app: 'resonance-scribe',
+							appVersion: '0.2.0',
+							sealedAt: STAMP.at,
+							shelfPhoto: 'a key this base has no column for',
+							author: { name: 'A', byline: 'B', contact: '', pronouns: 'they/them' },
+							works: []
+						},
+						{ works: 0 }
+					)
+				)
+			),
+			'resonance-scribe'
+		)
+	);
+	claim(
+		'an unknown key at the studio level and one on the author are both NAMED, and neither is stored',
+		strangeStudio.told.some((t) => t.includes('shelfPhoto')) &&
+			strangeStudio.told.some((t) => t.includes('pronouns')) &&
+			!JSON.stringify(strangeStudio).includes('a key this base has no column for') &&
+			!JSON.stringify(strangeStudio).includes('they/them')
+	);
+
+	// THE TWO FORMATS NEVER READ EACH OTHER BY ACCIDENT.
+	claim(
+		'a lone work handed to the studio reader is refused in one plain sentence, and the file is not altered',
+		readingToStudioImport(envelope.open(JSON.parse(JSON.stringify(one)), 'resonance-scribe')).refused !== null
+	);
+	claim(
+		'a whole studio handed to the single-work reader is refused the same way',
+		readingToImport(reading).refused !== null
+	);
+	claim(
+		'a studio written by a newer Scribe is refused rather than upgraded silently',
+		readingToStudioImport({ kind: 'envelope', data: { format: 'scribe-studio', version: 99 }, counts: {}, envelope: {} }).refused !== null
+	);
+	claim(
+		'a legacy bare list is refused plainly rather than half-read',
+		readingToStudioImport({ kind: 'legacy', raw: [] }).refused !== null
+	);
+	claim(
+		'a work inside a studio file that cannot be read is named and left out, and the rest still come in',
+		(() => {
+			const mixed = readingToStudioImport(
+				envelope.open(
+					JSON.parse(
+						JSON.stringify(
+							envelope.seal(
+								'resonance-scribe',
+								'0.2.0',
+								{
+									format: 'scribe-studio',
+									version: 1,
+									app: 'resonance-scribe',
+									appVersion: '0.2.0',
+									sealedAt: STAMP.at,
+									author: null,
+									works: [{ format: 'skapa-board' }, two.data]
+								},
+								{ works: 2 }
+							)
+						)
+					),
+					'resonance-scribe'
+				)
+			);
+			return mixed.refused === null && mixed.works.length === 1 && mixed.told.some((t) => t.includes('left out'));
+		})()
+	);
+}
+
+console.log('');
 console.log('── the snapshot’s name ──');
 
 {
@@ -851,6 +1130,21 @@ console.log('── the two doors out of this window, and no third ──');
 	claim(
 		'the bind room imports no plugin of its own — it reaches the disk through `$lib/host` and nowhere else',
 		specifiers(room).every((s) => !s.startsWith('@tauri-apps')) && /\$lib\/host/.test(room)
+	);
+	claim(
+		'and it keeps a drawn licence with `setWorkRights`, imported from `$lib/base` — the one door to the base, never a second road',
+		/setWorkRights\(w\.id, drawn \? JSON\.stringify\(drawn\) : null\)/.test(room) &&
+			/import \{[^}]*\bsetWorkRights\b[^}]*\} from '\$lib\/base'/.test(room)
+	);
+	const rightsWriters = [...files, ...mirrors]
+		.filter((f) => /\bsetWorkRights\b/.test(read(f)))
+		.map((f) => f.replace(/\\/g, '/'))
+		.sort();
+	claim(
+		`\`setWorkRights\` — the only write of a work's rights page — is named in exactly two files, the door and the room that draws the licence [${rightsWriters.join(' ')}]`,
+		rightsWriters.length === 2 &&
+			rightsWriters[0] === 'src/lib/base.ts' &&
+			rightsWriters[1] === 'src/routes/bind/+page.svelte'
 	);
 
 	const shelf = read('src', 'routes', '+page.svelte');

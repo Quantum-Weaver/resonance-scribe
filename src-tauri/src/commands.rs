@@ -1,5 +1,6 @@
 // THE DOORS — one Tauri command per verb of THE AUTHOR'S STUDIO's six nouns,
-// and nothing else. Each takes the base's lock, calls the plain function in
+// one pair for the author's own row, and two that take the whole studio at
+// once. Each takes the base's lock, calls the plain function in
 // `base.rs`, and hands the row back; all the meaning lives there, so a proof
 // can walk the same road with no app running.
 //
@@ -7,7 +8,9 @@
 // `capabilities/default.json` and no SQL in any `.svelte` file: a room that
 // wants a row asks for it by name.
 
-use crate::base::{self, Appearance, Arc, Base, Character, Era, Part, Res, Work};
+use crate::base::{
+    self, Appearance, Arc, Author, Base, Character, Era, Part, Res, StudioDump, Work,
+};
 
 type S<'a> = tauri::State<'a, Base>;
 
@@ -15,6 +18,20 @@ type S<'a> = tauri::State<'a, Base>;
 /// holding the base's lock. Named once, so every door says it the same way.
 fn poisoned<E>(_: E) -> String {
     "the base's lock is poisoned".to_string()
+}
+
+// ── author ───────────────────────────────────────────────────────────────
+
+#[tauri::command]
+pub fn get_author(base: S<'_>) -> Res<Option<Author>> {
+    let conn = base.0.lock().map_err(poisoned)?;
+    base::get_author(&conn)
+}
+
+#[tauri::command]
+pub fn set_author(base: S<'_>, name: String, byline: String, contact: String) -> Res<Author> {
+    let conn = base.0.lock().map_err(poisoned)?;
+    base::set_author(&conn, &name, &byline, &contact)
 }
 
 // ── work ─────────────────────────────────────────────────────────────────
@@ -67,6 +84,12 @@ pub fn update_work(
         byline.as_deref(),
         note.as_deref(),
     )
+}
+
+#[tauri::command]
+pub fn set_work_rights(base: S<'_>, id: String, rights: Option<String>) -> Res<Work> {
+    let conn = base.0.lock().map_err(poisoned)?;
+    base::set_work_rights(&conn, &id, rights.as_deref())
 }
 
 #[tauri::command]
@@ -275,4 +298,21 @@ pub fn create_appearance(
 pub fn delete_appearance(base: S<'_>, id: String) -> Res<()> {
     let conn = base.0.lock().map_err(poisoned)?;
     base::delete_appearance(&conn, &id)
+}
+
+// ── the whole studio ─────────────────────────────────────────────────────
+//
+// Two doors a room needs and no noun owns: everything out in one call, and
+// everything gone in one call.
+
+#[tauri::command]
+pub fn read_all(base: S<'_>) -> Res<StudioDump> {
+    let conn = base.0.lock().map_err(poisoned)?;
+    base::read_all(&conn)
+}
+
+#[tauri::command]
+pub fn purge_all(base: S<'_>) -> Res<u64> {
+    let mut conn = base.0.lock().map_err(poisoned)?;
+    base::purge_all(&mut conn)
 }

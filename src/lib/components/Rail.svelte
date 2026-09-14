@@ -1,9 +1,9 @@
 <script lang="ts">
-	// THE RAIL — five doors and the work they are all about.
+	// THE RAIL — six doors and the work they are all about.
 	//
 	// Plain links, deliberately. The mother's Sidebar derives its panels from
 	// the-cumdach because she has nine rooms and a fold to arrange; this body
-	// has five doors that always fit, so the arithmetic would be answering a
+	// has six doors that always fit, so the arithmetic would be answering a
 	// question nobody asked. What is kept from her is the IDIOM — the family's
 	// tokens, the wordmark, the accent per door from QUANTUM_COLORS — written
 	// fresh, not copied.
@@ -31,7 +31,8 @@
 		{ href: '/desk', label: 'Desk', face: '✒️', colour: QUANTUM_COLORS['hearth.gold'] },
 		{ href: '/board', label: 'Board', face: '🧵', colour: QUANTUM_COLORS['sanctuary.green'] },
 		{ href: '/cast', label: 'Cast', face: '🎭', colour: QUANTUM_COLORS['quantum.purple'] },
-		{ href: '/bind', label: 'Bind', face: '📖', colour: QUANTUM_COLORS['sirens.rose'] }
+		{ href: '/bind', label: 'Bind', face: '📖', colour: QUANTUM_COLORS['sirens.rose'] },
+		{ href: '/settings', label: 'Settings', face: '⚙️', colour: QUANTUM_COLORS['void.light'] }
 	];
 
 	const here = $derived(page.url.pathname.replace(/\/$/, '') || '/');
@@ -155,7 +156,7 @@
 	}
 
 	/* A narrow window turns the column into a row across the top; nothing is
-	   hidden behind a hamburger, because five doors fit either way. */
+	   hidden behind a hamburger, because six doors fit either way. */
 	@media (max-width: 46rem) {
 		.rail {
 			width: auto;

@@ -7,7 +7,7 @@ editable truth is:
     ../resonance-awen/tools/the-pandulipi/src/index.ts
 
 Do not edit index.ts in THIS folder - it is a byte-faithful mirror
-(SHA256 verified at the copy: 1A29CB00007D6BF7), to be refreshed by
+(SHA256 verified at the copy: F4393D05F4BF57E8), to be refreshed by
 distribution runs as the house's delivery pipeline stands up. Format changes -
 the running head, the drop, the scene break, the counting rule - happen in the
 water.
@@ -19,7 +19,7 @@ carries KP's ⚛ sentence with its address:
 
     "we have a need for it to be repurposed as a book, manuscript, article,
      all the reasons an author might publish. all types formatting assistance"
-    KP ⚛ 2026-09-02 · resonance-chamber/desk/THE-AUTHORS-STUDIO.md:6-7
+    KP ⚛ 2026-09-02 · resonance-chamber/desk/THE-AUTHORS-STUDIO.md:4-6
 
 `NOTHING_STOOD` is exported beside it: the house held no standard manuscript
 submission format before this water, swept 2026-09-02 for Shunn, MLA and

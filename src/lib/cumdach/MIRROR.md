@@ -8,7 +8,7 @@ shrine's single editable truth is:
 ../resonance-awen/tools/the-cumdach/src/index.ts
 
 Do not edit index.ts in THIS folder - it is a byte-faithful mirror
-(SHA256 verified at the copy: 07BB8DBA494A5F04), to be refreshed by
+(SHA256 verified at the copy: 79CC7A1F9795DFD4), to be refreshed by
 distribution runs as the house's delivery pipeline stands up, the
 same road the cosmic mirror travels. This app's Sidebar imports from
 here; formula changes happen in the water. Why a mirror and not a
@@ -16,4 +16,4 @@ file: link: Echoes is a standalone, given-away-whole repo - a link
 reaching outside it would break a lone clone's build; the mirror
 keeps Echoes sovereign.
 
-Record: docs/CHECKLIST.md.
+Record: this realm's .journals/realm/2026-09-14-mirrors-design-hand.md.

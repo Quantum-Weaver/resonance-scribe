@@ -13,21 +13,28 @@ Resonance Scribe is a local-first studio for anyone who writes to publish — a
 book, a manuscript, an article, an essay. It holds a **work** and its **parts**
 (chapters, and scenes beneath them), with **eras**, **characters** and **arcs**
 hanging on those parts, and it keeps all of it in one SQLite file on your own
-machine. **Four rooms stand above that base, and all four are built.** The
-**desk**, where a part is written in a plain box, saved to the base after a
-moment's quiet, with the word count as the base counted it and the same text
-rendered beside it. The **board**, where the chapters stand as cards across the
-eras, the arcs are drawn through the cards they run through, and a character's
-emoji marks the cards they appear on — drag a card, or move it with the buttons
-on it; both write the same rows. The **cast**, where a character's appearances
-are read from those same rows rather than kept as a second list. And the
-**bind**, where a finished work leaves the studio five ways — a manuscript
-folder of markdown, an EPUB 3, paged HTML for print, a screenplay set on the
-format's own measure of ten characters and six lines to the inch so a page
-runs a minute, or standard manuscript submission format for an editor — with
-a sixth road beside them that carries the whole work out as a `.scribe.json`
-and opens it again on any machine you own. A licence can be drawn for the
-rights page; nothing is ever written over a file that already stands.
+machine. **Six rooms stand above that base, and all six are built.** The
+**shelf**, where a work is opened, begun, or deleted behind two steps of
+confirmation. The **desk**, where a part is written in a plain box, saved to
+the base after a moment's quiet, with the word count as the base counted it
+and the same text rendered beside it. The **board**, where the chapters stand
+as cards across the eras, the arcs are drawn through the cards they run
+through, and a character's emoji marks the cards they appear on — drag a
+card, or move it with the buttons on it; both write the same rows. The
+**cast**, where a character's appearances are read from those same rows
+rather than kept as a second list. The **bind**, where a finished work leaves
+the studio six roads — a manuscript folder of markdown, an EPUB 3, paged HTML
+for print, a screenplay set on the format's own measure of ten characters and
+six lines to the inch so a page runs a minute, standard manuscript submission
+format for an editor, or the whole work out as a `.scribe.json` that opens
+again on any machine you own. A licence can be drawn for the rights page;
+nothing is ever written over a file that already stands. The **settings**,
+where the author is captured — first at the door, when none stands yet, and
+changed again here as often as a hand likes — the theme is chosen, and the
+whole studio, the author and every work together, leaves as one
+`.scribe.json` envelope and returns as new works, never overwriting what
+stands; a purge that truly purges empties the base in one transaction and
+cannot be undone.
 
 The sixth noun is the one that makes the rest simple: an **appearance** is one
 row that can hang on a part, an era, a character or an arc — a character in a
@@ -40,7 +47,7 @@ studio never alters your text: typos are fingerprints unless you say otherwise.
 
 *Founded 2026-09-02, cut from Resonance Sistrum v0.2.0 (the attested lineage);
 Sistrum itself is never altered. The body, the base, the shell, the rail and
-all four rooms stand. Where it stands is the base:*
+all six rooms stand. Where it stands is the base:*
 `python ../resonance-progenatrix/progenatrix.py recall --realm resonance-scribe`
 
 ## THE STORY

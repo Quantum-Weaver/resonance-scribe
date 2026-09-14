@@ -13,7 +13,6 @@
     "fs:allow-write-text-file",
     "fs:allow-mkdir",
     "fs:allow-exists",
-    "opener:default",
     "dialog:default",
     "dialog:allow-save",
     "dialog:allow-open"

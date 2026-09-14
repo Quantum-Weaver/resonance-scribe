@@ -19,14 +19,17 @@
 	// only ever show what the author typed. No markdown library is installed
 	// and none may be.
 	//
-	// THE SCREENPLAY SHAPE IS TEXT, NOT MARKUP. `$lib/screenplay` hands back
+	// THE SCREENPLAY SHAPE IS TEXT, NOT MARKUP. `$lib/patakatha` hands back
 	// laid-out lines and this room prints them in a `<pre>` — no `{@html}` on
 	// that road at all — so the same text the author typed is the text shown.
+	// What the water will not set comes back as a Refusal and is shown as the
+	// one plain sentence it carries; nothing here throws.
 	import { onDestroy, onMount } from 'svelte';
 	import { chaptersOf, scenesOf } from '$lib/base';
+	import { SCENE_BREAK } from '$lib/bind';
 	import { filterData, sortData } from '$lib/panti';
+	import { isRefusal, patakatha } from '$lib/patakatha';
 	import { renderScrollBody } from '$lib/scrolls/the-scrolls.mjs';
-	import { format as screenplayOf, render as renderScreenplay } from '$lib/screenplay';
 	import { studioStore } from '$lib/stores/studio.svelte';
 	import { workStore } from '$lib/stores/work.svelte';
 	import type { Part } from '$lib/types/types';
@@ -89,9 +92,45 @@
 
 	const counted = $derived(rail.reduce((n, r) => n + 1 + r.scenes.length, 0));
 
+	/**
+	 * The body, cut at every line that is exactly the-binder's scene break, so
+	 * the prose pane can draw the break as a break. The cut is the PREVIEW's
+	 * alone: `draftBody` is what the base is handed, whole and untouched.
+	 */
+	function atBreaks(body: string): string[] {
+		const out: string[] = [];
+		let held: string[] = [];
+		for (const line of body.split(/\r?\n/)) {
+			if (line === SCENE_BREAK) {
+				out.push(held.join('\n'));
+				held = [];
+			} else held.push(line);
+		}
+		out.push(held.join('\n'));
+		return out;
+	}
+
+	const prose = $derived(atBreaks(draftBody));
+
 	// The screenplay is measured, not estimated: fixed-pitch type on a fixed
-	// page, so the page count is arithmetic and one page runs one minute.
-	const script = $derived(shape === 'screenplay' ? screenplayOf(draftBody) : null);
+	// page, so the page count is arithmetic and one page runs one minute. The
+	// part in hand goes through as one part with no title card: its title names
+	// the source it was read from and is not set as an element.
+	const reading = $derived(
+		shape === 'screenplay' && work
+			? patakatha(
+					{
+						work: { title: work.title, byline: work.byline },
+						parts: [{ name: chosen?.title ?? '', body: draftBody }]
+					},
+					{ titleCard: false }
+				)
+			: null
+	);
+	/** The set pages, or nothing when the water refused. */
+	const script = $derived(reading && !isRefusal(reading) ? reading : null);
+	/** The water's one plain sentence, or nothing. */
+	const refused = $derived(reading && isRefusal(reading) ? reading.refused : null);
 
 	// ── the autosave ───────────────────────────────────────────────────────
 
@@ -426,15 +465,20 @@
 								Screenplay 🎬
 							</button>
 						</div>
-						{#if shape === 'screenplay' && script}
-							<pre class="preview script">{draftBody.trim() === ''
-									? ''
-									: renderScreenplay(script)}</pre>
+						{#if shape === 'screenplay' && refused}
+							<div class="preview">
+								<p class="quiet">{refused}</p>
+							</div>
+						{:else if shape === 'screenplay' && script}
+							<pre class="preview script">{script.text}</pre>
 							<p class="quiet small">
-								{script.pages.length} page{script.pages.length === 1 ? '' : 's'}, running
-								{script.runtime} at one page to the minute — {script.measure.cpi} characters
-								and {script.measure.lpi} lines to the inch on {script.measure.pageWidth}in by
-								{script.measure.pageHeight}in. A slugline opens INT. or EXT.; a shouted short
+								{script.screenplay.pages.length} page{script.screenplay.pages.length === 1
+									? ''
+									: 's'}, running
+								{script.screenplay.runtime} at one page to the minute — {script.screenplay
+									.measure.cpi} characters and {script.screenplay.measure.lpi} lines to the
+								inch on {script.screenplay.measure.pageWidth}in by {script.screenplay.measure
+									.pageHeight}in. A slugline opens INT. or EXT.; a shouted short
 								line with speech under it is a character; a line in parentheses inside a speech
 								is a parenthetical; a shouted line ending TO: is a transition; everything else
 								is action. Nothing is upper-cased and no word is broken.
@@ -445,14 +489,19 @@
 									<p class="quiet">Nothing yet.</p>
 								{:else}
 									<!-- the-scrolls escapes before it shapes; this is its output and
-									     no other renderer's. -->
-									{@html renderScrollBody(draftBody)}
+									     no other renderer's. The rule between two pieces is this
+									     room's own element, drawn where the break line stood. -->
+									{#each prose as piece, i (i)}
+										{#if i > 0}<hr class="scene-break" />{/if}
+										{@html renderScrollBody(piece)}
+									{/each}
 								{/if}
 							</div>
 							<p class="quiet small">
 								The preview shows five forms — headings, bold, italic, bullets and
-								checklists. Anything else stays a plain paragraph here and is stored
-								exactly as you typed it.
+								checklists — and a line of {SCENE_BREAK} on its own as a scene break.
+								Anything else stays a plain paragraph here and is stored exactly as you
+								typed it.
 							</p>
 						{/if}
 					</div>
@@ -675,6 +724,14 @@
 		line-height: 1.6;
 	}
 
+	/* The break line's own mark: the room's hairline, a short rule, centred. */
+	.scene-break {
+		width: 5rem;
+		margin: 1.4rem auto;
+		border: none;
+		border-top: 1px solid var(--border-color);
+	}
+
 	.shapes {
 		display: flex;
 		align-items: center;
@@ -843,7 +900,7 @@
 		white-space: nowrap;
 	}
 
-	@media (max-width: 62rem) {
+	@media (max-width: 56rem) {
 		.desk {
 			flex-direction: column;
 			height: auto;

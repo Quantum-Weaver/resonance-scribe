@@ -38,6 +38,7 @@
 		createPart,
 		createWork,
 		scenesOf,
+		setWorkRights,
 		updateWork
 	} from '$lib/base';
 	import {
@@ -61,10 +62,11 @@
 	import { deliver, openFrom } from '$lib/envelope';
 	import { appDataFolder, chooseFolder, makeFolder, occupied, saveAs, scribeHost, writeNew } from '$lib/host';
 	import { isRefusal as isSettingRefusal, pandulipi } from '$lib/pandulipi';
-	import { bindScreenplay } from '$lib/screenplay';
-	import type { Leaf } from '$lib/screenplay';
+	import { isRefusal as isScriptRefusal, patakatha } from '$lib/patakatha';
+	import type { PartFile } from '$lib/patakatha';
 	import { GRANT_ORDER, HOUSE_SPLIT, draw, render } from '$lib/sphragis';
 	import type { GrantName, Sphragis } from '$lib/sphragis';
+	import { authorStore } from '$lib/stores/author.svelte';
 	import { studioStore } from '$lib/stores/studio.svelte';
 	import { workStore } from '$lib/stores/work.svelte';
 
@@ -90,11 +92,12 @@
 	let touchedAuthor = $state(false);
 
 	// The by-line is the author's, and it fills this box until a hand types
-	// over it. `touchedAuthor` is what keeps a prefill from stamping on an
-	// edit when the store refreshes.
+	// over it: the work's own first, and the studio author's by-line when the
+	// work carries none. `touchedAuthor` is what keeps a prefill from stamping
+	// on an edit when the store refreshes.
 	$effect(() => {
 		const w = workStore.work;
-		if (w && !touchedAuthor) author = w.byline ?? '';
+		if (w && !touchedAuthor) author = w.byline ?? authorStore.byline;
 	});
 
 	const authorGiven = $derived(author.trim() !== '');
@@ -140,10 +143,69 @@
 			permits,
 			split: { artist: splitArtist, platform: splitPlatform }
 		});
+		void keepRights();
 	}
 
 	function setLicenceAside() {
 		drawn = null;
+		void keepRights();
+	}
+
+	/** The drawn licence, kept ON THE WORK as JSON text. `setWorkRights` writes
+	 *  that one column and nothing else, and null is a work with no rights page
+	 *  at all. */
+	async function keepRights() {
+		const w = work;
+		if (!w) return;
+		try {
+			const saved = await setWorkRights(w.id, drawn ? JSON.stringify(drawn) : null);
+			workStore.refresh(saved);
+			rightsSaid = said(
+				'done',
+				drawn
+					? 'Kept on this work. It stands in this drawer again the next time this room opens.'
+					: 'Set aside, and this work now carries no rights page at all.'
+			);
+		} catch (e) {
+			rightsSaid = said('refused', e instanceof Error ? e.message : String(e));
+		}
+	}
+
+	/** A licence read back off the work. Nothing here throws: a rights column
+	 *  this room cannot read is left exactly as it stands, and the drawer opens
+	 *  empty rather than half-filled. */
+	function licenceOf(text: string | null): Sphragis | null {
+		if (!text) return null;
+		let back: unknown;
+		try {
+			back = JSON.parse(text);
+		} catch {
+			return null;
+		}
+		if (!back || typeof back !== 'object') return null;
+		const held = back as Partial<Sphragis>;
+		if (typeof held.holder !== 'string') return null;
+		if (!held.ergon || typeof held.ergon !== 'object') return null;
+		if (!held.split || typeof held.split !== 'object') return null;
+		if (!Array.isArray(held.grants)) return null;
+		for (const g of held.grants) {
+			if (!g || typeof g !== 'object') return null;
+			if (typeof g.name !== 'string' || !Array.isArray(g.permits)) return null;
+		}
+		return held as Sphragis;
+	}
+
+	/** The drawer, filled from the licence a work already carries. */
+	function restoreLicence(back: Sphragis) {
+		drawn = back;
+		holder = back.holder;
+		touchedHolder = true;
+		for (const g of back.grants) {
+			if (GRANT_ORDER.indexOf(g.name) !== -1) permitWords[g.name] = g.permits.join(', ');
+		}
+		if (typeof back.split.artist === 'number') splitArtist = back.split.artist;
+		if (typeof back.split.platform === 'number') splitPlatform = back.split.platform;
+		drawerOpen = true;
 	}
 
 	/** The-binder's `Rights` block, keyed to the-sphragis' own shape and read
@@ -180,6 +242,13 @@
 	let surname = $state('');
 	let shortTitle = $state('');
 	let contact = $state('');
+	let touchedContact = $state(false);
+
+	// The contact block is the author's until a hand types over it — the same
+	// block the-pandulipi sets at the top left of the title page, verbatim.
+	$effect(() => {
+		if (!touchedContact) contact = authorStore.contact;
+	});
 
 	const contactLines = (): string[] =>
 		contact.split('\n').filter((l, i, all) => !(l.trim() === '' && i === all.length - 1));
@@ -214,6 +283,7 @@
 	let printSaid = $state<Said | null>(null);
 	let setSaid = $state<Said | null>(null);
 	let scriptSaid = $state<Said | null>(null);
+	let rightsSaid = $state<Said | null>(null);
 	let sealSaid = $state<Said | null>(null);
 	let openSaid = $state<Said | null>(null);
 	let importSaid = $state<Said | null>(null);
@@ -440,12 +510,15 @@
 	// ── 4 · a screenplay ───────────────────────────────────────────────────
 
 	/** Chapters in `ord`, each chapter's scenes beneath it — the same reading
-	 *  order the folder road walks. */
-	const leaves = (): Leaf[] => {
-		const out: Leaf[] = [];
+	 *  order the folder road walks. A part's title names the source it is read
+	 *  from as well as standing as its own title. */
+	const leaves = (): PartFile[] => {
+		const out: PartFile[] = [];
 		for (const c of chaptersOf(parts)) {
-			out.push({ title: c.title, body: c.body });
-			for (const s of scenesOf(parts, c.id)) out.push({ title: s.title, body: s.body });
+			out.push({ name: c.title, title: c.title, body: c.body });
+			for (const s of scenesOf(parts, c.id)) {
+				out.push({ name: s.title, title: s.title, body: s.body });
+			}
 		}
 		return out;
 	};
@@ -457,13 +530,12 @@
 		scriptSaid = null;
 		try {
 			await keepBylineIfAsked();
-			const bound = bindScreenplay({ title: w.title, byline: author.trim() }, leaves());
-			if (bound.screenplay.pages.length === 0) {
-				scriptSaid = said(
-					'refused',
-					'There is no text in this work yet, so there are no pages to set.',
-					bound.told
-				);
+			const script = patakatha({
+				work: { title: w.title, byline: author.trim() },
+				parts: leaves()
+			});
+			if (isScriptRefusal(script)) {
+				scriptSaid = said('refused', script.refused);
 				return;
 			}
 			const chose = await saveAs(slug(w.title) + '-screenplay.txt', [
@@ -473,17 +545,17 @@
 				scriptSaid = said(
 					chose.why ? 'refused' : 'declined',
 					chose.why ?? 'No destination was chosen, and nothing was written.',
-					bound.told
+					script.told
 				);
 				return;
 			}
-			const wrote = await writeNew(chose.path, bound.text);
+			const wrote = await writeNew(chose.path, script.text);
 			scriptSaid = said(
 				wrote.written ? 'done' : 'refused',
 				wrote.written
-					? `Written to ${chose.path}. ${bound.screenplay.pages.length} page${bound.screenplay.pages.length === 1 ? '' : 's'} after the title page, running ${bound.screenplay.runtime} at one page to the minute.`
+					? `Written to ${chose.path}. ${script.screenplay.pages.length} page${script.screenplay.pages.length === 1 ? '' : 's'} after the title page, running ${script.screenplay.runtime} at one page to the minute.`
 					: (wrote.why ?? 'Nothing was written.'),
-				bound.told
+				script.told
 			);
 		} finally {
 			busy = null;
@@ -694,9 +766,13 @@
 	// ── the room's life ────────────────────────────────────────────────────
 
 	onMount(() => {
+		void authorStore.load();
 		void (async () => {
 			const w = await workStore.restore();
-			if (w) await studioStore.load(w.id);
+			if (!w) return;
+			await studioStore.load(w.id);
+			const back = licenceOf(w.rights);
+			if (back) restoreLicence(back);
 		})();
 		year = String(new Date().getFullYear());
 	});
@@ -886,6 +962,8 @@
 						{/if}
 					</div>
 
+					{@render says(rightsSaid)}
+
 					{#if drawn && rendered}
 						<p class="quiet small">
 							While this stands, the four ways above bind a rights page from it. The
@@ -1028,7 +1106,12 @@
 
 			<label class="field">
 				<span>Contact block — one line per line, set verbatim, in this order</span>
-				<textarea bind:value={contact} rows="4" placeholder="nothing is looked up and nothing is invented"></textarea>
+				<textarea
+					bind:value={contact}
+					oninput={() => (touchedContact = true)}
+					rows="4"
+					placeholder="nothing is looked up and nothing is invented"
+				></textarea>
 			</label>
 
 			<button type="button" onclick={setManuscript} disabled={!authorGiven || busy !== null}>

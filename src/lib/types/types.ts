@@ -46,6 +46,18 @@ export const WORK_KINDS: readonly WorkKind[] = [
 
 export const ARC_SHAPES: readonly ArcShape[] = ['rising', 'turning', 'resolving', 'other'];
 
+/** Author — the one row the studio keeps about the person writing. Its id is
+ *  always the string 'author'; there is no second row. `contact` is a
+ *  multi-line block kept verbatim and may be empty. */
+export type Author = {
+  id: 'author';
+  name: string;
+  byline: string;
+  contact: string;
+  created_at: number;
+  updated_at: number;
+};
+
 /** Work — the thing being written. */
 export type Work = {
   id: string;
@@ -53,6 +65,9 @@ export type Work = {
   title: string;
   byline: string | null;
   note: string | null;
+  /** A drawn licence as JSON text, written whole by the window. null is a work
+   *  with no rights page. */
+  rights: string | null;
   created_at: number;
   updated_at: number;
 };
@@ -108,4 +123,17 @@ export type Appearance = {
   character_id: string | null;
   arc_id: string | null;
   note: string | null;
+};
+
+/** Every row of every table, as `read_all` hands them back: the works in
+ *  `list_works` order, and each work's rows in the order its own `list_*`
+ *  gives. */
+export type StudioDump = {
+  author: Author | null;
+  works: Work[];
+  parts: Part[];
+  eras: Era[];
+  characters: Character[];
+  arcs: Arc[];
+  appearances: Appearance[];
 };

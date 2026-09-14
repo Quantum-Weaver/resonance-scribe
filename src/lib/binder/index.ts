@@ -20,7 +20,8 @@ export const EDITORIAL_LAW =
 	'Editorial law: verbatim-vs-light-touch is KP\'s ruling per line; typos are fingerprints unless he says otherwise.';
 
 /** Where that sentence stands. */
-export const EDITORIAL_LAW_AT = 'resonance-chamber/desk/POTENTIALITIES.md:31 (P-12, THE PUBLISHING SHELF)';
+export const EDITORIAL_LAW_AT =
+	'resonance-chamber/constellation/weaver/mimirs-well/design-lineage/constellation/fable/lanes/records/2026-08-23-stretto-deals/GROUND.md:265 (P-12, THE PUBLISHING SHELF; first set down at the desk paper POTENTIALITIES.md:31, since retired)';
 
 /** THE COVER RULE, KP's own. */
 export const COVER_RULE = 'no art → note it, never block. -yes';
@@ -157,10 +158,16 @@ export interface FrontMatter {
 	[k: string]: unknown;
 }
 
-/** THE MANUSCRIPT: front matter, and chapters in the order they are read. */
+/** THE MANUSCRIPT: front matter, and chapters in the order they are read.
+ *
+ *  `assets` carries a figure's bytes, keyed by the source exactly as the
+ *  markdown writes it — the door fills it by resolving each source against
+ *  the chapter's own folder. A source with no bytes here is TOLD and its
+ *  figure omitted; nothing is fetched and nothing is invented. */
 export interface Manuscript {
 	front: FrontMatter;
 	chapters: Chapter[];
+	assets?: { [path: string]: readonly number[] };
 	[k: string]: unknown;
 }
 
@@ -253,12 +260,21 @@ export type LineBreaks = 'keep' | 'fold';
  *
  *  `text` — prose, set into the page.
  *  `code` — the inside of a code span.
- *  `href` — a link target, carried byte-identical into an attribute. */
+ *  `href` — a link target or a figure's source, carried byte-identical
+ *           into an attribute.
+ *  `alt`  — a figure's alt text, carried byte-identical into an attribute. */
 export interface Ink {
 	at: number;
 	end: number;
 	text: string;
-	kind: 'text' | 'code' | 'href';
+	kind: 'text' | 'code' | 'href' | 'alt';
+}
+
+/** A table's delimiter row, by its byte offsets — the one span of a source
+ *  where this dialect consumes a colon as markup. */
+export interface DelimiterRow {
+	at: number;
+	end: number;
 }
 
 /** A chapter body, imposed. */
@@ -267,6 +283,8 @@ export interface Rendered {
 	xhtml: string;
 	/** every literal run, in source order, never overlapping. */
 	ink: readonly Ink[];
+	/** every table delimiter row consumed, in source order. */
+	delimiterRows: readonly DelimiterRow[];
 }
 
 /** THE MARKUP ALPHABET — every character this dialect may consume as
@@ -276,9 +294,26 @@ export interface Rendered {
  *  a gap and the proof would go FALSE.
  *
  *  `#` headings · `*` `_` emphasis and rules · backtick code spans ·
- *  `>` blockquote · `-` bullets and rules · `[](` `)` links ·
- *  digits, `.` and `)` for ordered markers · spaces, tabs, CR and LF. */
-export const MARKUP_ALPHABET = '#*_' + String.fromCharCode(96) + '>-[]()0123456789. \t\r\n';
+ *  `>` blockquote · `-` bullets and rules · `[](` `)` links · `!` figures ·
+ *  `|` table rows · digits, `.` and `)` for ordered markers · spaces, tabs,
+ *  CR and LF.
+ *
+ *  The alignment colon is NOT here: it is markup only inside a table's
+ *  delimiter row, and every such row is recorded in `Rendered.delimiterRows`
+ *  so a proof may admit it there and nowhere else. */
+export const MARKUP_ALPHABET = '#*_' + String.fromCharCode(96) + '>-[]()!|0123456789. \t\r\n';
+
+/** THE DELIMITER ROW'S ALPHABET — every character a table's delimiter row
+ *  may consume, and the only place the alignment colon is markup. Read
+ *  against the spans in `Rendered.delimiterRows` and never against a whole
+ *  source: a colon dropped from prose still lands in a gap and turns the
+ *  alphabet proof FALSE. */
+export const DELIMITER_ALPHABET = '|:- \t';
+
+/** How a figure's source is carried into the page: the href to set on the
+ *  img, or null to omit the figure. Absent, the source is set exactly as the
+ *  author wrote it. */
+export type Figures = (src: string) => string | null;
 
 // ── the dialect ─────────────────────────────────────────────────────────
 //
@@ -421,13 +456,74 @@ const HEAD = /^(#{1,6})[ \t]+/;
 const RULE = /^[ \t]*(-{3,}|\*{3,}|_{3,})[ \t]*$/;
 const QUOTE = /^[ \t]*>[ \t]?/;
 const ITEM = /^([ \t]*)([-*]|\d{1,9}[.)])[ \t]+/;
+/** A figure: a line that is nothing but one image mark. An image mark with
+ *  anything else on its line is ordinary text. */
+const FIGURE = /^([ \t]*)!\[([^\]]*)\]\(([^)]*)\)[ \t]*$/;
+const ROW = /^[ \t]*\|/;
+const DELIMITER_CELL = /^[ \t]*:?-+:?[ \t]*$/;
 
 function isBlank(l: SourceLine): boolean {
 	return leadingBlank(l.text) === l.text.length;
 }
 
-function blockOpens(l: SourceLine): boolean {
-	return HEAD.test(l.text) || RULE.test(l.text) || QUOTE.test(l.text) || ITEM.test(l.text);
+/** One cell of a pipe row, by its byte offsets. */
+interface Cell {
+	at: number;
+	end: number;
+}
+
+/** The cells of a pipe row. The opening pipe, every separating pipe, a
+ *  closing pipe and all the padding are markup; the cells are the text. */
+function cells(l: SourceLine): Cell[] {
+	const t = l.text;
+	const open = leadingBlank(t);
+	if (t.charAt(open) !== '|') return [];
+	const out: Cell[] = [];
+	let from = open + 1;
+	for (let i = from; i <= t.length; i += 1) {
+		if (i === t.length || t.charAt(i) === '|') {
+			out.push({ at: l.at + from, end: l.at + i });
+			from = i + 1;
+		}
+	}
+	const last = out[out.length - 1];
+	const tail = t.slice(last.at - l.at, last.end - l.at);
+	if (out.length > 1 && leadingBlank(tail) === tail.length) out.pop();
+	return out;
+}
+
+/** How many lines the table beginning at `j` takes: a header row, a
+ *  delimiter row of dashes with optional alignment colons, and every pipe
+ *  row that follows. ZERO when no table stands here — a pipe row with no
+ *  delimiter row under it is ordinary text. */
+function tableRows(src: string, ls: readonly SourceLine[], j: number): number {
+	if (j + 1 >= ls.length) return 0;
+	if (!ROW.test(ls[j].text) || !ROW.test(ls[j + 1].text)) return 0;
+	const head = cells(ls[j]);
+	const rule = cells(ls[j + 1]);
+	if (head.length === 0 || head.length !== rule.length) return 0;
+	for (const c of rule) if (!DELIMITER_CELL.test(src.slice(c.at, c.end))) return 0;
+	let n = 2;
+	while (j + n < ls.length && ROW.test(ls[j + n].text)) n += 1;
+	return n;
+}
+
+/** A delimiter cell's alignment, read from its colons. */
+function alignOf(src: string, c: Cell): string {
+	const t = src.slice(c.at, c.end);
+	const inner = t.slice(leadingBlank(t), t.length - trailingBlank(t));
+	const left = inner.charAt(0) === ':';
+	const right = inner.charAt(inner.length - 1) === ':';
+	if (left && right) return 'center';
+	if (right) return 'right';
+	if (left) return 'left';
+	return '';
+}
+
+function blockOpens(src: string, ls: readonly SourceLine[], j: number): boolean {
+	const t = ls[j].text;
+	return HEAD.test(t) || RULE.test(t) || QUOTE.test(t) || ITEM.test(t) ||
+		FIGURE.test(t) || tableRows(src, ls, j) > 0;
 }
 
 interface ListEntry {
@@ -480,7 +576,70 @@ function renderItems(entries: readonly ListEntry[]): string {
 	return html;
 }
 
-function renderLines(src: string, ls: readonly SourceLine[], mode: LineBreaks): Piece {
+/** A table, set into XHTML: head cells in a `thead`, body rows in a
+ *  `tbody`, alignment carried as a class. Every cell's text is a run at its
+ *  own offsets; the pipes, the dashes, the colons and the padding are
+ *  markup, and the delimiter row's own span is recorded. */
+function renderTable(
+	src: string,
+	ls: readonly SourceLine[],
+	j: number,
+	n: number,
+	ink: Ink[],
+	rows: DelimiterRow[]
+): string {
+	const rule = cells(ls[j + 1]);
+	const aligns: string[] = [];
+	for (const c of rule) aligns.push(alignOf(src, c));
+	rows.push({ at: ls[j + 1].at, end: ls[j + 1].at + ls[j + 1].text.length });
+
+	function cellHtml(c: Cell, i: number, tag: string): string {
+		const t = src.slice(c.at, c.end);
+		const p = inlineSpan(src, c.at + leadingBlank(t), c.end - trailingBlank(t));
+		for (const k of p.ink) ink.push(k);
+		const a = i < aligns.length ? aligns[i] : '';
+		return '<' + tag + (a === '' ? '' : ' class="align-' + a + '"') + '>' + p.html + '</' + tag + '>';
+	}
+
+	let html = '<table><thead><tr>';
+	const head = cells(ls[j]);
+	for (let i = 0; i < head.length; i += 1) html += cellHtml(head[i], i, 'th');
+	html += '</tr></thead>';
+	if (n > 2) {
+		html += '<tbody>';
+		for (let r = j + 2; r < j + n; r += 1) {
+			const cs = cells(ls[r]);
+			html += '<tr>';
+			for (let i = 0; i < cs.length; i += 1) html += cellHtml(cs[i], i, 'td');
+			html += '</tr>';
+		}
+		html += '</tbody>';
+	}
+	return html + '</table>';
+}
+
+/** A figure. The alt is a run and lands in an attribute; the source takes a
+ *  link href's road. A source the `Figures` road declines is OMITTED whole —
+ *  the alt is never set as prose in its place. */
+function renderFigure(src: string, l: SourceLine, m: RegExpExecArray, ink: Ink[], figures?: Figures): string {
+	const altAt = l.at + m[1].length + 2;
+	const altEnd = altAt + m[2].length;
+	const srcAt = altEnd + 2;
+	const srcEnd = srcAt + m[3].length;
+	if (altEnd > altAt) ink.push({ at: altAt, end: altEnd, text: m[2], kind: 'alt' });
+	if (srcEnd > srcAt) ink.push({ at: srcAt, end: srcEnd, text: m[3], kind: 'href' });
+	const href = figures ? figures(m[3]) : m[3];
+	if (href === null) return '';
+	return '<figure><img src="' + esc(href) + '" alt="' + esc(m[2]) + '"/></figure>';
+}
+
+function renderLines(
+	src: string,
+	ls: readonly SourceLine[],
+	mode: LineBreaks,
+	rows: DelimiterRow[],
+	figures?: Figures
+): Piece {
 	const out: string[] = [];
 	const ink: Ink[] = [];
 	let j = 0;
@@ -518,7 +677,7 @@ function renderLines(src: string, ls: readonly SourceLine[], mode: LineBreaks): 
 				inner.push({ at: ls[j].at + m[0].length, text: ls[j].text.slice(m[0].length) });
 				j += 1;
 			}
-			const p = renderLines(src, inner, mode);
+			const p = renderLines(src, inner, mode, rows, figures);
 			out.push('<blockquote>' + p.html + '</blockquote>');
 			for (const k of p.ink) ink.push(k);
 			continue;
@@ -542,9 +701,24 @@ function renderLines(src: string, ls: readonly SourceLine[], mode: LineBreaks): 
 			continue;
 		}
 
+		const rowCount = tableRows(src, ls, j);
+		if (rowCount > 0) {
+			out.push(renderTable(src, ls, j, rowCount, ink, rows));
+			j += rowCount;
+			continue;
+		}
+
+		const fig = FIGURE.exec(l.text);
+		if (fig) {
+			const html = renderFigure(src, l, fig, ink, figures);
+			if (html !== '') out.push(html);
+			j += 1;
+			continue;
+		}
+
 		// A stanza: consecutive lines that open no other block.
 		const parts: string[] = [];
-		while (j < ls.length && !isBlank(ls[j]) && !blockOpens(ls[j])) {
+		while (j < ls.length && !isBlank(ls[j]) && !blockOpens(src, ls, j)) {
 			const line = ls[j];
 			let from = line.at;
 			let to = line.at + line.text.length;
@@ -566,11 +740,28 @@ function renderLines(src: string, ls: readonly SourceLine[], mode: LineBreaks): 
 /** IMPOSE — a chapter's markdown, set into XHTML, with every literal run
  *  of the author's text recorded at its own byte offsets.
  *
- *  @param text   the author's markdown, whole and untouched
- *  @param mode   'keep' (default, verse) or 'fold' (prose) */
-export function impose(text: string, mode: LineBreaks = 'keep'): Rendered {
-	const p = renderLines(text, toLines(text), mode);
-	return { xhtml: p.html, ink: p.ink };
+ *  @param text     the author's markdown, whole and untouched
+ *  @param mode     'keep' (default, verse) or 'fold' (prose)
+ *  @param figures  where a figure's source is carried. Absent, a source is
+ *                  set exactly as the author wrote it. */
+export function impose(text: string, mode: LineBreaks = 'keep', figures?: Figures): Rendered {
+	const rows: DelimiterRow[] = [];
+	const p = renderLines(text, toLines(text), mode, rows, figures);
+	return { xhtml: p.html, ink: p.ink, delimiterRows: rows };
+}
+
+/** THE FIGURE SOURCES a chapter's text references, in source order, each
+ *  once. The door reads them from disk; this charter never does. */
+export function figureSources(text: string): string[] {
+	const out: string[] = [];
+	for (const l of toLines(text)) {
+		const m = FIGURE.exec(l.text);
+		if (!m) continue;
+		let seen = false;
+		for (const s of out) if (s === m[3]) seen = true;
+		if (!seen) out.push(m[3]);
+	}
+	return out;
 }
 
 // ── CRC-32, pure ────────────────────────────────────────────────────────
@@ -621,6 +812,30 @@ export function utf8(s: string): number[] {
 		else if (cp < 0x800) out.push(0xc0 | (cp >> 6), 0x80 | (cp & 0x3f));
 		else if (cp < 0x10000) out.push(0xe0 | (cp >> 12), 0x80 | ((cp >> 6) & 0x3f), 0x80 | (cp & 0x3f));
 		else out.push(0xf0 | (cp >> 18), 0x80 | ((cp >> 12) & 0x3f), 0x80 | ((cp >> 6) & 0x3f), 0x80 | (cp & 0x3f));
+	}
+	return out;
+}
+
+const BASE64_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+
+/** Base64 of a byte sequence, computed here because the charter touches no
+ *  host global and `btoa` is one. */
+export function base64(bytes: readonly number[]): string {
+	let out = '';
+	let i = 0;
+	for (; i + 2 < bytes.length; i += 3) {
+		const n = ((bytes[i] & 0xff) << 16) | ((bytes[i + 1] & 0xff) << 8) | (bytes[i + 2] & 0xff);
+		out += BASE64_ALPHABET.charAt((n >> 18) & 63) + BASE64_ALPHABET.charAt((n >> 12) & 63) +
+			BASE64_ALPHABET.charAt((n >> 6) & 63) + BASE64_ALPHABET.charAt(n & 63);
+	}
+	const left = bytes.length - i;
+	if (left === 1) {
+		const n = (bytes[i] & 0xff) << 16;
+		out += BASE64_ALPHABET.charAt((n >> 18) & 63) + BASE64_ALPHABET.charAt((n >> 12) & 63) + '==';
+	} else if (left === 2) {
+		const n = ((bytes[i] & 0xff) << 16) | ((bytes[i + 1] & 0xff) << 8);
+		out += BASE64_ALPHABET.charAt((n >> 18) & 63) + BASE64_ALPHABET.charAt((n >> 12) & 63) +
+			BASE64_ALPHABET.charAt((n >> 6) & 63) + '=';
 	}
 	return out;
 }
@@ -684,6 +899,72 @@ function slug(s: string): string {
 	return out === '' ? 'untitled' : out;
 }
 
+/** The last segment of a path, by either separator. */
+function fileName(path: string): string {
+	let i = path.length;
+	while (i > 0 && path.charAt(i - 1) !== '/' && path.charAt(i - 1) !== String.fromCharCode(92)) i -= 1;
+	return path.slice(i);
+}
+
+/** A file name's extension, lowercased, with its dot — empty when it has none. */
+function extensionOf(path: string): string {
+	const name = fileName(path);
+	const dot = name.lastIndexOf('.');
+	return dot > 0 ? name.slice(dot).toLowerCase() : '';
+}
+
+/** A file name without its extension. */
+function stemOf(path: string): string {
+	const name = fileName(path);
+	const dot = name.lastIndexOf('.');
+	return dot > 0 ? name.slice(0, dot) : name;
+}
+
+/** The media type an image's extension names, or null when this water does
+ *  not know it. Nothing is guessed from bytes and nothing is invented. */
+function mediaOf(path: string): string | null {
+	const ext = extensionOf(path);
+	if (ext === '.png') return 'image/png';
+	if (ext === '.jpg' || ext === '.jpeg') return 'image/jpeg';
+	if (ext === '.gif') return 'image/gif';
+	if (ext === '.svg') return 'image/svg+xml';
+	if (ext === '.webp') return 'image/webp';
+	return null;
+}
+
+/** The media types a figure may carry, named in the tellings. */
+const FIGURE_TYPES = 'png, jpeg, jpg, gif, svg, webp';
+
+/** One figure packed into a book: the source as written, the name it takes
+ *  inside the container, its media type and its bytes. */
+interface Figure {
+	src: string;
+	name: string;
+	mediaType: string;
+	bytes: readonly number[];
+}
+
+/** A figure's media type and bytes, or null with one plain sentence TOLD.
+ *  No art blocks a binding: an absent figure is noted and the book goes on. */
+function figureBytes(
+	ms: Manuscript,
+	src: string,
+	tell: Endpaper
+): { mediaType: string; bytes: readonly number[] } | null {
+	const media = mediaOf(src);
+	if (media === null) {
+		tell('a figure names ' + src + ' and this water knows no media type for its extension (' + FIGURE_TYPES + ') — the figure is OMITTED, its alt text is not set as prose, nothing is invented, and NOTHING is blocked (KP ⚛: "' + COVER_RULE + '")');
+		return null;
+	}
+	const store = ms.assets;
+	const bytes = store ? store[src] : undefined;
+	if (!bytes || bytes.length === 0) {
+		tell('a figure names ' + src + ' but its bytes were not handed over — the figure is OMITTED, its alt text is not set as prose, nothing is fetched, and NOTHING is blocked (KP ⚛: "' + COVER_RULE + '"). Any imagery of Jessica’s is her word alone (P-12, consent gate 3).');
+		return null;
+	}
+	return { mediaType: media, bytes };
+}
+
 function xmlHead(): string {
 	return '<?xml version="1.0" encoding="utf-8"?>\n';
 }
@@ -717,6 +998,15 @@ function styles(mode: LineBreaks): string {
 		'code { font-family: monospace; font-size: 0.95em; }',
 		'hr { border: 0; border-top: 1px solid currentColor; width: 30%; margin: 2em auto; }',
 		'a { color: inherit; }',
+		'figure { margin: 1.5em 0; padding: 0; text-align: center; page-break-inside: avoid; break-inside: avoid; }',
+		'figure img { max-width: 100%; max-height: 60vh; width: auto; height: auto; }',
+		'table { width: 100%; border-collapse: collapse; margin: 0 0 1em; page-break-inside: avoid; break-inside: avoid; }',
+		'th, td { padding: 0.3em 0.5em; vertical-align: top; text-align: left; white-space: normal; border-bottom: 1px solid currentColor; }',
+		'thead th { border-bottom: 1px solid currentColor; }',
+		'tbody tr:last-child td { border-bottom: 0; }',
+		'.align-left { text-align: left; }',
+		'.align-center { text-align: center; }',
+		'.align-right { text-align: right; }',
 		'.title-page { text-align: center; }',
 		'.title-page .book-title { font-size: 2em; margin-top: 25%; }',
 		'.title-page .book-author { font-size: 1.2em; margin-top: 1em; }',
@@ -928,6 +1218,26 @@ export function bind(ms: Manuscript, options?: BindOptions, endpaper?: Endpaper)
 		tell('cover art bound in: ' + cover.href + ' (' + String(cover.bytes.length) + ' bytes, ' + cover.mediaType + ')');
 	}
 
+	// The figures — each packed once, absent ones TOLD, NEVER blocking.
+	const figures: Figure[] = [];
+	const absent: string[] = [];
+	const figureRoad = (src: string): string | null => {
+		for (const g of figures) if (g.src === src) return 'images/' + g.name;
+		for (const a of absent) if (a === src) return null;
+		const got = figureBytes(ms, src, tell);
+		if (got === null) {
+			absent.push(src);
+			return null;
+		}
+		const name = 'img-' + pad3(figures.length + 1) + '-' + slug(stemOf(src)) + extensionOf(src);
+		figures.push({ src, name, mediaType: got.mediaType, bytes: got.bytes });
+		tell('figure bound in: ' + src + ' → ' + root + '/images/' + name + ' (' + String(got.bytes.length) + ' bytes, ' + got.mediaType + ')');
+		return 'images/' + name;
+	};
+
+	const bodies: string[] = [];
+	for (const c of ms.chapters) bodies.push(impose(c.text, mode, figureRoad).xhtml);
+
 	manifest.push({ id: 'nav', href: 'nav.xhtml', media: 'application/xhtml+xml', props: 'nav' });
 	manifest.push({ id: 'ncx', href: 'toc.ncx', media: 'application/x-dtbncx+xml', props: '' });
 	manifest.push({ id: 'css', href: 'styles.css', media: 'text/css', props: '' });
@@ -951,6 +1261,9 @@ export function bind(ms: Manuscript, options?: BindOptions, endpaper?: Endpaper)
 		order.push(id);
 		points.push({ label: ms.chapters[i].title, href });
 		chapterPaths.push(root + '/' + href);
+	}
+	for (let i = 0; i < figures.length; i += 1) {
+		manifest.push({ id: 'img-' + pad3(i + 1), href: 'images/' + figures[i].name, media: figures[i].mediaType, props: '' });
 	}
 
 	// 3 · the package document.
@@ -1010,18 +1323,21 @@ export function bind(ms: Manuscript, options?: BindOptions, endpaper?: Endpaper)
 
 	// 8 · the chapters, in the manuscript's own order.
 	for (let i = 0; i < ms.chapters.length; i += 1) {
-		const c = ms.chapters[i];
-		const body = impose(c.text, mode);
 		files.push({
 			path: root + '/chapter-' + pad3(i + 1) + '.xhtml',
-			text: page(f.language, c.title, '<section epub:type="chapter">\n' + body.xhtml + '\n</section>', 'chapter'),
+			text: page(f.language, ms.chapters[i].title, '<section epub:type="chapter">\n' + bodies[i] + '\n</section>', 'chapter'),
 			bytes: null,
 			stored: false,
 			mediaType: 'application/xhtml+xml',
 		});
 	}
 
-	// 9 · the stylesheet.
+	// 9 · the figures, packed once each.
+	for (const g of figures) {
+		files.push({ path: root + '/images/' + g.name, text: null, bytes: g.bytes, stored: false, mediaType: g.mediaType });
+	}
+
+	// 10 · the stylesheet.
 	files.push({ path: root + '/styles.css', text: styles(mode), bytes: null, stored: false, mediaType: 'text/css' });
 
 	tell('bound: ' + String(files.length) + ' files, ' + String(ms.chapters.length) + ' chapters, spine of ' + String(order.length) + ' — and not one character of the text was altered.');
@@ -1139,6 +1455,15 @@ export function typeset(ms: Manuscript, options?: TypesetOptions, endpaper?: End
 		'code { font-family: "Courier New", monospace; font-size: 0.95em; }',
 		'hr { border: 0; border-top: 1px solid currentColor; width: 25%; margin: 1.6em auto; }',
 		'a { color: inherit; text-decoration: none; }',
+		'figure { margin: 1.4em 0; padding: 0; text-align: center; break-inside: avoid; page-break-inside: avoid; }',
+		'figure img { max-width: 100%; max-height: 60vh; width: auto; height: auto; }',
+		'table { width: 100%; border-collapse: collapse; margin: 0 0 1em; break-inside: avoid; page-break-inside: avoid; }',
+		'th, td { padding: 0.3em 0.5em; vertical-align: top; text-align: left; white-space: normal; border-bottom: 0.5pt solid currentColor; }',
+		'thead th { border-bottom: 0.5pt solid currentColor; }',
+		'tbody tr:last-child td { border-bottom: 0; }',
+		'.align-left { text-align: left; }',
+		'.align-center { text-align: center; }',
+		'.align-right { text-align: right; }',
 		'.title-page { text-align: center; break-after: page; page-break-after: always; }',
 		'.title-page .book-title { font-size: 2.2em; margin-top: 30%; }',
 		'.title-page .book-author { font-size: 1.2em; margin-top: 1.5em; }',
@@ -1178,10 +1503,26 @@ export function typeset(ms: Manuscript, options?: TypesetOptions, endpaper?: End
 		tell('no cover art — noted, and NOTHING is blocked by it (KP ⚛: "' + COVER_RULE + '")');
 	}
 
+	const inlined: { src: string; uri: string }[] = [];
+	const absent: string[] = [];
+	const figureRoad = (src: string): string | null => {
+		for (const g of inlined) if (g.src === src) return g.uri;
+		for (const a of absent) if (a === src) return null;
+		const got = figureBytes(ms, src, tell);
+		if (got === null) {
+			absent.push(src);
+			return null;
+		}
+		const uri = 'data:' + got.mediaType + ';base64,' + base64(got.bytes);
+		inlined.push({ src, uri });
+		tell('figure inlined as a data URI: ' + src + ' (' + String(got.bytes.length) + ' bytes, ' + got.mediaType + ') — the printed file stays ONE self-contained HTML and fetches nothing.');
+		return uri;
+	};
+
 	for (const c of ms.chapters) {
 		b.push('<section class="chapter">');
 		b.push('<span class="head-string chapter-title-string">' + esc(c.title) + '</span>');
-		b.push(impose(c.text, mode).xhtml);
+		b.push(impose(c.text, mode, figureRoad).xhtml);
 		b.push('</section>');
 	}
 	b.push('</body>');

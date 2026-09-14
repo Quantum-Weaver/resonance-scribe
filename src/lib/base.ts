@@ -12,7 +12,28 @@
 // convention. Rows come back in the base's snake_case, unrenamed.
 
 import { invoke } from '@tauri-apps/api/core';
-import type { Appearance, Arc, ArcShape, Character, Era, Part, Work, WorkKind } from '$lib/types/types';
+import type {
+	Appearance,
+	Arc,
+	ArcShape,
+	Author,
+	Character,
+	Era,
+	Part,
+	StudioDump,
+	Work,
+	WorkKind
+} from '$lib/types/types';
+
+// ── author ───────────────────────────────────────────────────────────────
+
+/** The one author row, or null before it has been written. */
+export const getAuthor = (): Promise<Author | null> => invoke('get_author');
+
+/** Writes the one row, whether or not it already stands. `contact` is a
+ *  multi-line block kept verbatim and may be empty. */
+export const setAuthor = (name: string, byline: string, contact: string): Promise<Author> =>
+	invoke('set_author', { name, byline, contact });
 
 // ── work ─────────────────────────────────────────────────────────────────
 
@@ -35,6 +56,11 @@ export const updateWork = (
 	note?: string | null
 ): Promise<Work> =>
 	invoke('update_work', { id, kind, title, byline: byline ?? null, note: note ?? null });
+
+/** The rights page as the window drew it, stored whole as JSON text; null
+ *  clears it. `updateWork` never touches this column. */
+export const setWorkRights = (id: string, rights: string | null): Promise<Work> =>
+	invoke('set_work_rights', { id, rights });
 
 /** Deleting a work cascades: parts, scenes, eras, characters, arcs and every
  *  appearance hanging on any of them go with it. The base's own foreign keys
@@ -149,6 +175,17 @@ export const createAppearance = (
 
 export const deleteAppearance = (id: string): Promise<void> =>
 	invoke('delete_appearance', { id });
+
+// ── the whole studio ─────────────────────────────────────────────────────
+
+/** Every row of every table in one call, each list in the order its own `list`
+ *  gives. */
+export const readAll = (): Promise<StudioDump> => invoke('read_all');
+
+/** Empties every table, author included, in one transaction and returns how
+ *  many rows went. The schema and the file stand; nothing outside the base is
+ *  touched. */
+export const purgeAll = (): Promise<number> => invoke('purge_all');
 
 // ── a small kindness for the rooms ───────────────────────────────────────
 

@@ -34,7 +34,6 @@ fn base_path(app: &tauri::AppHandle) -> Result<std::path::PathBuf, String> {
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_fs::init())
-        .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_dialog::init())
         .setup(|app| {
             // Opening the base runs the migration (base.rs, gated on SQLite's
@@ -47,11 +46,15 @@ pub fn run() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
+            // ── author — one row, the studio's own ───────────────────────
+            commands::get_author,
+            commands::set_author,
             // ── work ─────────────────────────────────────────────────────
             commands::list_works,
             commands::get_work,
             commands::create_work,
             commands::update_work,
+            commands::set_work_rights,
             commands::delete_work,
             // ── part — a chapter, or a scene under a chapter ─────────────
             commands::list_parts,
@@ -79,6 +82,9 @@ pub fn run() {
             commands::list_appearances,
             commands::create_appearance,
             commands::delete_appearance,
+            // ── the whole studio — everything out, everything gone ───────
+            commands::read_all,
+            commands::purge_all,
         ])
         .run(tauri::generate_context!())
         .expect("error while running Resonance Scribe");

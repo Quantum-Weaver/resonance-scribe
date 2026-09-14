@@ -315,6 +315,7 @@ function build(
 		title: ATOGAIL,
 		byline: null,
 		note,
+		rights: null,
 		created_at: stamp.at,
 		updated_at: stamp.at
 	};

@@ -1,0 +1,74 @@
+{
+  "project": "resonance-scribe",
+  "analyzed_at": "2026-09-14T16:21:48.017814+00:00",
+  "standards_compliance": {
+    "readme": true,
+    "license": true,
+    "philosophy": true,
+    "claude_md": false,
+    "gitignore": true
+  },
+  "vulnerabilities": [],
+  "gaps": [
+    "Possibly broken import in .svelte-kit/generated/client/nodes/1.js: '../../../../node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte' does not resolve to a known file",
+    "Possibly broken import in .svelte-kit/generated/client-optimized/nodes/1.js: '../../../../node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte' does not resolve to a known file",
+    "Possibly broken import in .svelte-kit/generated/server/internal.js: '../../../node_modules/@sveltejs/kit/src/runtime/shared-server.js' does not resolve to a known file",
+    "Possibly broken import in src/lib/envelope/hosts/tauri.ts: '../host-surface.js' does not resolve to a known file",
+    "Possibly broken import in src/lib/envelope/index.ts: './host-surface.js' does not resolve to a known file",
+    "Possibly broken import in src/lib/envelope/index.ts: './host-surface.js' does not resolve to a known file",
+    "Possibly broken import in src/lib/panti/index.ts: './table.utils.js' does not resolve to a known file",
+    "10 file(s) over 100KB were flagged by the reader and not fully read by the analyzer: .svelte-kit/output/server/index.js, release/Resonance Scribe_0.1.0_x64_en-US.msi, release/resonance-scribe-v0.1.0.apk.idsig, src-tauri/Cargo.lock, src-tauri/gen/schemas/acl-manifests.json, src-tauri/gen/schemas/android-schema.json, src-tauri/gen/schemas/desktop-schema.json, src-tauri/gen/schemas/mobile-schema.json, src-tauri/gen/schemas/windows-schema.json, src-tauri/icons/icon.icns",
+    "No CI/CD configuration found"
+  ],
+  "test_readiness": "0 test file(s) found. Detected framework(s): jest.",
+  "recommendations": [
+    {
+      "priority": 1,
+      "action": "Create CLAUDE.md"
+    },
+    {
+      "priority": 2,
+      "action": "Possibly broken import in .svelte-kit/generated/client/nodes/1.js: '../../../../node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte' does not resolve to a known file"
+    },
+    {
+      "priority": 3,
+      "action": "Possibly broken import in .svelte-kit/generated/client-optimized/nodes/1.js: '../../../../node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte' does not resolve to a known file"
+    },
+    {
+      "priority": 4,
+      "action": "Possibly broken import in .svelte-kit/generated/server/internal.js: '../../../node_modules/@sveltejs/kit/src/runtime/shared-server.js' does not resolve to a known file"
+    },
+    {
+      "priority": 5,
+      "action": "Possibly broken import in src/lib/envelope/hosts/tauri.ts: '../host-surface.js' does not resolve to a known file"
+    },
+    {
+      "priority": 6,
+      "action": "Possibly broken import in src/lib/envelope/index.ts: './host-surface.js' does not resolve to a known file"
+    },
+    {
+      "priority": 7,
+      "action": "Possibly broken import in src/lib/envelope/index.ts: './host-surface.js' does not resolve to a known file"
+    },
+    {
+      "priority": 8,
+      "action": "Possibly broken import in src/lib/panti/index.ts: './table.utils.js' does not resolve to a known file"
+    },
+    {
+      "priority": 9,
+      "action": "10 file(s) over 100KB were flagged by the reader and not fully read by the analyzer: .svelte-kit/output/server/index.js, release/Resonance Scribe_0.1.0_x64_en-US.msi, release/resonance-scribe-v0.1.0.apk.idsig, src-tauri/Cargo.lock, src-tauri/gen/schemas/acl-manifests.json, src-tauri/gen/schemas/android-schema.json, src-tauri/gen/schemas/desktop-schema.json, src-tauri/gen/schemas/mobile-schema.json, src-tauri/gen/schemas/windows-schema.json, src-tauri/icons/icon.icns"
+    },
+    {
+      "priority": 10,
+      "action": "No CI/CD configuration found"
+    },
+    {
+      "priority": 11,
+      "action": "Establish a test suite"
+    },
+    {
+      "priority": 12,
+      "action": "Add CI/CD configuration"
+    }
+  ]
+}

@@ -1,0 +1,3286 @@
+{
+  "project": "resonance-scribe",
+  "scanned_at": "2026-09-14T16:21:47.721714+00:00",
+  "total_files": 462,
+  "files": [
+    {
+      "path": ".cargo/config.toml",
+      "type": "config",
+      "language": "toml",
+      "lines": 11,
+      "description": "Android 16 KB memory-page-size support (Play requirement for Android 15+"
+    },
+    {
+      "path": ".claude/settings.json",
+      "type": "config",
+      "language": "json",
+      "lines": 5,
+      "description": "Settings"
+    },
+    {
+      "path": ".gitignore",
+      "type": "config",
+      "language": "unknown",
+      "lines": 80,
+      "description": ".gitignore"
+    },
+    {
+      "path": ".journals/proofs/2026-09-02-the-base-round-trip/round-trip.mjs",
+      "type": "source",
+      "language": "javascript",
+      "lines": 152,
+      "description": "PROOF \u2014 the six nouns round-trip through the base, and a deleted work"
+    },
+    {
+      "path": ".journals/proofs/2026-09-02-the-bind/bind.mjs",
+      "type": "source",
+      "language": "javascript",
+      "lines": 893,
+      "description": "PROOF \u2014 THE BIND ROOM. Movement S3 of THE AUTHOR'S STUDIO, 2026-09-02."
+    },
+    {
+      "path": ".journals/proofs/2026-09-02-the-rooms/rooms.mjs",
+      "type": "source",
+      "language": "javascript",
+      "lines": 371,
+      "description": "PROOF \u2014 THE ROOMS. Movement S2 of THE AUTHOR'S STUDIO, 2026-09-02."
+    },
+    {
+      "path": ".journals/proofs/2026-09-13-the-atogail-importer/importer.mjs",
+      "type": "source",
+      "language": "javascript",
+      "lines": 270,
+      "description": "PROOF \u2014 THE BIBLE-TO-SCRIBE IMPORTER. 2026-09-13."
+    },
+    {
+      "path": ".journals/proofs/2026-09-13-the-screenplay/screenplay.mjs",
+      "type": "source",
+      "language": "javascript",
+      "lines": 247,
+      "description": "PROOF \u2014 THE SCREENPLAY FORMAT. 2026-09-13."
+    },
+    {
+      "path": ".journals/realm/2026-09-13-sonnet-importer.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 58,
+      "description": "2026-09-13 \u2014 the two proofs repointed, the bible importer, the screenplay"
+    },
+    {
+      "path": ".svelte-kit/ambient.d.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 428,
+      "description": "this file is generated \u2014 do not edit it"
+    },
+    {
+      "path": ".svelte-kit/env.d.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 1,
+      "description": "See https://svelte.dev/docs/kit/environment-variables for more information"
+    },
+    {
+      "path": ".svelte-kit/generated/client/app.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 47,
+      "description": "in dev, this makes Vite inject its client as this module's first dependency,"
+    },
+    {
+      "path": ".svelte-kit/generated/client/matchers.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "Matchers"
+    },
+    {
+      "path": ".svelte-kit/generated/client/nodes/0.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 3,
+      "description": "0"
+    },
+    {
+      "path": ".svelte-kit/generated/client/nodes/1.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "1"
+    },
+    {
+      "path": ".svelte-kit/generated/client/nodes/2.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "2"
+    },
+    {
+      "path": ".svelte-kit/generated/client/nodes/3.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "3"
+    },
+    {
+      "path": ".svelte-kit/generated/client/nodes/4.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "4"
+    },
+    {
+      "path": ".svelte-kit/generated/client/nodes/5.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "5"
+    },
+    {
+      "path": ".svelte-kit/generated/client/nodes/6.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "6"
+    },
+    {
+      "path": ".svelte-kit/generated/client-optimized/app.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 47,
+      "description": "in dev, this makes Vite inject its client as this module's first dependency,"
+    },
+    {
+      "path": ".svelte-kit/generated/client-optimized/matchers.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "Matchers"
+    },
+    {
+      "path": ".svelte-kit/generated/client-optimized/nodes/0.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 3,
+      "description": "0"
+    },
+    {
+      "path": ".svelte-kit/generated/client-optimized/nodes/1.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "1"
+    },
+    {
+      "path": ".svelte-kit/generated/client-optimized/nodes/2.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "2"
+    },
+    {
+      "path": ".svelte-kit/generated/client-optimized/nodes/3.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "3"
+    },
+    {
+      "path": ".svelte-kit/generated/client-optimized/nodes/4.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "4"
+    },
+    {
+      "path": ".svelte-kit/generated/client-optimized/nodes/5.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "5"
+    },
+    {
+      "path": ".svelte-kit/generated/client-optimized/nodes/6.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "6"
+    },
+    {
+      "path": ".svelte-kit/generated/root.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 3,
+      "description": "Root"
+    },
+    {
+      "path": ".svelte-kit/generated/root.svelte",
+      "type": "source",
+      "language": "svelte",
+      "lines": 68,
+      "description": "Root"
+    },
+    {
+      "path": ".svelte-kit/generated/server/internal.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 55,
+      "description": "Internal"
+    },
+    {
+      "path": ".svelte-kit/generated/shared/error-template.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "Error template"
+    },
+    {
+      "path": ".svelte-kit/non-ambient.d.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 47,
+      "description": "this file is generated \u2014 do not edit it"
+    },
+    {
+      "path": ".svelte-kit/output/client/.vite/manifest.json",
+      "type": "config",
+      "language": "json",
+      "lines": 260,
+      "description": "Manifest"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/assets/0.BwXgqBYq.css",
+      "type": "source",
+      "language": "css",
+      "lines": 1,
+      "description": "! tailwindcss v4.3.3 | MIT License | https://tailwindcss.com */@layer properties{@supports (((-webkit-hyphens:none)) and (not (margin-trim:inline))) or ((-moz-orient:inline) and (not (color:rgb(from r"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/assets/2.DWN0S5DX.css",
+      "type": "source",
+      "language": "css",
+      "lines": 1,
+      "description": "2.DWN0S5DX"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/assets/3.CQZjc1RC.css",
+      "type": "source",
+      "language": "css",
+      "lines": 1,
+      "description": "3.CQZjc1RC"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/assets/4.KRXb4s8_.css",
+      "type": "source",
+      "language": "css",
+      "lines": 1,
+      "description": "4.KRXb4s8"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/assets/5.DE38c40Y.css",
+      "type": "source",
+      "language": "css",
+      "lines": 1,
+      "description": "5.DE38c40Y"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/assets/6.C0iyyzMD.css",
+      "type": "source",
+      "language": "css",
+      "lines": 1,
+      "description": "6.C0iyyzMD"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/chunks/BhovHxKZ.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "BhovHxKZ"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/chunks/Bqoo0yEQ.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "Bqoo0yEQ"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/chunks/BULD7jKq.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 12,
+      "description": "BULD7jKq"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/chunks/Bw3L-zTh.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "Bw3L zTh"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/chunks/C5ijRCQv.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "C5ijRCQv"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/chunks/COm4cVd_.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "COm4cVd"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/chunks/CqMuo4T5.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "CqMuo4T5"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/chunks/CS-MKo32.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "CS MKo32"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/chunks/CSTdRvJm.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 2,
+      "description": "CSTdRvJm"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/chunks/Dm2_PLi5.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "Dm2 PLi5"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/chunks/DrMvuorI.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "DrMvuorI"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/chunks/fU0a6ASg.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 2,
+      "description": "FU0a6ASg"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/chunks/mFkkQBm6.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "MFkkQBm6"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/chunks/Pm60tbsO.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "Pm60tbsO"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/chunks/wbPk3Yxo.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 81,
+      "description": "WbPk3Yxo"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/entry/app.cckAJ0GQ.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 2,
+      "description": "App.cckAJ0GQ"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/entry/start.kKkOwGbj.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "Start.kKkOwGbj"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/nodes/0._z6PBoSP.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 9,
+      "description": "0. z6PBoSP"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/nodes/1.BRPB8JB5.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1,
+      "description": "1.BRPB8JB5"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/nodes/2.lcf0V-l5.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 3,
+      "description": "2.lcf0V l5"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/nodes/3.Clxu96yz.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 120,
+      "description": "3.Clxu96yz"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/nodes/4.CI09urME.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 15,
+      "description": "4.CI09urME"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/nodes/5.xkuMw3nx.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 9,
+      "description": "5.xkuMw3nx"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/immutable/nodes/6.DbST8Vwt.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 38,
+      "description": "6.DbST8Vwt"
+    },
+    {
+      "path": ".svelte-kit/output/client/_app/version.json",
+      "type": "config",
+      "language": "json",
+      "lines": 1,
+      "description": "Version"
+    },
+    {
+      "path": ".svelte-kit/output/client/favicon.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 684.51,
+      "description": "Favicon"
+    },
+    {
+      "path": ".svelte-kit/output/server/.vite/manifest.json",
+      "type": "config",
+      "language": "json",
+      "lines": 240,
+      "description": "Manifest"
+    },
+    {
+      "path": ".svelte-kit/output/server/_app/immutable/assets/_layout.D5R7_0C8.css",
+      "type": "source",
+      "language": "css",
+      "lines": 1,
+      "description": "! tailwindcss v4.3.3 | MIT License | https://tailwindcss.com */@layer properties{@supports (((-webkit-hyphens:none)) and (not (margin-trim:inline))) or ((-moz-orient:inline) and (not (color:rgb(from r"
+    },
+    {
+      "path": ".svelte-kit/output/server/_app/immutable/assets/_page.CQZjc1RC.css",
+      "type": "source",
+      "language": "css",
+      "lines": 1,
+      "description": "Page.CQZjc1RC"
+    },
+    {
+      "path": ".svelte-kit/output/server/_app/immutable/assets/_page.CrH8Yr6k.css",
+      "type": "source",
+      "language": "css",
+      "lines": 1,
+      "description": "Page.CrH8Yr6k"
+    },
+    {
+      "path": ".svelte-kit/output/server/_app/immutable/assets/_page.d1wrH0ze.css",
+      "type": "source",
+      "language": "css",
+      "lines": 1,
+      "description": "Page.d1wrH0ze"
+    },
+    {
+      "path": ".svelte-kit/output/server/_app/immutable/assets/_page.DE38c40Y.css",
+      "type": "source",
+      "language": "css",
+      "lines": 1,
+      "description": "Page.DE38c40Y"
+    },
+    {
+      "path": ".svelte-kit/output/server/_app/immutable/assets/_page.DWN0S5DX.css",
+      "type": "source",
+      "language": "css",
+      "lines": 1,
+      "description": "Page.DWN0S5DX"
+    },
+    {
+      "path": ".svelte-kit/output/server/chunks/exports.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 174,
+      "description": "Exports"
+    },
+    {
+      "path": ".svelte-kit/output/server/chunks/index.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1288,
+      "description": "Index"
+    },
+    {
+      "path": ".svelte-kit/output/server/chunks/index2.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 43,
+      "description": "eslint-disable-next-line @typescript-eslint/require-await"
+    },
+    {
+      "path": ".svelte-kit/output/server/chunks/index3.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 59,
+      "description": "Index3"
+    },
+    {
+      "path": ".svelte-kit/output/server/chunks/internal.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 135,
+      "description": "Internal"
+    },
+    {
+      "path": ".svelte-kit/output/server/chunks/root.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 2996,
+      "description": "Root"
+    },
+    {
+      "path": ".svelte-kit/output/server/chunks/server.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 34,
+      "description": "Server"
+    },
+    {
+      "path": ".svelte-kit/output/server/chunks/solids.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 531,
+      "description": "============================================================================"
+    },
+    {
+      "path": ".svelte-kit/output/server/chunks/state.svelte.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 19,
+      "description": "State.svelte"
+    },
+    {
+      "path": ".svelte-kit/output/server/chunks/studio.svelte.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 360,
+      "description": "Studio.svelte"
+    },
+    {
+      "path": ".svelte-kit/output/server/chunks/table.utils.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 42,
+      "description": "Table.utils"
+    },
+    {
+      "path": ".svelte-kit/output/server/chunks/types.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 12,
+      "description": "Types"
+    },
+    {
+      "path": ".svelte-kit/output/server/chunks/utils.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1014,
+      "description": "Utils"
+    },
+    {
+      "path": ".svelte-kit/output/server/chunks/utils2.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 41,
+      "description": "Utils2"
+    },
+    {
+      "path": ".svelte-kit/output/server/chunks/work.svelte.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 11,
+      "description": "Work.svelte"
+    },
+    {
+      "path": ".svelte-kit/output/server/entries/fallbacks/error.svelte.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 11,
+      "description": "Error.svelte"
+    },
+    {
+      "path": ".svelte-kit/output/server/entries/pages/_layout.svelte.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 136,
+      "description": "Layout.svelte"
+    },
+    {
+      "path": ".svelte-kit/output/server/entries/pages/_layout.ts.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 4,
+      "description": "Layout.ts"
+    },
+    {
+      "path": ".svelte-kit/output/server/entries/pages/_page.svelte.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 81,
+      "description": "Page.svelte"
+    },
+    {
+      "path": ".svelte-kit/output/server/entries/pages/bind/_page.svelte.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 214,
+      "description": "Page.svelte"
+    },
+    {
+      "path": ".svelte-kit/output/server/entries/pages/board/_page.svelte.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 347,
+      "description": "rising"
+    },
+    {
+      "path": ".svelte-kit/output/server/entries/pages/cast/_page.svelte.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 161,
+      "description": "Page.svelte"
+    },
+    {
+      "path": ".svelte-kit/output/server/entries/pages/desk/_page.svelte.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 283,
+      "description": "Page.svelte"
+    },
+    {
+      "path": ".svelte-kit/output/server/env.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 13,
+      "description": "Env"
+    },
+    {
+      "path": ".svelte-kit/output/server/index.js",
+      "type": "source",
+      "language": "javascript",
+      "large": true,
+      "size_kb": 127.86,
+      "description": "Index"
+    },
+    {
+      "path": ".svelte-kit/output/server/internal.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 14,
+      "description": "Internal"
+    },
+    {
+      "path": ".svelte-kit/output/server/manifest-full.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 71,
+      "description": "Manifest full"
+    },
+    {
+      "path": ".svelte-kit/output/server/manifest.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 71,
+      "description": "Manifest"
+    },
+    {
+      "path": ".svelte-kit/output/server/nodes/0.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 10,
+      "description": "0"
+    },
+    {
+      "path": ".svelte-kit/output/server/nodes/1.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 6,
+      "description": "1"
+    },
+    {
+      "path": ".svelte-kit/output/server/nodes/2.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 6,
+      "description": "2"
+    },
+    {
+      "path": ".svelte-kit/output/server/nodes/3.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 6,
+      "description": "3"
+    },
+    {
+      "path": ".svelte-kit/output/server/nodes/4.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 6,
+      "description": "4"
+    },
+    {
+      "path": ".svelte-kit/output/server/nodes/5.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 6,
+      "description": "5"
+    },
+    {
+      "path": ".svelte-kit/output/server/nodes/6.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 6,
+      "description": "6"
+    },
+    {
+      "path": ".svelte-kit/output/server/remote-entry.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 1166,
+      "description": "Remote entry"
+    },
+    {
+      "path": ".svelte-kit/tsconfig.json",
+      "type": "config",
+      "language": "json",
+      "lines": 56,
+      "description": "Tsconfig"
+    },
+    {
+      "path": ".svelte-kit/types/route_meta_data.json",
+      "type": "config",
+      "language": "json",
+      "lines": 18,
+      "description": "Route meta data"
+    },
+    {
+      "path": ".svelte-kit/types/src/routes/$types.d.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 25,
+      "description": "$types.d"
+    },
+    {
+      "path": ".svelte-kit/types/src/routes/bind/$types.d.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 17,
+      "description": "$types.d"
+    },
+    {
+      "path": ".svelte-kit/types/src/routes/board/$types.d.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 17,
+      "description": "$types.d"
+    },
+    {
+      "path": ".svelte-kit/types/src/routes/cast/$types.d.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 17,
+      "description": "$types.d"
+    },
+    {
+      "path": ".svelte-kit/types/src/routes/desk/$types.d.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 17,
+      "description": "$types.d"
+    },
+    {
+      "path": "docs/blueprints/scribe/.cargo/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 30,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/.claude/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 32,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/.journals/dbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 46,
+      "description": "Dbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/.journals/entity/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 16,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/.journals/entity/obp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 22,
+      "description": "Obp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/.journals/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 20,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/.journals/proofs/2026-09-02-the-base-round-trip/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 28,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/.journals/proofs/2026-09-02-the-bind/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 32,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/.journals/proofs/2026-09-02-the-rooms/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 28,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/.journals/proofs/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 20,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/.journals/proofs/obp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 43,
+      "description": "Obp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/.journals/realm/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 201,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/.journals/realm/obp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 22,
+      "description": "Obp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/analysis_sovereignty.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 22,
+      "description": "Analysis sovereignty.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/docs/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 62,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 347,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/journal.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 8,
+      "description": "blueprint-forge journal \u2014 resonance-scribe"
+    },
+    {
+      "path": "docs/blueprints/scribe/pbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 173,
+      "description": "Pbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/reconciliation.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 12,
+      "description": "Reconciliation.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/dbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 39,
+      "description": "Dbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 57,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/binder/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 96,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/clavis/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 84,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/components/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 31,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/cosmic/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 552,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/cumdach/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 75,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/envelope/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 112,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/envelope/hosts/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 41,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/epagoge/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 82,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 204,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/lok/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 84,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/merismos/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 90,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/obp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 169,
+      "description": "Obp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/pandulipi/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 89,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/panti/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 101,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/scrolls/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 62,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/signet/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 71,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/sky/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 80,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/sphragis/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 89,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/stores/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 90,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/styles/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 32,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/styles/generated/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 310,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/theme/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 42,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/lib/types/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 49,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/routes/bind/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 33,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/routes/board/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 33,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/routes/cast/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 32,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/routes/desk/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 32,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/routes/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 70,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src/routes/obp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 50,
+      "description": "Obp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/.cargo/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 30,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/.cargo/obp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 22,
+      "description": "Obp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/android-extras/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 36,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/android-extras/obp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 22,
+      "description": "Obp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/capabilities/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 36,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/capabilities/obp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 22,
+      "description": "Obp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/dbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 67,
+      "description": "Dbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 88,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 51,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 18,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/assets/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 39,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 26,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/java/com/audhd/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 18,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/java/com/audhd/resonance_scribe/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 29,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/java/com/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 18,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/java/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 18,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/jniLibs/arm64-v8a/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 16,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/jniLibs/armeabi-v7a/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 16,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/jniLibs/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 21,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/jniLibs/x86/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 16,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/jniLibs/x86_64/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 16,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/res/drawable/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 21,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/res/drawable-v24/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 21,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/res/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 29,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/res/layout/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 21,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/res/mipmap-anydpi-v26/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 21,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/res/mipmap-hdpi/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 57,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/res/mipmap-mdpi/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 57,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/res/mipmap-xhdpi/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 57,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/res/mipmap-xxhdpi/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 57,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/res/mipmap-xxxhdpi/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 57,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/res/values/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 33,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/res/values-night/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 21,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/app/src/main/res/xml/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 21,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/buildSrc/.kotlin/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 18,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/buildSrc/.kotlin/sessions/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 16,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/buildSrc/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 32,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/buildSrc/src/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 18,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/buildSrc/src/main/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 18,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/buildSrc/src/main/java/com/audhd/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 18,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/buildSrc/src/main/java/com/audhd/resonance_scribe/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 18,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/buildSrc/src/main/java/com/audhd/resonance_scribe/kotlin/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 25,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/buildSrc/src/main/java/com/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 18,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/buildSrc/src/main/java/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 18,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 61,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/gradle/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 18,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/android/gradle/wrapper/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 25,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 26,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/gen/obp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 295,
+      "description": "Obp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/icons/android/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 24,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/icons/android/mipmap-anydpi-v26/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 21,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/icons/android/mipmap-hdpi/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 57,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/icons/android/mipmap-mdpi/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 57,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/icons/android/mipmap-xhdpi/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 57,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/icons/android/mipmap-xxhdpi/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 57,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/icons/android/mipmap-xxxhdpi/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 57,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/icons/android/values/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 21,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/icons/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 237,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/icons/ios/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 252,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/icons/obp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 85,
+      "description": "Obp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/src/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 135,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/src-tauri/src/obp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 22,
+      "description": "Obp.ai"
+    },
+    {
+      "path": "docs/blueprints/scribe/static/fbp.ai.json",
+      "type": "config",
+      "language": "json",
+      "lines": 31,
+      "description": "Fbp.ai"
+    },
+    {
+      "path": "docs/STORY-BLOCK.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 42,
+      "description": "STORY BLOCK \u2014 resonance-scribe"
+    },
+    {
+      "path": "HANDS.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 40,
+      "description": "The Hands \u2014 who builds this, and how"
+    },
+    {
+      "path": "LICENSE",
+      "type": "unknown",
+      "language": "unknown",
+      "lines": 16,
+      "description": "LICENSE"
+    },
+    {
+      "path": "package-lock.json",
+      "type": "config",
+      "language": "json",
+      "lines": 2519,
+      "description": "Package lock"
+    },
+    {
+      "path": "package.json",
+      "type": "config",
+      "language": "json",
+      "lines": 35,
+      "description": "Package"
+    },
+    {
+      "path": "PHILOSOPHY.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 114,
+      "description": "THE RESONANCE LICENSE \u2014 PHILOSOPHY"
+    },
+    {
+      "path": "README.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 66,
+      "description": "\u270d\ufe0f Resonance Scribe"
+    },
+    {
+      "path": "release/Resonance Scribe_0.1.0_x64-setup.exe",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 3153.34,
+      "description": "Resonance Scribe 0.1.0 x64 setup"
+    },
+    {
+      "path": "release/Resonance Scribe_0.1.0_x64_en-US.msi",
+      "type": "unknown",
+      "language": "unknown",
+      "large": true,
+      "size_kb": 4192.0,
+      "description": "Resonance Scribe 0.1.0 x64 en US"
+    },
+    {
+      "path": "release/resonance-scribe-v0.1.0.aab",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 18495.91,
+      "description": "Resonance scribe v0.1.0"
+    },
+    {
+      "path": "release/resonance-scribe-v0.1.0.apk",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 36289.94,
+      "description": "Resonance scribe v0.1.0"
+    },
+    {
+      "path": "release/resonance-scribe-v0.1.0.apk.idsig",
+      "type": "unknown",
+      "language": "unknown",
+      "large": true,
+      "size_kb": 290.5,
+      "description": "Resonance scribe v0.1.0.apk"
+    },
+    {
+      "path": "src/app.css",
+      "type": "source",
+      "language": "css",
+      "lines": 111,
+      "description": "src/app.css */"
+    },
+    {
+      "path": "src/app.html",
+      "type": "source",
+      "language": "html",
+      "lines": 16,
+      "description": "App"
+    },
+    {
+      "path": "src/lib/atogail.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 416,
+      "description": "THE BIBLE, READ AS STRUCTURE \u2014 the At\u00f3g\u00e1il's three-doors book into this"
+    },
+    {
+      "path": "src/lib/base.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 160,
+      "description": "THE BASE, from the window's side \u2014 one function per Tauri command, and no"
+    },
+    {
+      "path": "src/lib/bind.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 940,
+      "description": "THE BIND'S ARITHMETIC \u2014 framework-free, and it imports two pure functions"
+    },
+    {
+      "path": "src/lib/binder/index.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 1191,
+      "description": "THE BINDER \u2014 manuscript to book."
+    },
+    {
+      "path": "src/lib/binder/MIRROR.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 58,
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    },
+    {
+      "path": "src/lib/board.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 227,
+      "description": "THE BOARD'S ARITHMETIC \u2014 framework-free, and it imports nothing but types."
+    },
+    {
+      "path": "src/lib/clavis/index.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 342,
+      "description": "the-clavis \u2014 THE KEY. A keypair per entity, a credential per artefact."
+    },
+    {
+      "path": "src/lib/clavis/MIRROR.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 24,
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    },
+    {
+      "path": "src/lib/components/Rail.svelte",
+      "type": "source",
+      "language": "svelte",
+      "lines": 195,
+      "description": "Rail"
+    },
+    {
+      "path": "src/lib/cosmic/attention.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 261,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/cosmic/colors.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 379,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/cosmic/consciousness.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 559,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/cosmic/dimensions.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 576,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/cosmic/effects.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 586,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/cosmic/index.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 390,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/cosmic/interactivity.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 217,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/cosmic/MIRROR.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 9,
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-ziggy"
+    },
+    {
+      "path": "src/lib/cosmic/motion.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 821,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/cosmic/positioning.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 844,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/cosmic/solids.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 480,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/cosmic/typography.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 679,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/cumdach/index.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 216,
+      "description": "the-cumdach \u2014 the navigation shrine: panels are DERIVED from the screen's own measure. Pure: no DOM, no clock, no disk."
+    },
+    {
+      "path": "src/lib/cumdach/MIRROR.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 19,
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    },
+    {
+      "path": "src/lib/envelope/host-surface.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 59,
+      "description": "THE HOST SURFACE \u2014 declared here, implemented nowhere in this water."
+    },
+    {
+      "path": "src/lib/envelope/hosts/tauri.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 119,
+      "description": "A SECOND REFERENCE HOST, on a different mechanism \u2014 the Tauri road: a real"
+    },
+    {
+      "path": "src/lib/envelope/index.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 567,
+      "description": "the-envelope \u2014 the sovereignty trio as one library, framework-free."
+    },
+    {
+      "path": "src/lib/envelope/MIRROR.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 65,
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    },
+    {
+      "path": "src/lib/epagoge/index.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 171,
+      "description": "the-epagoge \u2014 the ordered walk. A choice is recorded by its KEY, never its shown name; skip is always lawful. Pure: no disk, no clock, no DOM."
+    },
+    {
+      "path": "src/lib/epagoge/MIRROR.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 19,
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    },
+    {
+      "path": "src/lib/host.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 189,
+      "description": "THE ONE DOOR TO THE DISK."
+    },
+    {
+      "path": "src/lib/lok/index.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 384,
+      "description": "the-lok \u2014 THE LOCK the key fits in. `the-clavis` is the key."
+    },
+    {
+      "path": "src/lib/lok/MIRROR.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 21,
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    },
+    {
+      "path": "src/lib/merismos/index.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 578,
+      "description": "the-merismos \u2014 THE CONTRIBUTORS: who made it, and the equal division."
+    },
+    {
+      "path": "src/lib/merismos/MIRROR.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 33,
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    },
+    {
+      "path": "src/lib/pandulipi/index.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 769,
+      "description": "THE PANDULIPI \u2014 a manuscript, set for submission."
+    },
+    {
+      "path": "src/lib/pandulipi/MIRROR.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 60,
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    },
+    {
+      "path": "src/lib/panti/index.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 50,
+      "description": "the-panti \u2014 THE ROW. A table's own logic as data: how a column's sort"
+    },
+    {
+      "path": "src/lib/panti/MIRROR.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 51,
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    },
+    {
+      "path": "src/lib/panti/table.utils.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 311,
+      "description": "src/lib/utils/components/runes/table.utils.ts"
+    },
+    {
+      "path": "src/lib/screenplay.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 418,
+      "description": "THE SCREENPLAY \u2014 a part's text read as sluglines, action, dialogue and"
+    },
+    {
+      "path": "src/lib/scrolls/MIRROR.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 55,
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    },
+    {
+      "path": "src/lib/scrolls/the-scrolls.d.mts",
+      "type": "unknown",
+      "language": "unknown",
+      "lines": 37,
+      "description": "The scrolls.d"
+    },
+    {
+      "path": "src/lib/scrolls/the-scrolls.mjs",
+      "type": "source",
+      "language": "javascript",
+      "lines": 110,
+      "description": "The scrolls \u2014 the card\u2192popout class: title rolled, markdown body unrolled."
+    },
+    {
+      "path": "src/lib/signet/index.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 74,
+      "description": "The signet \u2014 provenance as a standalone tool: entity identity (name \u00b7 sigil \u00b7"
+    },
+    {
+      "path": "src/lib/signet/MIRROR.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 29,
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    },
+    {
+      "path": "src/lib/sky/index.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 211,
+      "description": "Sky facts, computed offline, no API ever: moon phase to ~hours, solstices/equinoxes to ~minutes, planet longitudes to a few degrees."
+    },
+    {
+      "path": "src/lib/sky/MIRROR.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 19,
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    },
+    {
+      "path": "src/lib/sphragis/index.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 577,
+      "description": "the-sphragis \u2014 the license grammar: the license is DATA, the text a rendering."
+    },
+    {
+      "path": "src/lib/sphragis/MIRROR.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 47,
+      "description": "DISTRIBUTED MIRROR - the source of truth lives in resonance-awen"
+    },
+    {
+      "path": "src/lib/stores/studio.svelte.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 377,
+      "description": "THE STUDIO \u2014 the chosen work's five lists, and every act that changes them."
+    },
+    {
+      "path": "src/lib/stores/theme.svelte.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 57,
+      "description": "Merged over the default so a config saved before a field existed keeps working."
+    },
+    {
+      "path": "src/lib/stores/ui.svelte.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 11,
+      "description": "Ui.svelte"
+    },
+    {
+      "path": "src/lib/stores/work.svelte.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 84,
+      "description": "THE CHOSEN WORK \u2014 one work held across the rooms."
+    },
+    {
+      "path": "src/lib/styles/custom_overrides.css",
+      "type": "source",
+      "language": "css",
+      "lines": 52,
+      "description": "styles/custom-overrides.css"
+    },
+    {
+      "path": "src/lib/styles/generated/animations.css",
+      "type": "source",
+      "language": "css",
+      "lines": 471,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/styles/generated/attention-modes.css",
+      "type": "source",
+      "language": "css",
+      "lines": 118,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/styles/generated/attention-selector.css",
+      "type": "source",
+      "language": "css",
+      "lines": 145,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/styles/generated/ceremonies-refuge.css",
+      "type": "source",
+      "language": "css",
+      "lines": 185,
+      "description": "========================================================================== */"
+    },
+    {
+      "path": "src/lib/styles/generated/ceremonies.css",
+      "type": "source",
+      "language": "css",
+      "lines": 258,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/styles/generated/consciousness-depth.css",
+      "type": "source",
+      "language": "css",
+      "lines": 228,
+      "description": "========================================================================== */"
+    },
+    {
+      "path": "src/lib/styles/generated/deity-voices.css",
+      "type": "source",
+      "language": "css",
+      "lines": 233,
+      "description": "========================================================================== */"
+    },
+    {
+      "path": "src/lib/styles/generated/domains.css",
+      "type": "source",
+      "language": "css",
+      "lines": 1518,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/styles/generated/ensemble.css",
+      "type": "source",
+      "language": "css",
+      "lines": 153,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/styles/generated/eternal-witness.css",
+      "type": "source",
+      "language": "css",
+      "lines": 173,
+      "description": "========================================================================== */"
+    },
+    {
+      "path": "src/lib/styles/generated/gates.css",
+      "type": "source",
+      "language": "css",
+      "lines": 116,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/styles/generated/glow-field.css",
+      "type": "source",
+      "language": "css",
+      "lines": 212,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/styles/generated/parallax.css",
+      "type": "source",
+      "language": "css",
+      "lines": 514,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/styles/generated/pause-state.css",
+      "type": "source",
+      "language": "css",
+      "lines": 63,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/styles/generated/scene.css",
+      "type": "source",
+      "language": "css",
+      "lines": 119,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/styles/generated/supportive-affordances.css",
+      "type": "source",
+      "language": "css",
+      "lines": 66,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/styles/generated/text-effects.css",
+      "type": "source",
+      "language": "css",
+      "lines": 470,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/styles/generated/transcendence.css",
+      "type": "source",
+      "language": "css",
+      "lines": 128,
+      "description": "========================================================================== */"
+    },
+    {
+      "path": "src/lib/styles/generated/typography.css",
+      "type": "source",
+      "language": "css",
+      "lines": 1589,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/styles/generated/variables.css",
+      "type": "source",
+      "language": "css",
+      "lines": 481,
+      "description": "========================================================================== */"
+    },
+    {
+      "path": "src/lib/styles/generated/zoom.css",
+      "type": "source",
+      "language": "css",
+      "lines": 803,
+      "description": "============================================================================"
+    },
+    {
+      "path": "src/lib/theme/theme.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 168,
+      "description": "Theme"
+    },
+    {
+      "path": "src/lib/types/types.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 111,
+      "description": "Theme customization \u2014 carried whole from the mother (resonance-sistrum),"
+    },
+    {
+      "path": "src/routes/+layout.svelte",
+      "type": "source",
+      "language": "svelte",
+      "lines": 83,
+      "description": "+layout"
+    },
+    {
+      "path": "src/routes/+layout.ts",
+      "type": "source",
+      "language": "typescript",
+      "lines": 2,
+      "description": "Tauri has no Node server: adapter-static with an index.html fallback puts the app in SPA mode."
+    },
+    {
+      "path": "src/routes/+page.svelte",
+      "type": "source",
+      "language": "svelte",
+      "lines": 333,
+      "description": "+page"
+    },
+    {
+      "path": "src/routes/bind/+page.svelte",
+      "type": "source",
+      "language": "svelte",
+      "lines": 1416,
+      "description": "+page"
+    },
+    {
+      "path": "src/routes/board/+page.svelte",
+      "type": "source",
+      "language": "svelte",
+      "lines": 1261,
+      "description": "+page"
+    },
+    {
+      "path": "src/routes/cast/+page.svelte",
+      "type": "source",
+      "language": "svelte",
+      "lines": 534,
+      "description": "+page"
+    },
+    {
+      "path": "src/routes/desk/+page.svelte",
+      "type": "source",
+      "language": "svelte",
+      "lines": 862,
+      "description": "+page"
+    },
+    {
+      "path": "src-tauri/.cargo/config.toml",
+      "type": "config",
+      "language": "toml",
+      "lines": 11,
+      "description": "Android 16 KB memory-page-size support (Play requirement for Android 15+"
+    },
+    {
+      "path": "src-tauri/.gitignore",
+      "type": "config",
+      "language": "unknown",
+      "lines": 7,
+      "description": ".gitignore"
+    },
+    {
+      "path": "src-tauri/android-extras/extras.json",
+      "type": "config",
+      "language": "json",
+      "lines": 14,
+      "description": "Extras"
+    },
+    {
+      "path": "src-tauri/build.rs",
+      "type": "source",
+      "language": "rust",
+      "lines": 13,
+      "description": "No app-local Android plugin in this body: the mother's media-permission"
+    },
+    {
+      "path": "src-tauri/capabilities/default.json",
+      "type": "config",
+      "language": "json",
+      "lines": 21,
+      "description": "Default"
+    },
+    {
+      "path": "src-tauri/Cargo.lock",
+      "type": "config",
+      "language": "unknown",
+      "large": true,
+      "size_kb": 122.2,
+      "description": "Cargo"
+    },
+    {
+      "path": "src-tauri/Cargo.toml",
+      "type": "config",
+      "language": "toml",
+      "lines": 45,
+      "description": "THE BASE. The mother (resonance-sistrum) reaches SQLite from the window"
+    },
+    {
+      "path": "src-tauri/gen/android/.editorconfig",
+      "type": "config",
+      "language": "unknown",
+      "lines": 12,
+      "description": ".editorconfig"
+    },
+    {
+      "path": "src-tauri/gen/android/.gitignore",
+      "type": "config",
+      "language": "unknown",
+      "lines": 20,
+      "description": ".gitignore"
+    },
+    {
+      "path": "src-tauri/gen/android/app/.gitignore",
+      "type": "config",
+      "language": "unknown",
+      "lines": 6,
+      "description": ".gitignore"
+    },
+    {
+      "path": "src-tauri/gen/android/app/build.gradle.kts",
+      "type": "unknown",
+      "language": "unknown",
+      "lines": 71,
+      "description": "Build.gradle"
+    },
+    {
+      "path": "src-tauri/gen/android/app/proguard-rules.pro",
+      "type": "unknown",
+      "language": "unknown",
+      "lines": 21,
+      "description": "Proguard rules"
+    },
+    {
+      "path": "src-tauri/gen/android/app/proguard-tauri.pro",
+      "type": "unknown",
+      "language": "unknown",
+      "lines": 5,
+      "description": "Proguard tauri"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/AndroidManifest.xml",
+      "type": "source",
+      "language": "xml",
+      "lines": 37,
+      "description": "AndroidManifest"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/assets/tauri.conf.json",
+      "type": "config",
+      "language": "json",
+      "lines": 1,
+      "description": "Tauri.conf"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/java/com/audhd/resonance_scribe/generated/Ipc.kt",
+      "type": "source",
+      "language": "kotlin",
+      "lines": 25,
+      "description": "Copyright 2020-2023 Tauri Programme within The Commons Conservancy"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/java/com/audhd/resonance_scribe/generated/Logger.kt",
+      "type": "source",
+      "language": "kotlin",
+      "lines": 89,
+      "description": "Copyright 2020-2023 Tauri Programme within The Commons Conservancy"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/java/com/audhd/resonance_scribe/generated/PermissionHelper.kt",
+      "type": "source",
+      "language": "kotlin",
+      "lines": 117,
+      "description": "Copyright 2020-2023 Tauri Programme within The Commons Conservancy"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/java/com/audhd/resonance_scribe/generated/proguard-wry.pro",
+      "type": "unknown",
+      "language": "unknown",
+      "lines": 37,
+      "description": "Proguard wry"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/java/com/audhd/resonance_scribe/generated/Rust.kt",
+      "type": "source",
+      "language": "kotlin",
+      "lines": 48,
+      "description": "Copyright 2020-2023 Tauri Programme within The Commons Conservancy"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/java/com/audhd/resonance_scribe/generated/RustWebChromeClient.kt",
+      "type": "source",
+      "language": "kotlin",
+      "lines": 493,
+      "description": "Copyright 2020-2023 Tauri Programme within The Commons Conservancy"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/java/com/audhd/resonance_scribe/generated/RustWebView.kt",
+      "type": "source",
+      "language": "kotlin",
+      "lines": 98,
+      "description": "Copyright 2020-2023 Tauri Programme within The Commons Conservancy"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/java/com/audhd/resonance_scribe/generated/RustWebViewClient.kt",
+      "type": "source",
+      "language": "kotlin",
+      "lines": 100,
+      "description": "Copyright 2020-2023 Tauri Programme within The Commons Conservancy"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/java/com/audhd/resonance_scribe/generated/TauriActivity.kt",
+      "type": "source",
+      "language": "kotlin",
+      "lines": 65,
+      "description": "Copyright 2019-2024 Tauri Programme within The Commons Conservancy"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/java/com/audhd/resonance_scribe/generated/WryActivity.kt",
+      "type": "source",
+      "language": "kotlin",
+      "lines": 175,
+      "description": "Copyright 2020-2023 Tauri Programme within The Commons Conservancy"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/java/com/audhd/resonance_scribe/MainActivity.kt",
+      "type": "source",
+      "language": "kotlin",
+      "lines": 11,
+      "description": "MainActivity"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/drawable/ic_launcher_background.xml",
+      "type": "source",
+      "language": "xml",
+      "lines": 170,
+      "description": "Ic launcher background"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml",
+      "type": "source",
+      "language": "xml",
+      "lines": 30,
+      "description": "Ic launcher foreground"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/layout/activity_main.xml",
+      "type": "source",
+      "language": "xml",
+      "lines": 18,
+      "description": "Activity main"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml",
+      "type": "source",
+      "language": "xml",
+      "lines": 5,
+      "description": "Ic launcher"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-hdpi/ic_launcher.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 3.56,
+      "description": "Ic launcher"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 33.28,
+      "description": "Ic launcher foreground"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 3.6,
+      "description": "Ic launcher round"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-mdpi/ic_launcher.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 3.4,
+      "description": "Ic launcher"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 16.89,
+      "description": "Ic launcher foreground"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 3.42,
+      "description": "Ic launcher round"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 10.83,
+      "description": "Ic launcher"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 53.47,
+      "description": "Ic launcher foreground"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 10.52,
+      "description": "Ic launcher round"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 21.2,
+      "description": "Ic launcher"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 104.49,
+      "description": "Ic launcher foreground"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 20.46,
+      "description": "Ic launcher round"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 34.36,
+      "description": "Ic launcher"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 165.52,
+      "description": "Ic launcher foreground"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 33.1,
+      "description": "Ic launcher round"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/values/colors.xml",
+      "type": "source",
+      "language": "xml",
+      "lines": 10,
+      "description": "Colors"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/values/ic_launcher_background.xml",
+      "type": "source",
+      "language": "xml",
+      "lines": 4,
+      "description": "Ic launcher background"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/values/strings.xml",
+      "type": "source",
+      "language": "xml",
+      "lines": 4,
+      "description": "Strings"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/values/themes.xml",
+      "type": "source",
+      "language": "xml",
+      "lines": 6,
+      "description": "Themes"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/values-night/themes.xml",
+      "type": "source",
+      "language": "xml",
+      "lines": 6,
+      "description": "Themes"
+    },
+    {
+      "path": "src-tauri/gen/android/app/src/main/res/xml/file_paths.xml",
+      "type": "source",
+      "language": "xml",
+      "lines": 5,
+      "description": "File paths"
+    },
+    {
+      "path": "src-tauri/gen/android/app/tauri.build.gradle.kts",
+      "type": "unknown",
+      "language": "unknown",
+      "lines": 9,
+      "description": "Tauri.build.gradle"
+    },
+    {
+      "path": "src-tauri/gen/android/app/tauri.properties",
+      "type": "unknown",
+      "language": "unknown",
+      "lines": 3,
+      "description": "Tauri"
+    },
+    {
+      "path": "src-tauri/gen/android/build.gradle.kts",
+      "type": "unknown",
+      "language": "unknown",
+      "lines": 22,
+      "description": "Build.gradle"
+    },
+    {
+      "path": "src-tauri/gen/android/buildSrc/build.gradle.kts",
+      "type": "unknown",
+      "language": "unknown",
+      "lines": 23,
+      "description": "Build.gradle"
+    },
+    {
+      "path": "src-tauri/gen/android/buildSrc/src/main/java/com/audhd/resonance_scribe/kotlin/BuildTask.kt",
+      "type": "source",
+      "language": "kotlin",
+      "lines": 68,
+      "description": "Try different Windows-specific extensions"
+    },
+    {
+      "path": "src-tauri/gen/android/buildSrc/src/main/java/com/audhd/resonance_scribe/kotlin/RustPlugin.kt",
+      "type": "source",
+      "language": "kotlin",
+      "lines": 85,
+      "description": "RustPlugin"
+    },
+    {
+      "path": "src-tauri/gen/android/gradle/wrapper/gradle-wrapper.jar",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 57.82,
+      "description": "Gradle wrapper"
+    },
+    {
+      "path": "src-tauri/gen/android/gradle/wrapper/gradle-wrapper.properties",
+      "type": "unknown",
+      "language": "unknown",
+      "lines": 6,
+      "description": "Gradle wrapper"
+    },
+    {
+      "path": "src-tauri/gen/android/gradle.properties",
+      "type": "unknown",
+      "language": "unknown",
+      "lines": 24,
+      "description": "Gradle"
+    },
+    {
+      "path": "src-tauri/gen/android/gradlew",
+      "type": "unknown",
+      "language": "unknown",
+      "lines": 185,
+      "description": "Gradlew"
+    },
+    {
+      "path": "src-tauri/gen/android/gradlew.bat",
+      "type": "source",
+      "language": "batch",
+      "lines": 89,
+      "description": "Gradlew"
+    },
+    {
+      "path": "src-tauri/gen/android/settings.gradle",
+      "type": "unknown",
+      "language": "unknown",
+      "lines": 3,
+      "description": "Settings"
+    },
+    {
+      "path": "src-tauri/gen/android/tauri.settings.gradle",
+      "type": "unknown",
+      "language": "unknown",
+      "lines": 9,
+      "description": "Tauri.settings"
+    },
+    {
+      "path": "src-tauri/gen/schemas/acl-manifests.json",
+      "type": "config",
+      "language": "json",
+      "large": true,
+      "size_kb": 137.41,
+      "description": "Acl manifests"
+    },
+    {
+      "path": "src-tauri/gen/schemas/android-schema.json",
+      "type": "config",
+      "language": "json",
+      "large": true,
+      "size_kb": 400.09,
+      "description": "Android schema"
+    },
+    {
+      "path": "src-tauri/gen/schemas/capabilities.json",
+      "type": "config",
+      "language": "json",
+      "lines": 1,
+      "description": "Capabilities"
+    },
+    {
+      "path": "src-tauri/gen/schemas/desktop-schema.json",
+      "type": "config",
+      "language": "json",
+      "large": true,
+      "size_kb": 400.09,
+      "description": "Desktop schema"
+    },
+    {
+      "path": "src-tauri/gen/schemas/mobile-schema.json",
+      "type": "config",
+      "language": "json",
+      "large": true,
+      "size_kb": 400.09,
+      "description": "Mobile schema"
+    },
+    {
+      "path": "src-tauri/gen/schemas/windows-schema.json",
+      "type": "config",
+      "language": "json",
+      "large": true,
+      "size_kb": 400.09,
+      "description": "Windows schema"
+    },
+    {
+      "path": "src-tauri/icons/128x128.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 22.43,
+      "description": "128x128"
+    },
+    {
+      "path": "src-tauri/icons/128x128@2x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 71.09,
+      "description": "128x128@2x"
+    },
+    {
+      "path": "src-tauri/icons/32x32.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 2.23,
+      "description": "32x32"
+    },
+    {
+      "path": "src-tauri/icons/64x64.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 7.12,
+      "description": "64x64"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-anydpi-v26/ic_launcher.xml",
+      "type": "source",
+      "language": "xml",
+      "lines": 5,
+      "description": "Ic launcher"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-hdpi/ic_launcher.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 4.03,
+      "description": "Ic launcher"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-hdpi/ic_launcher_foreground.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 39.04,
+      "description": "Ic launcher foreground"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-hdpi/ic_launcher_round.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 4.17,
+      "description": "Ic launcher round"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-mdpi/ic_launcher.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 3.89,
+      "description": "Ic launcher"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-mdpi/ic_launcher_foreground.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 19.77,
+      "description": "Ic launcher foreground"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-mdpi/ic_launcher_round.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 3.94,
+      "description": "Ic launcher round"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xhdpi/ic_launcher.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 12.5,
+      "description": "Ic launcher"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xhdpi/ic_launcher_foreground.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 63.12,
+      "description": "Ic launcher foreground"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xhdpi/ic_launcher_round.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 12.39,
+      "description": "Ic launcher round"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xxhdpi/ic_launcher.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 24.53,
+      "description": "Ic launcher"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xxhdpi/ic_launcher_foreground.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 123.02,
+      "description": "Ic launcher foreground"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xxhdpi/ic_launcher_round.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 24.43,
+      "description": "Ic launcher round"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xxxhdpi/ic_launcher.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 39.85,
+      "description": "Ic launcher"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xxxhdpi/ic_launcher_foreground.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 194.29,
+      "description": "Ic launcher foreground"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xxxhdpi/ic_launcher_round.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 39.4,
+      "description": "Ic launcher round"
+    },
+    {
+      "path": "src-tauri/icons/android/values/ic_launcher_background.xml",
+      "type": "source",
+      "language": "xml",
+      "lines": 4,
+      "description": "Ic launcher background"
+    },
+    {
+      "path": "src-tauri/icons/icon.icns",
+      "type": "unknown",
+      "language": "unknown",
+      "large": true,
+      "size_kb": 1225.85,
+      "description": "Icon"
+    },
+    {
+      "path": "src-tauri/icons/icon.ico",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 87.18,
+      "description": "Icon"
+    },
+    {
+      "path": "src-tauri/icons/icon.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 216.1,
+      "description": "Icon"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-20x20@1x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 1.02,
+      "description": "AppIcon 20x20@1x"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-20x20@2x-1.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 3.23,
+      "description": "AppIcon 20x20@2x 1"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-20x20@2x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 3.23,
+      "description": "AppIcon 20x20@2x"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-20x20@3x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 6.37,
+      "description": "AppIcon 20x20@3x"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-29x29@1x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 1.89,
+      "description": "AppIcon 29x29@1x"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-29x29@2x-1.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 6.03,
+      "description": "AppIcon 29x29@2x 1"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-29x29@2x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 6.03,
+      "description": "AppIcon 29x29@2x"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-29x29@3x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 11.82,
+      "description": "AppIcon 29x29@3x"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-40x40@1x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 3.23,
+      "description": "AppIcon 40x40@1x"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-40x40@2x-1.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 10.29,
+      "description": "AppIcon 40x40@2x 1"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-40x40@2x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 10.29,
+      "description": "AppIcon 40x40@2x"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-40x40@3x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 20.06,
+      "description": "AppIcon 40x40@3x"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-512@2x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 614.59,
+      "description": "AppIcon 512@2x"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-60x60@2x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 20.06,
+      "description": "AppIcon 60x60@2x"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-60x60@3x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 39.47,
+      "description": "AppIcon 60x60@3x"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-76x76@1x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 9.41,
+      "description": "AppIcon 76x76@1x"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-76x76@2x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 29.87,
+      "description": "AppIcon 76x76@2x"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-83.5x83.5@2x.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 34.8,
+      "description": "AppIcon 83.5x83.5@2x"
+    },
+    {
+      "path": "src-tauri/icons/source.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 684.51,
+      "description": "Source"
+    },
+    {
+      "path": "src-tauri/icons/Square107x107Logo.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 16.6,
+      "description": "Square107x107Logo"
+    },
+    {
+      "path": "src-tauri/icons/Square142x142Logo.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 26.62,
+      "description": "Square142x142Logo"
+    },
+    {
+      "path": "src-tauri/icons/Square150x150Logo.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 29.19,
+      "description": "Square150x150Logo"
+    },
+    {
+      "path": "src-tauri/icons/Square284x284Logo.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 84.24,
+      "description": "Square284x284Logo"
+    },
+    {
+      "path": "src-tauri/icons/Square30x30Logo.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 1.99,
+      "description": "Square30x30Logo"
+    },
+    {
+      "path": "src-tauri/icons/Square310x310Logo.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 97.37,
+      "description": "Square310x310Logo"
+    },
+    {
+      "path": "src-tauri/icons/Square44x44Logo.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 3.76,
+      "description": "Square44x44Logo"
+    },
+    {
+      "path": "src-tauri/icons/Square71x71Logo.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 8.43,
+      "description": "Square71x71Logo"
+    },
+    {
+      "path": "src-tauri/icons/Square89x89Logo.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 12.23,
+      "description": "Square89x89Logo"
+    },
+    {
+      "path": "src-tauri/icons/StoreLogo.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 4.74,
+      "description": "StoreLogo"
+    },
+    {
+      "path": "src-tauri/src/base.rs",
+      "type": "source",
+      "language": "rust",
+      "lines": 874,
+      "description": "THE BASE \u2014 the six nouns of THE AUTHOR'S STUDIO, and the only door to them."
+    },
+    {
+      "path": "src-tauri/src/commands.rs",
+      "type": "source",
+      "language": "rust",
+      "lines": 278,
+      "description": "THE DOORS \u2014 one Tauri command per verb of THE AUTHOR'S STUDIO's six nouns,"
+    },
+    {
+      "path": "src-tauri/src/lib.rs",
+      "type": "source",
+      "language": "rust",
+      "lines": 85,
+      "description": "RESONANCE SCRIBE \u2014 the author's studio."
+    },
+    {
+      "path": "src-tauri/src/main.rs",
+      "type": "source",
+      "language": "rust",
+      "lines": 6,
+      "description": "Prevents additional console window on Windows in release, DO NOT REMOVE!!"
+    },
+    {
+      "path": "src-tauri/tauri.conf.json",
+      "type": "config",
+      "language": "json",
+      "lines": 37,
+      "description": "Tauri.conf"
+    },
+    {
+      "path": "static/favicon.png",
+      "type": "binary",
+      "language": "unknown",
+      "size_kb": 684.51,
+      "description": "Favicon"
+    },
+    {
+      "path": "svelte.config.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 18,
+      "description": "Tauri doesn't have a Node.js server to do proper SSR"
+    },
+    {
+      "path": "tools/atogail-import.mjs",
+      "type": "source",
+      "language": "javascript",
+      "lines": 148,
+      "description": "THE BIBLE-TO-SCRIBE IMPORTER \u2014 the At\u00f3g\u00e1il's structure into two"
+    },
+    {
+      "path": "tsconfig.json",
+      "type": "config",
+      "language": "json",
+      "lines": 19,
+      "description": "Tsconfig"
+    },
+    {
+      "path": "vite.config.js",
+      "type": "source",
+      "language": "javascript",
+      "lines": 32,
+      "description": "https://vite.dev/config/"
+    },
+    {
+      "path": "YOU-NEED-NOT-PERFORM.md",
+      "type": "doc",
+      "language": "markdown",
+      "lines": 41,
+      "description": "YOU NEED NOT PERFORM"
+    }
+  ],
+  "by_type": {
+    "config": 140,
+    "source": 212,
+    "doc": 21,
+    "binary": 71,
+    "unknown": 18
+  },
+  "by_language": {
+    "toml": 3,
+    "json": 131,
+    "unknown": 95,
+    "javascript": 90,
+    "markdown": 21,
+    "typescript": 47,
+    "svelte": 8,
+    "css": 35,
+    "html": 1,
+    "rust": 5,
+    "xml": 13,
+    "kotlin": 12,
+    "batch": 1
+  },
+  "secrets_flagged": [],
+  "large_files": [
+    ".svelte-kit/output/server/index.js",
+    "release/Resonance Scribe_0.1.0_x64_en-US.msi",
+    "release/resonance-scribe-v0.1.0.apk.idsig",
+    "src-tauri/Cargo.lock",
+    "src-tauri/gen/schemas/acl-manifests.json",
+    "src-tauri/gen/schemas/android-schema.json",
+    "src-tauri/gen/schemas/desktop-schema.json",
+    "src-tauri/gen/schemas/mobile-schema.json",
+    "src-tauri/gen/schemas/windows-schema.json",
+    "src-tauri/icons/icon.icns"
+  ]
+}

@@ -3,7 +3,8 @@
 // `resonance-chamber/desk/THE-AUTHORS-STUDIO.md` §"The nouns, as a base" is
 // the brief, and its columns are written here unchanged:
 //
-//   work        — id · kind · title · byline · note · created_at · updated_at
+//   author      — id ('author') · name · byline · contact · created_at · …
+//   work        — id · kind · title · byline · note · rights · created_at · …
 //   part        — id · work_id · parent_id · ord · title · body · words · …
 //   era         — id · work_id · ord · name · note
 //   character   — id · work_id · name · note · emoji
@@ -151,6 +152,22 @@ CREATE INDEX IF NOT EXISTS idx_appearances_character ON appearances(character_id
 CREATE INDEX IF NOT EXISTS idx_appearances_arc ON appearances(arc_id);
 "#;
 
+/// The author, and the work's rights. `author` holds at most one row, and the
+/// CHECK is what says so: the id is the literal string `author`, so a second
+/// row has nowhere to land. `contact` is a multi-line block kept verbatim and
+/// may be empty. `works.rights` is added by `migrate`, not here, because the
+/// column may already stand on a base this migration has met before.
+pub const MIGRATION_V2: &str = r#"
+CREATE TABLE IF NOT EXISTS author (
+    id          TEXT PRIMARY KEY CHECK (id = 'author'),
+    name        TEXT NOT NULL,
+    byline      TEXT NOT NULL,
+    contact     TEXT NOT NULL,
+    created_at  INTEGER NOT NULL,
+    updated_at  INTEGER NOT NULL
+);
+"#;
+
 /// Open a base at `path`, turn foreign keys ON (SQLite's default is OFF, and
 /// the cascade is the whole point), and migrate it forward.
 pub fn open(path: &std::path::Path) -> Res<Connection> {
@@ -164,6 +181,25 @@ fn prepare(conn: &Connection) -> Res<()> {
     migrate(conn)
 }
 
+/// True when `table` already carries `column`, by SQLite's own word.
+pub fn has_column(conn: &Connection, table: &str, column: &str) -> Res<bool> {
+    let mut stmt = conn
+        .prepare(&format!("PRAGMA table_info({table})"))
+        .map_err(err)?;
+    let mut found = false;
+    let rows = stmt.query_map([], |r| r.get::<_, String>(1)).map_err(err)?;
+    for name in rows {
+        if name.map_err(err)? == column {
+            found = true;
+        }
+    }
+    Ok(found)
+}
+
+/// Each step runs only on a base that has not had it, and each writes its own
+/// `user_version`, so a base written by the first schema reaches the second
+/// with every row it already held. `works.rights` is an ALTER rather than a
+/// rebuild for that reason, and it is asked for only when the column is absent.
 pub fn migrate(conn: &Connection) -> Res<()> {
     let version: i64 = conn
         .query_row("PRAGMA user_version", [], |r| r.get(0))
@@ -172,10 +208,30 @@ pub fn migrate(conn: &Connection) -> Res<()> {
         conn.execute_batch(MIGRATION_V1).map_err(err)?;
         conn.execute_batch("PRAGMA user_version = 1;").map_err(err)?;
     }
+    if version < 2 {
+        conn.execute_batch(MIGRATION_V2).map_err(err)?;
+        if !has_column(conn, "works", "rights")? {
+            conn.execute_batch("ALTER TABLE works ADD COLUMN rights TEXT;")
+                .map_err(err)?;
+        }
+        conn.execute_batch("PRAGMA user_version = 2;").map_err(err)?;
+    }
     Ok(())
 }
 
 // ── The nouns, as rows ───────────────────────────────────────────────────
+
+/// The author of the studio — one row, whose id is always `author`.
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct Author {
+    pub id: String,
+    pub name: String,
+    pub byline: String,
+    /// A multi-line block, kept verbatim, possibly empty.
+    pub contact: String,
+    pub created_at: i64,
+    pub updated_at: i64,
+}
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Work {
@@ -186,6 +242,9 @@ pub struct Work {
     pub title: String,
     pub byline: Option<String>,
     pub note: Option<String>,
+    /// A drawn licence as JSON text, written whole by the window and never
+    /// read here. NULL is a work with no rights page.
+    pub rights: Option<String>,
     pub created_at: i64,
     pub updated_at: i64,
 }
@@ -243,7 +302,23 @@ pub struct Appearance {
     pub note: Option<String>,
 }
 
-const WORK_COLS: &str = "id, kind, title, byline, note, created_at, updated_at";
+/// Everything in one call, for a room that carries the studio out whole.
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct StudioDump {
+    pub author: Option<Author>,
+    pub works: Vec<Work>,
+    pub parts: Vec<Part>,
+    pub eras: Vec<Era>,
+    pub characters: Vec<Character>,
+    pub arcs: Vec<Arc>,
+    pub appearances: Vec<Appearance>,
+}
+
+/// The one id the `author` table accepts.
+pub const AUTHOR_ID: &str = "author";
+
+const AUTHOR_COLS: &str = "id, name, byline, contact, created_at, updated_at";
+const WORK_COLS: &str = "id, kind, title, byline, note, rights, created_at, updated_at";
 const PART_COLS: &str =
     "id, work_id, parent_id, ord, title, body, words, created_at, updated_at";
 const ERA_COLS: &str = "id, work_id, ord, name, note";
@@ -252,6 +327,17 @@ const ARC_COLS: &str = "id, work_id, name, shape, note";
 const APPEARANCE_COLS: &str =
     "id, work_id, part_id, era_id, character_id, arc_id, note";
 
+fn author_from(r: &rusqlite::Row<'_>) -> rusqlite::Result<Author> {
+    Ok(Author {
+        id: r.get(0)?,
+        name: r.get(1)?,
+        byline: r.get(2)?,
+        contact: r.get(3)?,
+        created_at: r.get(4)?,
+        updated_at: r.get(5)?,
+    })
+}
+
 fn work_from(r: &rusqlite::Row<'_>) -> rusqlite::Result<Work> {
     Ok(Work {
         id: r.get(0)?,
@@ -259,8 +345,9 @@ fn work_from(r: &rusqlite::Row<'_>) -> rusqlite::Result<Work> {
         title: r.get(2)?,
         byline: r.get(3)?,
         note: r.get(4)?,
-        created_at: r.get(5)?,
-        updated_at: r.get(6)?,
+        rights: r.get(5)?,
+        created_at: r.get(6)?,
+        updated_at: r.get(7)?,
     })
 }
 
@@ -320,6 +407,29 @@ fn appearance_from(r: &rusqlite::Row<'_>) -> rusqlite::Result<Appearance> {
     })
 }
 
+// ── author ───────────────────────────────────────────────────────────────
+
+pub fn get_author(conn: &Connection) -> Res<Option<Author>> {
+    let sql = format!("SELECT {AUTHOR_COLS} FROM author WHERE id = ?1");
+    conn.query_row(&sql, params![AUTHOR_ID], author_from)
+        .optional()
+        .map_err(err)
+}
+
+/// Writes the one row, whether or not it already stands. `created_at` is set
+/// on the first write and held after it; `updated_at` moves every time.
+pub fn set_author(conn: &Connection, name: &str, byline: &str, contact: &str) -> Res<Author> {
+    let now = now_ms();
+    conn.execute(
+        "INSERT INTO author (id, name, byline, contact, created_at, updated_at)
+         VALUES (?1, ?2, ?3, ?4, ?5, ?5)
+         ON CONFLICT(id) DO UPDATE SET name = ?2, byline = ?3, contact = ?4, updated_at = ?5",
+        params![AUTHOR_ID, name, byline, contact, now],
+    )
+    .map_err(err)?;
+    get_author(conn)?.ok_or_else(|| "the author row did not take".to_string())
+}
+
 // ── work ─────────────────────────────────────────────────────────────────
 
 pub fn list_works(conn: &Connection) -> Res<Vec<Work>> {
@@ -350,13 +460,16 @@ pub fn create_work(
         title: title.trim().to_string(),
         byline: byline.map(|s| s.to_string()),
         note: note.map(|s| s.to_string()),
+        rights: None,
         created_at: now,
         updated_at: now,
     };
     conn.execute(
-        "INSERT INTO works (id, kind, title, byline, note, created_at, updated_at)
-         VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)",
-        params![w.id, w.kind, w.title, w.byline, w.note, w.created_at, w.updated_at],
+        "INSERT INTO works (id, kind, title, byline, note, rights, created_at, updated_at)
+         VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)",
+        params![
+            w.id, w.kind, w.title, w.byline, w.note, w.rights, w.created_at, w.updated_at
+        ],
     )
     .map_err(err)?;
     Ok(w)
@@ -376,6 +489,22 @@ pub fn update_work(
             "UPDATE works SET kind = ?2, title = ?3, byline = ?4, note = ?5, updated_at = ?6
              WHERE id = ?1",
             params![id, kind, title, byline, note, now],
+        )
+        .map_err(err)?;
+    if n == 0 {
+        return Err(format!("no work with id {id}"));
+    }
+    get_work(conn, id)?.ok_or_else(|| format!("no work with id {id}"))
+}
+
+/// The rights page, as the window drew it. The text is stored whole and never
+/// parsed here; `None` clears it. `update_work` does not touch this column, so
+/// editing a title cannot lose a licence.
+pub fn set_work_rights(conn: &Connection, id: &str, rights: Option<&str>) -> Res<Work> {
+    let n = conn
+        .execute(
+            "UPDATE works SET rights = ?2, updated_at = ?3 WHERE id = ?1",
+            params![id, rights, now_ms()],
         )
         .map_err(err)?;
     if n == 0 {
@@ -764,6 +893,66 @@ pub fn delete_appearance(conn: &Connection, id: &str) -> Res<()> {
     Ok(())
 }
 
+// ── the whole studio ─────────────────────────────────────────────────────
+
+/// Every row of every table, in one call. The works come in `list_works`
+/// order, and each work's parts, eras, characters, arcs and appearances follow
+/// in the order their own `list_*` gives, so what a room exports is what a
+/// room shows.
+pub fn read_all(conn: &Connection) -> Res<StudioDump> {
+    let works = list_works(conn)?;
+    let mut parts = Vec::new();
+    let mut eras = Vec::new();
+    let mut characters = Vec::new();
+    let mut arcs = Vec::new();
+    let mut appearances = Vec::new();
+    for w in &works {
+        parts.extend(list_parts(conn, &w.id)?);
+        eras.extend(list_eras(conn, &w.id)?);
+        characters.extend(list_characters(conn, &w.id)?);
+        arcs.extend(list_arcs(conn, &w.id)?);
+        appearances.extend(list_appearances(conn, &w.id)?);
+    }
+    Ok(StudioDump {
+        author: get_author(conn)?,
+        works,
+        parts,
+        eras,
+        characters,
+        arcs,
+        appearances,
+    })
+}
+
+/// Empties every table, author included, in one transaction, and returns how
+/// many rows went. Each table is counted immediately before it is emptied, and
+/// children go before their parents, so the total is every row that stood and
+/// not the cascade's shadow. The schema and the file stand; `VACUUM` returns
+/// the space the rows held. Nothing outside this base is touched.
+pub fn purge_all(conn: &mut Connection) -> Res<u64> {
+    const TABLES: [&str; 7] = [
+        "appearances",
+        "arcs",
+        "characters",
+        "eras",
+        "parts",
+        "works",
+        "author",
+    ];
+    let mut gone: u64 = 0;
+    let tx = conn.transaction().map_err(err)?;
+    for t in TABLES {
+        let n: i64 = tx
+            .query_row(&format!("SELECT COUNT(*) FROM {t}"), [], |r| r.get(0))
+            .map_err(err)?;
+        tx.execute(&format!("DELETE FROM {t}"), []).map_err(err)?;
+        gone += n as u64;
+    }
+    tx.commit().map_err(err)?;
+    conn.execute_batch("VACUUM;").map_err(err)?;
+    Ok(gone)
+}
+
 // ── The proof's door ─────────────────────────────────────────────────────
 //
 // `.journals/proofs/2026-09-02-the-base-round-trip/` drives this, the way the
@@ -779,6 +968,134 @@ mod proof_door {
         println!("SCRIBE_PROOF_{key}={value}");
     }
 
+    fn count(conn: &Connection, table: &str) -> i64 {
+        conn.query_row(&format!("SELECT COUNT(*) FROM {table}"), [], |r| r.get(0))
+            .unwrap()
+    }
+
+    fn tables(conn: &Connection) -> Vec<String> {
+        let mut stmt = conn
+            .prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%' ORDER BY name")
+            .unwrap();
+        let mut names: Vec<String> = stmt
+            .query_map([], |r| r.get::<_, String>(0))
+            .unwrap()
+            .map(|r| r.unwrap())
+            .collect();
+        names.sort();
+        names
+    }
+
+    fn user_version(conn: &Connection) -> i64 {
+        conn.query_row("PRAGMA user_version", [], |r| r.get(0)).unwrap()
+    }
+
+    /// The schema as it stood before `author` and `works.rights`, written out
+    /// here so the migration is asked against a frozen old shape rather than
+    /// against the statements it ships with today.
+    const OLD_SCHEMA: &str = r#"
+CREATE TABLE works (
+    id          TEXT PRIMARY KEY,
+    kind        TEXT NOT NULL DEFAULT 'book',
+    title       TEXT NOT NULL,
+    byline      TEXT,
+    note        TEXT,
+    created_at  INTEGER NOT NULL,
+    updated_at  INTEGER NOT NULL
+);
+CREATE TABLE parts (
+    id          TEXT PRIMARY KEY,
+    work_id     TEXT NOT NULL REFERENCES works(id) ON DELETE CASCADE,
+    parent_id   TEXT REFERENCES parts(id) ON DELETE CASCADE,
+    ord         INTEGER NOT NULL DEFAULT 0,
+    title       TEXT NOT NULL DEFAULT '',
+    body        TEXT NOT NULL DEFAULT '',
+    words       INTEGER NOT NULL DEFAULT 0,
+    created_at  INTEGER NOT NULL,
+    updated_at  INTEGER NOT NULL
+);
+CREATE TABLE eras (
+    id          TEXT PRIMARY KEY,
+    work_id     TEXT NOT NULL REFERENCES works(id) ON DELETE CASCADE,
+    ord         INTEGER NOT NULL DEFAULT 0,
+    name        TEXT NOT NULL,
+    note        TEXT
+);
+CREATE TABLE characters (
+    id          TEXT PRIMARY KEY,
+    work_id     TEXT NOT NULL REFERENCES works(id) ON DELETE CASCADE,
+    name        TEXT NOT NULL,
+    note        TEXT,
+    emoji       TEXT NOT NULL DEFAULT ''
+);
+CREATE TABLE arcs (
+    id          TEXT PRIMARY KEY,
+    work_id     TEXT NOT NULL REFERENCES works(id) ON DELETE CASCADE,
+    name        TEXT NOT NULL,
+    shape       TEXT NOT NULL DEFAULT 'other',
+    note        TEXT
+);
+CREATE TABLE appearances (
+    id            TEXT PRIMARY KEY,
+    work_id       TEXT NOT NULL REFERENCES works(id) ON DELETE CASCADE,
+    part_id       TEXT REFERENCES parts(id) ON DELETE CASCADE,
+    era_id        TEXT REFERENCES eras(id) ON DELETE CASCADE,
+    character_id  TEXT REFERENCES characters(id) ON DELETE CASCADE,
+    arc_id        TEXT REFERENCES arcs(id) ON DELETE CASCADE,
+    note          TEXT,
+    CHECK (
+        part_id IS NOT NULL
+        OR era_id IS NOT NULL
+        OR character_id IS NOT NULL
+        OR arc_id IS NOT NULL
+    )
+);
+PRAGMA user_version = 1;
+"#;
+
+    /// A base written by the old schema, carrying a work and a part, opened by
+    /// today's `open` — the migration runs on it and it keeps what it held.
+    fn prove_old_base_migrates() {
+        let old = std::env::var("SCRIBE_PROOF_OLD_DB").expect("SCRIBE_PROOF_OLD_DB");
+        let old = std::path::Path::new(&old);
+        {
+            let c = Connection::open(old).unwrap();
+            c.execute_batch(OLD_SCHEMA).unwrap();
+            c.execute(
+                "INSERT INTO works (id, kind, title, byline, note, created_at, updated_at)
+                 VALUES ('old-work', 'book', 'The Old Road', 'KP', 'written before', 1, 2)",
+                [],
+            )
+            .unwrap();
+            c.execute(
+                "INSERT INTO parts (id, work_id, parent_id, ord, title, body, words, created_at, updated_at)
+                 VALUES ('old-part', 'old-work', NULL, 0, 'One', 'two words', 2, 1, 2)",
+                [],
+            )
+            .unwrap();
+            say("OLD_VERSION_BEFORE", user_version(&c));
+            say("OLD_HAS_AUTHOR_BEFORE", tables(&c).contains(&"author".to_string()));
+            say("OLD_HAS_RIGHTS_BEFORE", has_column(&c, "works", "rights").unwrap());
+        }
+
+        let c = open(old).expect("open the old base");
+        say("OLD_VERSION_AFTER", user_version(&c));
+        say("OLD_HAS_AUTHOR_AFTER", tables(&c).contains(&"author".to_string()));
+        say("OLD_HAS_RIGHTS_AFTER", has_column(&c, "works", "rights").unwrap());
+        say("OLD_WORKS", count(&c, "works"));
+        say("OLD_PARTS", count(&c, "parts"));
+        let kept = get_work(&c, "old-work").unwrap().unwrap();
+        say("OLD_WORK_TITLE", &kept.title);
+        say("OLD_WORK_RIGHTS_NULL", kept.rights.is_none());
+        say("OLD_WORK_CREATED_AT", kept.created_at);
+        drop(c);
+
+        // Opening it again asks nothing of the schema a second time.
+        let again = open(old).expect("re-open the migrated base");
+        say("OLD_REOPEN_VERSION", user_version(&again));
+        say("OLD_REOPEN_WORKS", count(&again, "works"));
+    }
+
     #[test]
     #[ignore]
     fn proof_base_round_trip() {
@@ -786,26 +1103,43 @@ mod proof_door {
         let mut conn = open(std::path::Path::new(&path)).expect("open");
 
         // Every table the migration claims to create, by the base's own word.
-        let mut names: Vec<String> = {
-            let mut stmt = conn
-                .prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%' ORDER BY name")
-                .unwrap();
-            stmt.query_map([], |r| r.get::<_, String>(0))
-                .unwrap()
-                .map(|r| r.unwrap())
-                .collect()
-        };
-        names.sort();
-        say("TABLES", names.join(","));
+        say("TABLES", tables(&conn).join(","));
+        say("USER_VERSION", user_version(&conn));
+        say("WORKS_HAS_RIGHTS", has_column(&conn, "works", "rights").unwrap());
 
         let fk: i64 = conn.query_row("PRAGMA foreign_keys", [], |r| r.get(0)).unwrap();
         say("FOREIGN_KEYS", fk);
+
+        prove_old_base_migrates();
+
+        // The author: nothing before, one row after, and one row still after a
+        // second writing.
+        say("AUTHOR_BEFORE", get_author(&conn).unwrap().is_none());
+        let first = set_author(
+            &conn,
+            "KP",
+            "KP, the Quantum Weaver",
+            "audhdities@proton.me\naudhdities.com",
+        )
+        .unwrap();
+        say("AUTHOR_ID", &first.id);
+        say("AUTHOR_NAME", &first.name);
+        say("AUTHOR_CONTACT_LINES", first.contact.lines().count());
+        say("AUTHOR_ROWS_AFTER_FIRST", count(&conn, "author"));
+        let second = set_author(&conn, "KP", "KP, weaver", "").unwrap();
+        say("AUTHOR_ROWS_AFTER_SECOND", count(&conn, "author"));
+        say("AUTHOR_BYLINE_AFTER_SECOND", &second.byline);
+        say("AUTHOR_CONTACT_EMPTY", second.contact.is_empty());
+        say("AUTHOR_CREATED_HELD", second.created_at == first.created_at);
+        say("AUTHOR_UPDATED_MOVED", second.updated_at >= first.updated_at);
+        say("AUTHOR_READ_BACK", get_author(&conn).unwrap().unwrap().byline);
 
         // A work with two chapters, one scene under the first.
         let w = create_work(&conn, "book", "The Salt Road", Some("KP"), Some("a first light"))
             .expect("create_work");
         say("WORK_ID", &w.id);
         say("WORK_KIND", &w.kind);
+        say("RIGHTS_AT_BIRTH_NULL", w.rights.is_none());
 
         let c1 = create_part(&conn, &w.id, None, "One", "the sea was still that morning").unwrap();
         let c2 = create_part(&conn, &w.id, None, "Two", "and then it was not").unwrap();
@@ -857,18 +1191,107 @@ mod proof_door {
         say("EDITED_WORDS", edited.words);
         say("EDITED_MOVED", edited.updated_at >= c1.updated_at);
 
+        // The rights page: JSON text in, the same text out, null clears it,
+        // and an edit of the work's own fields leaves it standing.
+        let drawn = r#"{"holder":"KP","grants":[{"name":"read"}],"exclusive":false}"#;
+        let with = set_work_rights(&conn, &w.id, Some(drawn)).unwrap();
+        say("RIGHTS_SET", with.rights.clone().unwrap_or_default());
+        say(
+            "RIGHTS_READ_BACK",
+            get_work(&conn, &w.id).unwrap().unwrap().rights.unwrap_or_default(),
+        );
+        let held = update_work(&conn, &w.id, "book", "The Salt Road", Some("KP"), Some("a first light")).unwrap();
+        say("RIGHTS_HELD_THROUGH_UPDATE", held.rights.as_deref() == Some(drawn));
+        let cleared = set_work_rights(&conn, &w.id, None).unwrap();
+        say("RIGHTS_CLEARED", cleared.rights.is_none());
+        say(
+            "RIGHTS_CLEARED_READ_BACK",
+            get_work(&conn, &w.id).unwrap().unwrap().rights.is_none(),
+        );
+        set_work_rights(&conn, &w.id, Some(drawn)).unwrap();
+
+        // Everything, in one call, in the order the lists give.
+        let dump = read_all(&conn).unwrap();
+        say("DUMP_AUTHOR", dump.author.is_some());
+        say("DUMP_WORKS", dump.works.len());
+        say("DUMP_PARTS", dump.parts.len());
+        say("DUMP_ERAS", dump.eras.len());
+        say("DUMP_CHARACTERS", dump.characters.len());
+        say("DUMP_ARCS", dump.arcs.len());
+        say("DUMP_APPEARANCES", dump.appearances.len());
+        let counts_match = dump.works.len() as i64 == count(&conn, "works")
+            && dump.parts.len() as i64 == count(&conn, "parts")
+            && dump.eras.len() as i64 == count(&conn, "eras")
+            && dump.characters.len() as i64 == count(&conn, "characters")
+            && dump.arcs.len() as i64 == count(&conn, "arcs")
+            && dump.appearances.len() as i64 == count(&conn, "appearances");
+        say("DUMP_COUNTS_MATCH_TABLES", counts_match);
+        say(
+            "DUMP_PART_ORDER",
+            dump.parts.iter().map(|p| p.title.as_str()).collect::<Vec<_>>().join(","),
+        );
+        let listed: Vec<String> = list_parts(&conn, &w.id).unwrap().iter().map(|p| p.id.clone()).collect();
+        let dumped: Vec<String> = dump.parts.iter().map(|p| p.id.clone()).collect();
+        say("DUMP_PARTS_IN_LIST_ORDER", dumped == listed);
+        say("DUMP_WORK_RIGHTS", dump.works[0].rights.as_deref() == Some(drawn));
+        say("DUMP_AUTHOR_BYLINE", dump.author.unwrap().byline);
+
         // Delete the work; find nothing left, anywhere.
         delete_work(&conn, &w.id).unwrap();
-        let count = |t: &str| -> i64 {
-            conn.query_row(&format!("SELECT COUNT(*) FROM {t}"), [], |r| r.get(0))
-                .unwrap()
-        };
-        say("LEFT_WORKS", count("works"));
-        say("LEFT_PARTS", count("parts"));
-        say("LEFT_ERAS", count("eras"));
-        say("LEFT_CHARACTERS", count("characters"));
-        say("LEFT_ARCS", count("arcs"));
-        say("LEFT_APPEARANCES", count("appearances"));
+        say("LEFT_WORKS", count(&conn, "works"));
+        say("LEFT_PARTS", count(&conn, "parts"));
+        say("LEFT_ERAS", count(&conn, "eras"));
+        say("LEFT_CHARACTERS", count(&conn, "characters"));
+        say("LEFT_ARCS", count(&conn, "arcs"));
+        say("LEFT_APPEARANCES", count(&conn, "appearances"));
+        say("LEFT_AUTHOR", count(&conn, "author"));
+
+        // A second studio, then the purge: every row gone, every table and the
+        // file still standing, and the base still takes a row afterwards.
+        let w2 = create_work(&conn, "essay", "Second Light", None, None).unwrap();
+        let p2 = create_part(&conn, &w2.id, None, "One", "a b c").unwrap();
+        let e2 = create_era(&conn, &w2.id, "Now", None).unwrap();
+        let ch2 = create_character(&conn, &w2.id, "Ro", None, "").unwrap();
+        let ar2 = create_arc(&conn, &w2.id, "The turn", "turning", None).unwrap();
+        create_appearance(
+            &conn,
+            &w2.id,
+            Some(&p2.id),
+            Some(&e2.id),
+            Some(&ch2.id),
+            Some(&ar2.id),
+            None,
+        )
+        .unwrap();
+        set_work_rights(&conn, &w2.id, Some(drawn)).unwrap();
+        let standing: i64 = [
+            "works",
+            "parts",
+            "eras",
+            "characters",
+            "arcs",
+            "appearances",
+            "author",
+        ]
+        .iter()
+        .map(|t| count(&conn, t))
+        .sum();
+        say("PURGE_ROWS_STANDING", standing);
+        let purged = purge_all(&mut conn).unwrap();
+        say("PURGED", purged);
+        say("PURGE_COUNT_TRUE", purged as i64 == standing);
+        say("AFTER_PURGE_WORKS", count(&conn, "works"));
+        say("AFTER_PURGE_PARTS", count(&conn, "parts"));
+        say("AFTER_PURGE_ERAS", count(&conn, "eras"));
+        say("AFTER_PURGE_CHARACTERS", count(&conn, "characters"));
+        say("AFTER_PURGE_ARCS", count(&conn, "arcs"));
+        say("AFTER_PURGE_APPEARANCES", count(&conn, "appearances"));
+        say("AFTER_PURGE_AUTHOR", count(&conn, "author"));
+        say("AFTER_PURGE_TABLES", tables(&conn).join(","));
+        say("AFTER_PURGE_VERSION", user_version(&conn));
+        say("AFTER_PURGE_FILE", std::path::Path::new(&path).exists());
+        let w3 = create_work(&conn, "book", "After the purge", None, None).unwrap();
+        say("AFTER_PURGE_WRITES", count(&conn, "works") == 1 && w3.rights.is_none());
         say("DONE", 1);
     }
 }

@@ -1,4 +1,16 @@
-// Sky facts, computed offline, no API ever: moon phase to ~hours, solstices/equinoxes to ~minutes, planet longitudes to a few degrees.
+// The sky organs — moon-phases · ancient-holidays · planets-alignment.
+//
+// COMPUTE-ONLY: facts and traditional names (common inheritance — phase
+// names, the wheel's eight spokes, zodiac signs), never anyone's coaching
+// text, never a shipped meaning. Any meaning a moment's sky carries is the
+// family's own to write.
+//
+// Accuracy, stated honestly: moon phase to ~hours; solstices/equinoxes to
+// ~minutes (Meeus approximations); planet longitudes to a few degrees
+// (circular-orbit mean elements) — PERSPECTIVE-grade, not telescope-grade.
+// Offline forever; no API in the core.
+//
+// STANDALONE BY LAW: framework-free, zero imports, no app coupling.
 
 // ——— the clock's common ground ———
 

@@ -489,27 +489,30 @@
 									</h2>
 									<div class="column-acts">
 										<button
+											aria-label="Move {col.era.name} earlier"
 											type="button"
 											class="plain tiny"
 											onclick={() => col.era && shoveColumn(col.era.id, -1)}
 											disabled={eraIds.indexOf(col.era.id) === 0}
 										>
-											◀<span class="visually-hidden"> move {col.era.name} earlier</span>
+											◀
 										</button>
 										<button
+											aria-label="Move {col.era.name} later"
 											type="button"
 											class="plain tiny"
 											onclick={() => col.era && shoveColumn(col.era.id, 1)}
 											disabled={eraIds.indexOf(col.era.id) === eraIds.length - 1}
 										>
-											▶<span class="visually-hidden"> move {col.era.name} later</span>
+											▶
 										</button>
 										<button
+											aria-label="Rename {col.era.name}"
 											type="button"
 											class="plain tiny"
 											onclick={() => col.era && beginEraEdit(col.era)}
 										>
-											Rename<span class="visually-hidden"> {col.era.name}</span>
+											Rename
 										</button>
 										{#if confirmEra === col.era.id}
 											<span class="confirm small">
@@ -532,11 +535,12 @@
 											</span>
 										{:else}
 											<button
+												aria-label="Delete {col.era.name}"
 												type="button"
 												class="plain tiny"
 												onclick={() => col.era && (confirmEra = col.era.id)}
 											>
-												Delete<span class="visually-hidden"> {col.era.name}</span>
+												Delete
 											</button>
 										{/if}
 									</div>
@@ -787,11 +791,12 @@
 										{t.through === 1 ? 'card' : 'cards'}
 									</span>
 									<button
+										aria-label="Rename {t.name}"
 										type="button"
 										class="plain tiny"
 										onclick={() => beginArcEdit(t.id, t.name, t.shape)}
 									>
-										Rename<span class="visually-hidden"> {t.name}</span>
+										Rename
 									</button>
 									{#if confirmArc === t.id}
 										<span class="confirm small">
@@ -809,11 +814,12 @@
 										</span>
 									{:else}
 										<button
+											aria-label="Delete {t.name}"
 											type="button"
 											class="plain tiny"
 											onclick={() => (confirmArc = t.id)}
 										>
-											Delete<span class="visually-hidden"> {t.name}</span>
+											Delete
 										</button>
 									{/if}
 								{/if}

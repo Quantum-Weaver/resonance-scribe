@@ -325,10 +325,11 @@ console.log('── the window can only ask for what the law allows ──');
 		!/\bsavePart\(|\bupdatePart\(/.test(boardRoom)
 	);
 
-	// The bind is a doorway and shows no list; the layout draws the rail. Every
-	// other room shows a list of the author's rows, and every one of them
+	// The bind is a doorway, the onboarding walk asks questions, the settings
+	// room shows counts and its own controls, and the layout draws the rail:
+	// none of the four shows a list of the author's rows. Every room that does
 	// orders or narrows it through the water.
-	const listing = rooms.filter((f) => !/bind|\+layout/.test(f));
+	const listing = rooms.filter((f) => !/bind|onboarding|settings|\+layout/.test(f));
 	const panti = listing.filter((f) => /\$lib\/panti/.test(read(f)));
 	claim(
 		`the-panti orders or narrows every list a room shows — ${panti.length} of ${listing.length} rooms that show one [${listing.map((f) => f.replace(/\\/g, '/')).join(' ')}]`,

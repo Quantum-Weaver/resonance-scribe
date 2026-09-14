@@ -8,10 +8,12 @@
 	// in. Add a character to a card on the board and this room already knows;
 	// there is nothing to keep in step, because there is only one truth.
 	//
-	// Which is the sixth noun's whole point: a character in a scene is ONE row.
+	// Which is the sixth noun's whole point: a character in a scene is ONE row —
+	// and the box on a character's row writes that row for any part of the work,
+	// chapter or scene, while Remove deletes it.
 	import { onMount } from 'svelte';
-	import { chaptersOf } from '$lib/base';
-	import { erasOfPart } from '$lib/board';
+	import { chaptersOf, scenesOf } from '$lib/base';
+	import { erasOfPart, hangId } from '$lib/board';
 	import { filterData, sortData } from '$lib/panti';
 	import { studioStore } from '$lib/stores/studio.svelte';
 	import { workStore } from '$lib/stores/work.svelte';
@@ -26,6 +28,8 @@
 	let draftEmoji = $state('');
 	let draftNote = $state('');
 	let confirming = $state<string | null>(null);
+	/** The part chosen in one character's own box, by that character's id. */
+	let chosenPart = $state<Record<string, string>>({});
 
 	const work = $derived(workStore.work);
 	const parts = $derived(studioStore.parts);
@@ -79,6 +83,42 @@
 		// first.
 		const order = parts.map((p) => p.id);
 		return out.sort((x, y) => order.indexOf(x.part.id) - order.indexOf(y.part.id));
+	}
+
+	interface Place {
+		id: string;
+		label: string;
+	}
+
+	/** Every part of the work in reading order, a scene named under the chapter
+	 *  it sits in. Both levels are ordered by the-panti on the base's own `ord`. */
+	const places = $derived.by<Place[]>(() => {
+		const out: Place[] = [];
+		for (const c of sortData(chaptersOf(parts), 'ord', 'asc')) {
+			out.push({ id: c.id, label: c.title });
+			for (const s of sortData(scenesOf(parts, c.id), 'ord', 'asc'))
+				out.push({ id: s.id, label: `${c.title} › ${s.title}` });
+		}
+		return out;
+	});
+
+	/** The parts this character is not in yet — the only ones the box offers. */
+	const partsWithout = (c: Character): Place[] =>
+		places.filter((p) => hangId(appearances, p.id, 'character_id', c.id) === null);
+
+	/** One row: this character, in that part. Guarded on the row not being
+	 *  there, so the store's toggle can only add here. */
+	async function putIn(c: Character) {
+		const partId = chosenPart[c.id] ?? '';
+		if (!partId || hangId(appearances, partId, 'character_id', c.id)) return;
+		await studioStore.toggleHang(partId, 'character_id', c.id);
+		chosenPart[c.id] = '';
+	}
+
+	/** The row goes; the part itself stays, and so does everything else on it. */
+	async function takeOut(c: Character, partId: string) {
+		if (!hangId(appearances, partId, 'character_id', c.id)) return;
+		await studioStore.toggleHang(partId, 'character_id', c.id);
 	}
 
 	async function add(event: SubmitEvent) {
@@ -192,8 +232,8 @@
 						There are no chapters yet either;
 						<a class="invite" href="/desk">the desk</a> is where the first one begins.
 					{:else}
-						<a class="invite" href="/board">The board</a> is where a character is put in a
-						scene.
+						A named character carries a box on their own row that puts them in a chapter
+						or a scene.
 					{/if}
 				</p>
 			{:else if shown.length === 0}
@@ -231,8 +271,13 @@
 										{where.length}
 										{where.length === 1 ? 'appearance' : 'appearances'}
 									</span>
-									<button type="button" class="plain" onclick={() => begin(c)}>
-										Edit<span class="visually-hidden"> {c.name}</span>
+									<button
+										type="button"
+										class="plain"
+										aria-label="Edit {c.name}"
+										onclick={() => begin(c)}
+									>
+										Edit
 									</button>
 									{#if confirming === c.id}
 										<span class="confirm">
@@ -246,16 +291,28 @@
 											</button>
 										</span>
 									{:else}
-										<button type="button" class="plain" onclick={() => (confirming = c.id)}>
-											Delete<span class="visually-hidden"> {c.name}</span>
+										<button
+											type="button"
+											class="plain"
+											aria-label="Delete {c.name}"
+											onclick={() => (confirming = c.id)}
+										>
+											Delete
 										</button>
 									{/if}
 								</div>
 
+								{@const rest = partsWithout(c)}
 								{#if where.length === 0}
 									<p class="quiet small nowhere">
-										Named, and in no scene yet. <a class="invite" href="/board">The board</a>
-										is where a character is put on a card.
+										{#if places.length === 0}
+											Named, and in no scene yet. There are no chapters either;
+											<a class="invite" href="/desk">the desk</a> is where the first one
+											begins.
+										{:else}
+											Named, and in no scene yet. The box below puts them in a chapter or
+											a scene.
+										{/if}
 									</p>
 								{:else}
 									<ul class="appears">
@@ -272,9 +329,44 @@
 												{:else}
 													<span class="quiet small">no era yet</span>
 												{/if}
+												<button
+													type="button"
+													class="plain"
+													aria-label="Remove {c.name} from {w.part.title}"
+													onclick={() => takeOut(c, w.part.id)}
+												>
+													Remove
+												</button>
 											</li>
 										{/each}
 									</ul>
+								{/if}
+
+								{#if rest.length > 0}
+									<div class="place">
+										<label>
+											<span class="visually-hidden">A chapter or a scene for {c.name}</span>
+											<select
+												value={chosenPart[c.id] ?? ''}
+												onchange={(e) => (chosenPart[c.id] = e.currentTarget.value)}
+											>
+												<option value="">a chapter or a scene…</option>
+												{#each rest as p (p.id)}
+													<option value={p.id}>{p.label}</option>
+												{/each}
+											</select>
+										</label>
+										<button
+											type="button"
+											disabled={!chosenPart[c.id]}
+											aria-label="Add an appearance for {c.name}"
+											onclick={() => putIn(c)}
+										>
+											Add
+										</button>
+									</div>
+								{:else if places.length > 0}
+									<p class="quiet small">In every part of the work.</p>
 								{/if}
 							{/if}
 						</li>
@@ -409,6 +501,23 @@
 		font-size: 0.88rem;
 	}
 
+	.appears button {
+		margin-left: auto;
+		padding: 0.05rem 0.5rem;
+		font-size: 0.72rem;
+	}
+
+	.place {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		align-items: center;
+	}
+
+	.place label {
+		flex: 1 1 16rem;
+	}
+
 	.part {
 		color: var(--text);
 	}
@@ -482,7 +591,8 @@
 		align-items: baseline;
 	}
 
-	input {
+	input,
+	select {
 		background: var(--bg-surface);
 		color: var(--text);
 		border: 1px solid var(--border-color);

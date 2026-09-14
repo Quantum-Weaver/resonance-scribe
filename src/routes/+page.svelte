@@ -11,7 +11,7 @@
 	// about without an `[id]` in the URL.
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import { createWork, listWorks } from '$lib/base';
+	import { createWork, deleteWork, listWorks } from '$lib/base';
 	import { sortData } from '$lib/panti';
 	import { studioStore } from '$lib/stores/studio.svelte';
 	import { workStore } from '$lib/stores/work.svelte';
@@ -25,6 +25,7 @@
 	let kind = $state<WorkKind>('book');
 	let byline = $state('');
 	let saving = $state(false);
+	let confirming = $state<string | null>(null);
 
 	const ready = $derived(title.trim().length > 0 && !saving);
 
@@ -65,6 +66,23 @@
 		workStore.choose(w);
 		void studioStore.load(w.id);
 		void goto('/desk');
+	}
+
+	/** The base's cascade takes the parts, eras, characters, arcs and every
+	 *  appearance with it. A work that was the chosen one is forgotten here, so
+	 *  no room is left holding an id the base no longer answers to. */
+	async function remove(w: Work) {
+		confirming = null;
+		try {
+			await deleteWork(w.id);
+			if (workStore.id === w.id) {
+				workStore.clear();
+				studioStore.forget();
+			}
+			await refresh();
+		} catch (e) {
+			error = e instanceof Error ? e.message : String(e);
+		}
 	}
 
 	const when = (ms: number) => new Date(ms).toLocaleDateString();
@@ -148,9 +166,30 @@
 						<span class="title">{w.title}</span>
 						{#if w.byline}<span class="byline">{w.byline}</span>{/if}
 						<span class="when">touched {when(w.updated_at)}</span>
-						<button class="open" type="button" onclick={() => open(w)}>
-							Open<span class="visually-hidden"> {w.title} at the desk</span>
+						<button type="button" aria-label="Open {w.title} at the desk" onclick={() => open(w)}>
+							Open
 						</button>
+						{#if confirming === w.id}
+							<span class="confirm">
+								Delete “{w.title}”? Its parts, eras, characters and arcs go with it, and
+								nothing on this device keeps a copy.
+								<button type="button" class="danger" onclick={() => remove(w)}>
+									Yes, delete
+								</button>
+								<button type="button" class="plain" onclick={() => (confirming = null)}>
+									Keep it
+								</button>
+							</span>
+						{:else}
+							<button
+								type="button"
+								class="plain"
+								aria-label="Delete {w.title}"
+								onclick={() => (confirming = w.id)}
+							>
+								Delete
+							</button>
+						{/if}
 					</li>
 				{/each}
 			</ul>
@@ -254,9 +293,30 @@
 		cursor: pointer;
 	}
 
+	button.plain {
+		background: none;
+		color: var(--text-secondary);
+		border: 1px solid var(--border-color);
+	}
+
+	button.danger {
+		background: none;
+		color: var(--text);
+		border: 1px solid var(--accent);
+	}
+
 	button:disabled {
 		opacity: 0.45;
 		cursor: default;
+	}
+
+	.confirm {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.4rem;
+		font-size: 0.85rem;
+		line-height: 1.5;
 	}
 
 	.shelf ul,
@@ -303,7 +363,7 @@
 		margin-left: auto;
 	}
 
-	.open {
+	.shelf li button {
 		padding: 0.35rem 0.8rem;
 		font-size: 0.82rem;
 	}
@@ -320,14 +380,5 @@
 	.doorways a {
 		color: inherit;
 		text-decoration-color: var(--text-muted);
-	}
-
-	.visually-hidden {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		overflow: hidden;
-		clip: rect(0, 0, 0, 0);
-		white-space: nowrap;
 	}
 </style>

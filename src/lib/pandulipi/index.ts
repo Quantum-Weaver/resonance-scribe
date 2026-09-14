@@ -20,7 +20,7 @@
 // a gap, and the proof would go FALSE.
 //
 // KP ⚛, verbatim, the word this water answers (resonance-chamber/desk/
-// THE-AUTHORS-STUDIO.md:6-7):
+// THE-AUTHORS-STUDIO.md:4-6):
 //   "we have a need for it to be repurposed as a book, manuscript, article,
 //    all the reasons an author might publish. all types formatting assistance"
 //
@@ -41,12 +41,13 @@ export const EDITORIAL_LAW =
 	'Editorial law: verbatim-vs-light-touch is KP\'s ruling per line; typos are fingerprints unless he says otherwise.';
 
 /** Where that sentence stands. */
-export const EDITORIAL_LAW_AT = 'resonance-chamber/desk/POTENTIALITIES.md:31 (P-12, THE PUBLISHING SHELF)';
+export const EDITORIAL_LAW_AT =
+	'resonance-chamber/constellation/weaver/mimirs-well/design-lineage/constellation/fable/lanes/records/2026-08-23-stretto-deals/GROUND.md:265 (P-12, THE PUBLISHING SHELF; first set down at the desk paper POTENTIALITIES.md:31, since retired)';
 
 /** KP's ⚛ word this water answers, verbatim, with its address. */
 export const THE_WORD =
 	'we have a need for it to be repurposed as a book, manuscript, article, all the reasons an author might publish. all types formatting assistance';
-export const THE_WORD_AT = 'KP ⚛ 2026-09-02 · resonance-chamber/desk/THE-AUTHORS-STUDIO.md:6-7';
+export const THE_WORD_AT = 'KP ⚛ 2026-09-02 · resonance-chamber/desk/THE-AUTHORS-STUDIO.md:4-6';
 
 /** What the house held before this water, checked by a read-only scout on
  *  2026-09-02: nothing. Kept as data so the claim carries its own reason. */
