@@ -1,6 +1,6 @@
 {
   "name": "resonance-scribe",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The author's studio — a book, a manuscript, an article, an essay: works and their parts, with eras, characters and arcs hanging on them, kept on your own device with nothing leaving it.",
   "type": "module",
   "scripts": {
@@ -18,7 +18,6 @@
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-dialog": "^2.7.1",
     "@tauri-apps/plugin-fs": "^2.5.1",
-    "@tauri-apps/plugin-opener": "^2",
     "tailwindcss": "^4.3.1"
   },
   "devDependencies": {
